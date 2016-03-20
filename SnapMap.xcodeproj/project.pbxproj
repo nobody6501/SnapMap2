@@ -13,6 +13,7 @@
 		33216C0A1C8361C300F249B1 /* SnapMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33216C081C8361C300F249B1 /* SnapMap.xcdatamodeld */; };
 		33216C0C1C8361C300F249B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33216C0B1C8361C300F249B1 /* Assets.xcassets */; };
 		33216C0F1C8361C300F249B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */; };
+		8321B2C41C9E671100CE42F7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8321B2C31C9E671100CE42F7 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		33216C0B1C8361C300F249B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33216C0E1C8361C300F249B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		33216C101C8361C300F249B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8321B2C31C9E671100CE42F7 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */,
 				33216C101C8361C300F249B1 /* Info.plist */,
 				33216C081C8361C300F249B1 /* SnapMap.xcdatamodeld */,
+				8321B2C31C9E671100CE42F7 /* MapViewController.swift */,
 			);
 			path = SnapMap;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33216C041C8361C300F249B1 /* ViewController.swift in Sources */,
+				8321B2C41C9E671100CE42F7 /* MapViewController.swift in Sources */,
 				33216C021C8361C300F249B1 /* AppDelegate.swift in Sources */,
 				33216C0A1C8361C300F249B1 /* SnapMap.xcdatamodeld in Sources */,
 			);
@@ -290,6 +294,7 @@
 				33216C151C8361C300F249B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
