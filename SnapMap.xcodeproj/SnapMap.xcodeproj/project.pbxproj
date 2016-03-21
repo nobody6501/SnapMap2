@@ -8,26 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		33216C021C8361C300F249B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33216C011C8361C300F249B1 /* AppDelegate.swift */; };
-		33216C041C8361C300F249B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33216C031C8361C300F249B1 /* ViewController.swift */; };
+		33216C041C8361C300F249B1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33216C031C8361C300F249B1 /* LoginViewController.swift */; };
 		33216C071C8361C300F249B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33216C051C8361C300F249B1 /* Main.storyboard */; };
 		33216C0A1C8361C300F249B1 /* SnapMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33216C081C8361C300F249B1 /* SnapMap.xcdatamodeld */; };
 		33216C0C1C8361C300F249B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33216C0B1C8361C300F249B1 /* Assets.xcassets */; };
 		33216C0F1C8361C300F249B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */; };
-		DCC93CB31C8F9B2000A1178E /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC93CB21C8F9B2000A1178E /* MainPageViewController.swift */; };
-		DCC93CB51C8F9B3700A1178E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC93CB41C8F9B3700A1178E /* SettingsViewController.swift */; };
+		DC8899BA1CA0877400EEAC2E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8899B91CA0877400EEAC2E /* FBSDKLoginKit.framework */; };
+		DC8899BC1CA0878600EEAC2E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8899BB1CA0878600EEAC2E /* FBSDKCoreKit.framework */; };
+		DC8899BE1CA0878E00EEAC2E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8899BD1CA0878E00EEAC2E /* Bolts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		33216BFE1C8361C300F249B1 /* SnapMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33216C011C8361C300F249B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		33216C031C8361C300F249B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		33216C031C8361C300F249B1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		33216C061C8361C300F249B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33216C091C8361C300F249B1 /* SnapMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SnapMap.xcdatamodel; sourceTree = "<group>"; };
 		33216C0B1C8361C300F249B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33216C0E1C8361C300F249B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		33216C101C8361C300F249B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DCC93CB21C8F9B2000A1178E /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
-		DCC93CB41C8F9B3700A1178E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		DC8899B41CA0784200EEAC2E /* Bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-header.h"; sourceTree = "<group>"; };
+		DC8899B91CA0877400EEAC2E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		DC8899BB1CA0878600EEAC2E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		DC8899BD1CA0878E00EEAC2E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +38,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC8899BE1CA0878E00EEAC2E /* Bolts.framework in Frameworks */,
+				DC8899BA1CA0877400EEAC2E /* FBSDKLoginKit.framework in Frameworks */,
+				DC8899BC1CA0878600EEAC2E /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,10 +66,10 @@
 		33216C001C8361C300F249B1 /* SnapMap */ = {
 			isa = PBXGroup;
 			children = (
+				DC8899B11CA0750900EEAC2E /* Frameworks */,
 				33216C011C8361C300F249B1 /* AppDelegate.swift */,
-				33216C031C8361C300F249B1 /* ViewController.swift */,
-				DCC93CB21C8F9B2000A1178E /* MainPageViewController.swift */,
-				DCC93CB41C8F9B3700A1178E /* SettingsViewController.swift */,
+				33216C031C8361C300F249B1 /* LoginViewController.swift */,
+				DC8899B41CA0784200EEAC2E /* Bridging-header.h */,
 				33216C051C8361C300F249B1 /* Main.storyboard */,
 				33216C0B1C8361C300F249B1 /* Assets.xcassets */,
 				33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */,
@@ -71,6 +77,17 @@
 				33216C081C8361C300F249B1 /* SnapMap.xcdatamodeld */,
 			);
 			path = SnapMap;
+			sourceTree = "<group>";
+		};
+		DC8899B11CA0750900EEAC2E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC8899BD1CA0878E00EEAC2E /* Bolts.framework */,
+				DC8899BB1CA0878600EEAC2E /* FBSDKCoreKit.framework */,
+				DC8899B91CA0877400EEAC2E /* FBSDKLoginKit.framework */,
+			);
+			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,10 +161,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCC93CB31C8F9B2000A1178E /* MainPageViewController.swift in Sources */,
-				33216C041C8361C300F249B1 /* ViewController.swift in Sources */,
+				33216C041C8361C300F249B1 /* LoginViewController.swift in Sources */,
 				33216C021C8361C300F249B1 /* AppDelegate.swift in Sources */,
-				DCC93CB51C8F9B3700A1178E /* SettingsViewController.swift in Sources */,
 				33216C0A1C8361C300F249B1 /* SnapMap.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,10 +276,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-20160316",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SnapMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cs378.SnapMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SnapMap/Bridging-header.h";
 			};
 			name = Debug;
 		};
@@ -272,10 +293,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-20160316",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SnapMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cs378.SnapMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SnapMap/Bridging-header.h";
 			};
 			name = Release;
 		};
