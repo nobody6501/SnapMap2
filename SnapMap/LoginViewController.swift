@@ -10,12 +10,13 @@ import UIKit
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
-    @IBOutlet weak var SnapMapTitle: UILabel!
+    @IBOutlet weak var SnapMapTitle: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        SnapMapTitle.backgroundColor = UIColor(patternImage: UIImage(named: "SnapMapTitle.jpg")!)
+        SnapMapTitle.image = UIImage(named: "SnapMapTitle.jpg")!
+//        SnapMapTitle.backgroundColor = UIColor(patternImage: UIImage(named: "SnapMapTitle.jpg")!)
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "LoginBackground.jpg")!)
         
         if (FBSDKAccessToken.currentAccessToken() != nil)
