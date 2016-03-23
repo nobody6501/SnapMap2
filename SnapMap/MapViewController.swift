@@ -18,12 +18,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var cameraTab: UITabBarItem!
     @IBOutlet weak var settingsTab: UITabBarItem!
     
-    
-    
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController!.navigationBar.hidden = true
+//        UINavigationItem.setHidesBackButton()
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()

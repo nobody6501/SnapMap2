@@ -43,14 +43,14 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="SnapMapTitle" destination="KmF-2X-GFt" id="ezD-9g-WfB"/>
-                        <segue destination="FqQ-Aq-a2V" kind="show" identifier="LoginSegue" id="fiN-dY-sgB"/>
+                        <segue destination="U61-fc-MbR" kind="show" identifier="LoginSegue" id="fiN-dY-sgB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="351" y="441"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="tc3-WH-tJT">
             <objects>
                 <viewController id="FqQ-Aq-a2V" customClass="MapViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -62,24 +62,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8P-OU-GRq">
-                                <rect key="frame" x="20" y="551" width="62" height="30"/>
-                                <state key="normal" title="Message"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVd-Kx-1ly">
-                                <rect key="frame" x="180" y="551" width="54" height="30"/>
-                                <state key="normal" title="Camera"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-gf-Pk8">
-                                <rect key="frame" x="318" y="551" width="57" height="30"/>
-                                <state key="normal" title="Settings"/>
-                            </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AfP-FA-Jic">
-                                <rect key="frame" x="0.0" y="56" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                             </mapView>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljC-bM-HZf" customClass="MapTabBar" customModule="SnapMap" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="SettingsSeque" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-gf-Pk8">
+                                <rect key="frame" x="318" y="687" width="57" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljC-bM-HZf">
                                 <rect key="frame" x="0.0" y="687" width="414" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <items>
                                     <tabBarItem title="Comment" image="MessageIcon" id="70A-I4-k7v"/>
                                     <tabBarItem title="Snap" image="CameraIcon" id="zf9-NJ-qKf"/>
@@ -89,6 +82,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="MapIcon" selectedImage="MapIcon" id="NsM-cE-ZDN"/>
                     <navigationItem key="navigationItem" id="qfU-VE-a9e"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
@@ -96,14 +90,51 @@
                         <outlet property="mapView" destination="AfP-FA-Jic" id="Jhh-WM-idt"/>
                         <outlet property="messageTab" destination="70A-I4-k7v" id="dQO-v4-dUM"/>
                         <outlet property="settingsTab" destination="inG-Hy-yvo" id="xP2-Z3-5Xy"/>
-                        <segue destination="WgH-ib-IFx" kind="show" identifier="SettingsSegue" id="EjO-0t-bMu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pcB-2N-Osl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="865" y="441"/>
+            <point key="canvasLocation" x="1617" y="7"/>
         </scene>
-        <!--View Controller-->
+        <!--Message-->
+        <scene sceneID="SQD-cK-yvg">
+            <objects>
+                <viewController id="c0E-Ow-HH4" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Omk-tP-LYo"/>
+                        <viewControllerLayoutGuide type="bottom" id="pUp-pe-ItW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2kC-1F-ydo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Message" image="MessageIcon" selectedImage="MessageIcon" id="djP-ha-cQJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ChY-bO-s8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="351" y="1342"/>
+        </scene>
+        <!--Camera-->
+        <scene sceneID="qai-kk-9MS">
+            <objects>
+                <viewController id="unM-Fn-fk5" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gNp-wb-F1b"/>
+                        <viewControllerLayoutGuide type="bottom" id="NDT-yz-MGA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IU3-sf-xvm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Camera" image="CameraIcon" selectedImage="CameraIcon" id="upf-f4-egq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZcD-hY-AZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="994" y="1262"/>
+        </scene>
+        <!--Settings-->
         <scene sceneID="oSm-QU-7uK">
             <objects>
                 <viewController id="WgH-ib-IFx" sceneMemberID="viewController">
@@ -147,15 +178,37 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsIcon" selectedImage="SettingsIcon" id="VE3-Ia-oLG"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Az8-ia-yhk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1437" y="441"/>
+            <point key="canvasLocation" x="1617" y="1091"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="bwK-cM-yfX">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="U61-fc-MbR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="0tU-Wt-BUr">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="FqQ-Aq-a2V" kind="relationship" relationship="viewControllers" id="00o-ZP-IMJ"/>
+                        <segue destination="unM-Fn-fk5" kind="relationship" relationship="viewControllers" id="eLC-Tp-vJ4"/>
+                        <segue destination="c0E-Ow-HH4" kind="relationship" relationship="viewControllers" id="EB3-R4-7gs"/>
+                        <segue destination="WgH-ib-IFx" kind="relationship" relationship="viewControllers" id="aUW-2N-YWw"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FPM-U1-YTM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="994" y="133"/>
         </scene>
     </scenes>
     <resources>
         <image name="CameraIcon" width="30" height="30"/>
+        <image name="MapIcon" width="30" height="30"/>
         <image name="MessageIcon" width="30" height="29"/>
         <image name="SettingsIcon" width="30" height="30"/>
     </resources>
