@@ -18,6 +18,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var cameraTab: UITabBarItem!
     @IBOutlet weak var settingsTab: UITabBarItem!
     
+    
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -49,7 +50,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
         
-        mapView.setRegion(region, animated: true)
+        self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
         
         //

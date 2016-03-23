@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2BZ-xf-JCB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="b27-TI-t18">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
-        <scene sceneID="4as-sP-D5e">
+        <scene sceneID="6jt-be-7e3">
             <objects>
-                <navigationController id="2BZ-xf-JCB" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eMJ-lr-SCp">
+                <navigationController id="b27-TI-t18" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e9J-aC-yaL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="V73-ul-6k6"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="uoE-32-z26"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eu3-1s-Vnl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ugX-q2-IWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-242" y="373"/>
+            <point key="canvasLocation" x="-381" y="398"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -43,12 +43,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="SnapMapTitle" destination="KmF-2X-GFt" id="ezD-9g-WfB"/>
-                        <segue destination="U61-fc-MbR" kind="show" identifier="LoginSegue" id="fiN-dY-sgB"/>
+                        <segue destination="U61-fc-MbR" kind="show" identifier="LoginSegue" id="07h-pR-ag9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="441"/>
+            <point key="canvasLocation" x="380" y="442"/>
         </scene>
         <!--Map-->
         <scene sceneID="tc3-WH-tJT">
@@ -137,7 +137,7 @@
         <!--Settings-->
         <scene sceneID="oSm-QU-7uK">
             <objects>
-                <viewController id="WgH-ib-IFx" sceneMemberID="viewController">
+                <viewController id="WgH-ib-IFx" customClass="SettingsViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SjJ-10-d6w"/>
                         <viewControllerLayoutGuide type="bottom" id="ws6-NE-u5y"/>
@@ -180,15 +180,20 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="SettingsIcon" selectedImage="SettingsIcon" id="VE3-Ia-oLG"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="allowPushSwitch" destination="lsa-tO-Mof" id="Hdp-Kb-RNj"/>
+                        <outlet property="darkModeSwitch" destination="gdV-bs-3tp" id="kkS-VH-ijw"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="backtologin" id="lRp-cv-bjq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Az8-ia-yhk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1617" y="1091"/>
+            <point key="canvasLocation" x="1576" y="1100"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="bwK-cM-yfX">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="U61-fc-MbR" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="U61-fc-MbR" customClass="TabBarViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="0tU-Wt-BUr">
                         <autoresizingMask key="autoresizingMask"/>
@@ -207,9 +212,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CameraIcon" width="30" height="30"/>
+        <image name="CameraIcon" width="60" height="60"/>
         <image name="MapIcon" width="30" height="30"/>
         <image name="MessageIcon" width="30" height="29"/>
         <image name="SettingsIcon" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="lRp-cv-bjq"/>
+    </inferredMetricsTieBreakers>
 </document>
