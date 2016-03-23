@@ -50,10 +50,10 @@
             </objects>
             <point key="canvasLocation" x="351" y="441"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="tc3-WH-tJT">
             <objects>
-                <viewController id="FqQ-Aq-a2V" sceneMemberID="viewController">
+                <viewController id="FqQ-Aq-a2V" customClass="MapViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jV0-wB-xK9"/>
                         <viewControllerLayoutGuide type="bottom" id="yoP-ip-VpA"/>
@@ -66,22 +66,38 @@
                                 <rect key="frame" x="20" y="551" width="62" height="30"/>
                                 <state key="normal" title="Message"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-gf-Pk8">
-                                <rect key="frame" x="318" y="551" width="57" height="30"/>
-                                <state key="normal" title="Settings"/>
-                                <connections>
-                                    <segue destination="WgH-ib-IFx" kind="show" id="zz1-uS-QzZ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVd-Kx-1ly">
                                 <rect key="frame" x="180" y="551" width="54" height="30"/>
                                 <state key="normal" title="Camera"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-gf-Pk8">
+                                <rect key="frame" x="318" y="551" width="57" height="30"/>
+                                <state key="normal" title="Settings"/>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AfP-FA-Jic">
+                                <rect key="frame" x="0.0" y="56" width="414" height="672"/>
+                            </mapView>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljC-bM-HZf" customClass="MapTabBar" customModule="SnapMap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="687" width="414" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="Comment" image="MessageIcon" id="70A-I4-k7v"/>
+                                    <tabBarItem title="Snap" image="CameraIcon" id="zf9-NJ-qKf"/>
+                                    <tabBarItem title="Settings" image="SettingsIcon" id="inG-Hy-yvo"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="qfU-VE-a9e"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="cameraTab" destination="zf9-NJ-qKf" id="QKz-E0-TDH"/>
+                        <outlet property="mapView" destination="AfP-FA-Jic" id="Jhh-WM-idt"/>
+                        <outlet property="messageTab" destination="70A-I4-k7v" id="dQO-v4-dUM"/>
+                        <outlet property="settingsTab" destination="inG-Hy-yvo" id="xP2-Z3-5Xy"/>
+                        <segue destination="WgH-ib-IFx" kind="show" identifier="SettingsSegue" id="EjO-0t-bMu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pcB-2N-Osl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -100,30 +116,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Allow Notifications:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGb-YC-m27">
-                                <rect key="frame" x="42" y="61" width="147" height="21"/>
+                                <rect key="frame" x="54" y="142" width="147" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dark Mode:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61S-gZ-aSM">
-                                <rect key="frame" x="100" y="119" width="89" height="21"/>
+                                <rect key="frame" x="112" y="200" width="89" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lsa-tO-Mof">
-                                <rect key="frame" x="250" y="56" width="51" height="31"/>
+                                <rect key="frame" x="262" y="137" width="51" height="31"/>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdV-bs-3tp">
-                                <rect key="frame" x="250" y="114" width="51" height="31"/>
+                                <rect key="frame" x="262" y="195" width="51" height="31"/>
                             </switch>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nsx-VP-k0Z">
-                                <rect key="frame" x="226" y="176" width="97" height="30"/>
+                                <rect key="frame" x="238" y="257" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default radius:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CM-PG-0v0">
-                                <rect key="frame" x="77" y="180" width="112" height="21"/>
+                                <rect key="frame" x="89" y="261" width="112" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -138,4 +154,9 @@
             <point key="canvasLocation" x="1437" y="441"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CameraIcon" width="30" height="30"/>
+        <image name="MessageIcon" width="30" height="29"/>
+        <image name="SettingsIcon" width="30" height="30"/>
+    </resources>
 </document>
