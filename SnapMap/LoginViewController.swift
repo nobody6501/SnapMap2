@@ -17,34 +17,30 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.fetchClients()
+        
         // Do any additional setup after loading the view, typically from a nib.
         SnapMapTitle.image = UIImage(named: "SnapMapTitle.jpg")!
-//        SnapMapTitle.backgroundColor = UIColor(patternImage: UIImage(named: "SnapMapTitle.jpg")!)
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "LoginBackground.jpg")!)
         
-        if (FBSDKAccessToken.currentAccessToken() != nil)
-        {
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
             let loginView: FBSDKLoginButton = FBSDKLoginButton()
             self.view.addSubview(loginView)
             loginView.center = self.view.center
             loginView.delegate = self
-            self.fetchClients()
-            self.createNewClient()
-            
-//            performSegueWithIdentifier("LoginSegue", sender: self)
             // User is already logged in, do work such as go to next view controller.
+            createNewClient()
         }
-        else
-        {
+            
+        else {
             let loginView : FBSDKLoginButton = FBSDKLoginButton()
             self.view.addSubview(loginView)
             loginView.center = self.view.center
             loginView.readPermissions = ["public_profile", "email", "user_friends"]
             loginView.delegate = self
-            fetchClients()
-            createNewClient()
+            self.createNewClient()
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,14 +48,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func fetchClients(){
+    func fetchClients() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
         let managedContext = appDelegate.managedObjectContext
-        
         let fetchRequest = NSFetchRequest(entityName:"Client")
-        
-        //
         var fetchedResults:[NSManagedObject]? = nil
         
         do {
@@ -72,7 +64,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         if let results = fetchedResults {
             clients = results
-        } else {
+        }
+        
+        else {
             print("Could not fetch")
         }
     }
@@ -86,6 +80,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             if ((error) != nil) {
                 // Process error
                 print("Error: \(error)")
+                return
             }
                 
             else {
@@ -93,13 +88,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 if let id: NSString = result.valueForKey("id") as? NSString {
                     print("ID is: \(id)")
+                    
                     for x in self.clients{
                         let clientid = x.valueForKey("id") as? NSString
                         if(id == clientid){
                             already_in_list = true
                         }
                     }
-                    if(!already_in_list){
+                    
+                    if (!already_in_list){
                         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                         let managedContext = appDelegate.managedObjectContext
                         
@@ -121,8 +118,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 else {
                     print("ID is null")
                 }
-                
-                
             }
             self.performSegueWithIdentifier("LoginSegue", sender: self)
         })
@@ -130,20 +125,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         print("Logged In")
-        if(error != nil)
-        {
+        
+        if error != nil {
             //There was an error
         }
-        else if result.isCancelled
-        {
+            
+        else if result.isCancelled {
             //Cancelled
         }
+        
         else {
             if result.grantedPermissions.contains("email") {
                 fetchClients()
                 createNewClient()
-                
-//                performSegueWithIdentifier("LoginSegue", sender: self)
             }
         }
     }
@@ -152,25 +146,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("Logged Out")
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        
-        print("Checking if can segue")
-        
-        if (identifier == "LoginSegue"){
-            
-            if let id = identifier as? String {
-                print("should segue with id \(id)")
-                return true
-            }
-            
-            return false
-        }
-        
-        return false
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if (self.identifier == nil) {
             print("ID is nil in prepare for segue")
             return
@@ -179,7 +155,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         if(segue.identifier == "LoginSegue"){
             let dvc = segue.destinationViewController as! TabBarViewController
             let settings = dvc.viewControllers![3] as! SettingsViewController
+            let map = dvc.viewControllers![0] as! MapViewController
+            dvc.id = self.identifier!
             settings.id = self.identifier!
+            map.id = self.identifier!
             print("identifier in segue = \(self.identifier!)")
         }
     }

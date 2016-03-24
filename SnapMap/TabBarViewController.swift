@@ -7,13 +7,30 @@
 //
 
 import UIKit
+import CoreData
 
 class TabBarViewController: UITabBarController {
-    var id: NSInteger? = nil
+    
+    var id: NSString? = nil
+    var clients = [NSManagedObject]()
+    var client: NSManagedObject? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchClients()
 
         // Do any additional setup after loading the view.
+        self.tabBar.tintColor = .redColor()
+        
+        if let darkMode = client?.valueForKey("darkMode") as? Bool {
+            if darkMode {
+                print("Dark Mode enabled")
+                self.tabBar.barTintColor = .blackColor()
+                self.tabBar.tintColor = .whiteColor()
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +39,38 @@ class TabBarViewController: UITabBarController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func fetchClients() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName:"Client")
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedResults {
+            clients = results
+        }
+        
+        else {
+            print("Could not fetch")
+        }
+        
+        // Do any additional setup after loading the view.
+        
+        for x in clients {
+            if let identifier: NSString = x.valueForKey("id") as? NSString{
+                if(identifier == id){
+                    print("Client found in Settings View")
+                    client = x
+                }
+            }
+        }
     }
-    */
 
 }

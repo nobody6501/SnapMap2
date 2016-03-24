@@ -15,10 +15,9 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
     @IBOutlet weak var darkModeSwitch: UISwitch!
     @IBOutlet weak var radius: UITextField!
     
-    var clients = [NSManagedObject]()
-    
     var id: NSString? = nil
     var client: NSManagedObject? = nil
+    var clients = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,46 +29,11 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         loginView.center = self.view.center
         loginView.delegate = self
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-        let fetchRequest = NSFetchRequest(entityName:"Client")
-        
-        var fetchedResults:[NSManagedObject]? = nil
-        
-        do {
-            try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
-        } catch {
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-        
-        if let results = fetchedResults {
-            clients = results
-        } else {
-            print("Could not fetch")
-        }
-                
-        // Do any additional setup after loading the view.
-        
-        for x in clients {
-            if let identifier: NSString = x.valueForKey("id") as? NSString{
-            if(identifier == id){
-                print("Client found in Settings View")
-                client = x
-            }
-        }
-            
-        print("ID in SettingsView = \(id)")
+        fetchClients()
         
         allowPushSwitch.setOn(client?.valueForKey("allowPush") as! Bool, animated: true)
         darkModeSwitch.setOn(client?.valueForKey("darkMode") as! Bool, animated: true)
-        print("radius: \((client?.valueForKey("radius")))")
         radius.text = String((client?.valueForKey("radius"))!)
-    }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -160,14 +124,36 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         view.endEditing(true)
     }
     
-    /*
-    // MARK: - Navigation
+    func fetchClients() {
+        print("ID in SettingsView = \((id)!)S")
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName:"Client")
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedResults {
+            clients = results
+        } else {
+            print("Could not fetch")
+        }
+        
+        for x in clients {
+            if let identifier: NSString = x.valueForKey("id") as? NSString{
+                if(identifier == id){
+                    print("Client found in Settings View")
+                    client = x
+                }
+            }
+        }
     }
-    */
 
 }
