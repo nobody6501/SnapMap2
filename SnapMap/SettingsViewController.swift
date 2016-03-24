@@ -13,12 +13,17 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
 
     @IBOutlet weak var allowPushSwitch: UISwitch!
     @IBOutlet weak var darkModeSwitch: UISwitch!
+    @IBOutlet weak var radius: UITextField!
+    
     var clients = [NSManagedObject]()
     
     var id: NSString? = nil
+    var client: NSManagedObject? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "CityNight.jpg")!)
         
         let loginView: FBSDKLoginButton = FBSDKLoginButton()
         self.view.addSubview(loginView)
@@ -29,10 +34,8 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         
         let managedContext = appDelegate.managedObjectContext
         
-        //
         let fetchRequest = NSFetchRequest(entityName:"Client")
         
-        //
         var fetchedResults:[NSManagedObject]? = nil
         
         do {
@@ -48,24 +51,24 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         } else {
             print("Could not fetch")
         }
-        darkModeSwitch.addTarget(self, action: Selector("switchIsChanged:"), forControlEvents: UIControlEvents.ValueChanged)        // Do any additional setup after loading the view.
-        for x in clients{
-            print("id = \(id)")
+                
+        // Do any additional setup after loading the view.
+        
+        for x in clients {
             if let identifier: NSString = x.valueForKey("id") as? NSString{
-            print("identifier = /(identifier)")
             if(identifier == id){
-                if(x.valueForKey("darkMode") as! Bool == true){
-                    print("found user")
-                    darkModeSwitch.setOn(false, animated: false)
-                }
-                else{
-                    print("user not found")
-                    darkModeSwitch.setOn(true, animated: false)
-                }
-            }
+                print("Client found in Settings View")
+                client = x
             }
         }
+            
+        print("ID in SettingsView = \(id)")
         
+        allowPushSwitch.setOn(client?.valueForKey("allowPush") as! Bool, animated: true)
+        darkModeSwitch.setOn(client?.valueForKey("darkMode") as! Bool, animated: true)
+        print("radius: \((client?.valueForKey("radius")))")
+        radius.text = String((client?.valueForKey("radius"))!)
+    }
         
     }
 
@@ -85,54 +88,78 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         performSegueWithIdentifier("backtologin", sender: self)
     }
     
-    
-    func switchIsChanged(darkModeSwitch: UISwitch){
-        if darkModeSwitch.on{
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            let managedContext = appDelegate.managedObjectContext
-            
-            // Create the entity we want to save
-            let entity =  NSEntityDescription.entityForName("Client", inManagedObjectContext: managedContext)
-            
-            let darkMode = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
-            
-            // Set the attribute values
-            darkMode.setValue(true, forKey: "darkMode")
-            
-            // Commit the changes.
-            do {
-                try managedContext.save()
-            } catch {
-                // what to do if an error occurs?
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
-            }
+    @IBAction func notificationSwitched(sender: AnyObject) {
+        
+        print("Saving Notifications")
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        // Set the attribute values
+        client?.setValue(allowPushSwitch.on, forKey: "darkMode")
+        
+        // Commit the changes.
+        do {
+            try managedContext.save()
+        } catch {
+            // what to do if an error occurs?
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
         }
-        else{
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            let managedContext = appDelegate.managedObjectContext
-            
-            // Create the entity we want to save
-            let entity =  NSEntityDescription.entityForName("Client", inManagedObjectContext: managedContext)
-            
-            let darkMode = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
-            
-            // Set the attribute values
-            darkMode.setValue(false, forKey: "darkMode")
-            
-            // Commit the changes.
-            do {
-                try managedContext.save()
-            } catch {
-                // what to do if an error occurs?
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
-            }        }
+        
     }
+    
+    @IBAction func darkModeChanged(sender: AnyObject) {
+        
+        print("Saving Dark mode")
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        // Set the attribute values
+        client?.setValue(darkModeSwitch.on, forKey: "darkMode")
+        
+        // Commit the changes.
+        do {
+            try managedContext.save()
+        } catch {
+            // what to do if an error occurs?
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+    }
+    
+    @IBAction func radiusSet(sender: AnyObject) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        print("Saving Radius")
+        
+        // Set the attribute values
+        client?.setValue(Double(radius.text!), forKey: "radius")
+        
+        // Commit the changes.
+        do {
+            try managedContext.save()
+        } catch {
+            // what to do if an error occurs?
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        view.endEditing(true)
+    }
+    
     /*
     // MARK: - Navigation
 

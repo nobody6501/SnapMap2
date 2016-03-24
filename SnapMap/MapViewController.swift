@@ -25,7 +25,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         super.viewDidLoad()
         
         navigationController!.navigationBar.hidden = true
-//        UINavigationItem.setHidesBackButton()
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -41,8 +40,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-    {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let location = locations.last
         
@@ -67,8 +65,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
-    {
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Errors: " + error.localizedDescription)
     }
     

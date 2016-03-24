@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var SnapMapTitle: UIImageView!
     var clients = [NSManagedObject]()
-    var identifier: NSString? = nil
+    var identifier: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +28,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             self.view.addSubview(loginView)
             loginView.center = self.view.center
             loginView.delegate = self
-            fetchClients()
-            createNewClient()
-            performSegueWithIdentifier("LoginSegue", sender: self)
+            self.fetchClients()
+            self.createNewClient()
+            
+//            performSegueWithIdentifier("LoginSegue", sender: self)
             // User is already logged in, do work such as go to next view controller.
         }
         else
@@ -79,14 +80,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func createNewClient(){
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            
             var already_in_list = false
-            if ((error) != nil)
-            {
+            
+            if ((error) != nil) {
                 // Process error
                 print("Error: \(error)")
             }
-            else
-            {
+                
+            else {
                 print("fetched user: \(result)")
                 
                 if let id: NSString = result.valueForKey("id") as? NSString {
@@ -110,17 +112,22 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         client.setValue(false, forKey: "allowPush")
                         client.setValue(10.0, forKey: "radius")
                     }
-                    print("id is \(id)")
-                    self.identifier = id
-                    print("identifier not segue is \(self.identifier!)")
-                } else {
-                    print("ID es null")
+                    
+                    self.identifier = id as String
+                    print("identifier after settings is \(self.identifier!)")
+                    
+                }
+                
+                else {
+                    print("ID is null")
                 }
                 
                 
             }
+            self.performSegueWithIdentifier("LoginSegue", sender: self)
         })
     }
+    
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         print("Logged In")
         if(error != nil)
@@ -131,27 +138,52 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         {
             //Cancelled
         }
-        else
-        {
-         if result.grantedPermissions.contains("email")
-         {
-            fetchClients()
-            createNewClient()
-            performSegueWithIdentifier("LoginSegue", sender: self)            }
+        else {
+            if result.grantedPermissions.contains("email") {
+                fetchClients()
+                createNewClient()
+                
+//                performSegueWithIdentifier("LoginSegue", sender: self)
+            }
         }
     }
 
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("Logged Out")
     }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        
+        print("Checking if can segue")
+        
+        if (identifier == "LoginSegue"){
+            
+            if let id = identifier as? String {
+                print("should segue with id \(id)")
+                return true
+            }
+            
+            return false
+        }
+        
+        return false
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if (self.identifier == nil) {
+            print("ID is nil in prepare for segue")
+            return
+        }
+        
         if(segue.identifier == "LoginSegue"){
             let dvc = segue.destinationViewController as! TabBarViewController
             let settings = dvc.viewControllers![3] as! SettingsViewController
-            settings.id = self.identifier
-            print("identifier segue = \(self.identifier)")
+            settings.id = self.identifier!
+            print("identifier in segue = \(self.identifier!)")
         }
     }
+    
 }
 
 

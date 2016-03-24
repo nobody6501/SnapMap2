@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="b27-TI-t18">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="b27-TI-t18">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -19,7 +19,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugX-q2-IWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-381" y="398"/>
+            <point key="canvasLocation" x="-561" y="110"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -48,7 +48,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="380" y="442"/>
+            <point key="canvasLocation" x="268" y="133"/>
         </scene>
         <!--Map-->
         <scene sceneID="tc3-WH-tJT">
@@ -62,9 +62,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AfP-FA-Jic">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="SettingsSeque" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-gf-Pk8">
                                 <rect key="frame" x="318" y="687" width="57" height="30"/>
                                 <state key="normal" title="Button"/>
@@ -79,11 +76,13 @@
                                     <tabBarItem title="Settings" image="SettingsIcon" id="inG-Hy-yvo"/>
                                 </items>
                             </tabBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AfP-FA-Jic">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="MapIcon" selectedImage="MapIcon" id="NsM-cE-ZDN"/>
-                    <navigationItem key="navigationItem" id="qfU-VE-a9e"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="cameraTab" destination="zf9-NJ-qKf" id="QKz-E0-TDH"/>
@@ -94,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pcB-2N-Osl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1617" y="7"/>
+            <point key="canvasLocation" x="1641" y="133"/>
         </scene>
         <!--Message-->
         <scene sceneID="SQD-cK-yvg">
@@ -113,7 +112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ChY-bO-s8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="1342"/>
+            <point key="canvasLocation" x="994" y="1186"/>
         </scene>
         <!--Camera-->
         <scene sceneID="qai-kk-9MS">
@@ -132,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZcD-hY-AZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="994" y="1262"/>
+            <point key="canvasLocation" x="1641" y="1186"/>
         </scene>
         <!--Settings-->
         <scene sceneID="oSm-QU-7uK">
@@ -147,48 +146,60 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Allow Notifications:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGb-YC-m27">
-                                <rect key="frame" x="54" y="142" width="147" height="21"/>
+                                <rect key="frame" x="54" y="128" width="147" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dark Mode:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61S-gZ-aSM">
-                                <rect key="frame" x="112" y="200" width="89" height="21"/>
+                                <rect key="frame" x="112" y="175" width="89" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
+                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lsa-tO-Mof">
-                                <rect key="frame" x="262" y="137" width="51" height="31"/>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdV-bs-3tp">
-                                <rect key="frame" x="262" y="195" width="51" height="31"/>
+                                <rect key="frame" x="262" y="123" width="51" height="31"/>
+                                <connections>
+                                    <action selector="notificationSwitched:" destination="WgH-ib-IFx" eventType="valueChanged" id="Z5g-Y3-Ehd"/>
+                                </connections>
                             </switch>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nsx-VP-k0Z">
-                                <rect key="frame" x="238" y="257" width="97" height="30"/>
+                                <rect key="frame" x="262" y="223" width="49" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="radiusSet:" destination="WgH-ib-IFx" eventType="editingDidEnd" id="5N0-n2-SQd"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default radius:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CM-PG-0v0">
-                                <rect key="frame" x="89" y="261" width="112" height="21"/>
+                                <rect key="frame" x="89" y="227" width="112" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdV-bs-3tp">
+                                <rect key="frame" x="262" y="170" width="51" height="31"/>
+                                <connections>
+                                    <action selector="darkModeChanged:" destination="WgH-ib-IFx" eventType="valueChanged" id="l7G-cp-AX7"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="SettingsIcon" selectedImage="SettingsIcon" id="VE3-Ia-oLG"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="allowPushSwitch" destination="lsa-tO-Mof" id="Hdp-Kb-RNj"/>
+                        <outlet property="allowPushSwitch" destination="lsa-tO-Mof" id="s44-fI-Lwz"/>
                         <outlet property="darkModeSwitch" destination="gdV-bs-3tp" id="kkS-VH-ijw"/>
+                        <outlet property="radius" destination="nsx-VP-k0Z" id="4pJ-BV-Cey"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="backtologin" id="lRp-cv-bjq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Az8-ia-yhk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1576" y="1100"/>
+            <point key="canvasLocation" x="208" y="1186"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="bwK-cM-yfX">
