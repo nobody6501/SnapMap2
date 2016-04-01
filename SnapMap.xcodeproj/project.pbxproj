@@ -20,6 +20,7 @@
 		338AC1C01CA23C9F00170CF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 338AC1BF1CA23C9F00170CF6 /* Images.xcassets */; };
 		338AC1C41CA2454500170CF6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338AC1C31CA2454500170CF6 /* TabBarViewController.swift */; };
 		338AC1C61CA3619B00170CF6 /* CityNight.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338AC1C51CA3619B00170CF6 /* CityNight.jpg */; };
+		DC24778E1CAEFA9C00082D30 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24778D1CAEFA9C00082D30 /* CameraViewController.swift */; };
 		DC85945A1CA1BDF500AD106B /* SnapMapTitle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DC8594591CA1BDF500AD106B /* SnapMapTitle.jpg */; };
 		DC85945C1CA1BFDC00AD106B /* LoginBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */; };
 		DCBAABE11CA3175800560A92 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAABE01CA3175800560A92 /* SettingsViewController.swift */; };
@@ -41,6 +42,7 @@
 		338AC1BF1CA23C9F00170CF6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		338AC1C31CA2454500170CF6 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		338AC1C51CA3619B00170CF6 /* CityNight.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CityNight.jpg; sourceTree = "<group>"; };
+		DC24778D1CAEFA9C00082D30 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		DC8594591CA1BDF500AD106B /* SnapMapTitle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SnapMapTitle.jpg; sourceTree = "<group>"; };
 		DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LoginBackground.jpg; sourceTree = "<group>"; };
 		DC8899B41CA0784200EEAC2E /* Bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-header.h"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				338AC1B21CA22EB400170CF6 /* MapViewController.swift */,
 				338AC1C31CA2454500170CF6 /* TabBarViewController.swift */,
 				DCBAABE01CA3175800560A92 /* SettingsViewController.swift */,
+				DC24778D1CAEFA9C00082D30 /* CameraViewController.swift */,
 				DC8899B41CA0784200EEAC2E /* Bridging-header.h */,
 				33216C051C8361C300F249B1 /* Main.storyboard */,
 				33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */,
@@ -190,6 +193,7 @@
 				33216C021C8361C300F249B1 /* AppDelegate.swift in Sources */,
 				DCBAABE11CA3175800560A92 /* SettingsViewController.swift in Sources */,
 				33216C0A1C8361C300F249B1 /* SnapMap.xcdatamodeld in Sources */,
+				DC24778E1CAEFA9C00082D30 /* CameraViewController.swift in Sources */,
 				338AC1C41CA2454500170CF6 /* TabBarViewController.swift in Sources */,
 				338AC1B31CA22EB400170CF6 /* MapViewController.swift in Sources */,
 			);
