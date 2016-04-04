@@ -104,7 +104,7 @@
                         <viewControllerLayoutGuide type="bottom" id="pUp-pe-ItW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2kC-1F-ydo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -113,6 +113,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ChY-bO-s8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="994" y="1186"/>
+        </scene>
+        <!--Photo Confirmation View Controller-->
+        <scene sceneID="eRU-GO-oDH">
+            <objects>
+                <viewController id="70s-M2-AB7" customClass="PhotoConfirmationViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pnS-vV-San"/>
+                        <viewControllerLayoutGuide type="bottom" id="q2C-yA-kwo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HEH-gz-Vdt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ujj-n4-id1">
+                                <rect key="frame" x="45" y="55" width="335" height="371"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jf6-Nw-eCX">
+                                <rect key="frame" x="65" y="485" width="285" height="30"/>
+                                <state key="normal" title="Are you sure you want to post this photo?"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="image" destination="Ujj-n4-id1" id="W0C-3r-sbG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="53v-LQ-OKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2278" y="1186"/>
         </scene>
         <!--Camera-->
         <scene sceneID="qai-kk-9MS">
@@ -123,11 +154,14 @@
                         <viewControllerLayoutGuide type="bottom" id="NDT-yz-MGA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IU3-sf-xvm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Camera" image="CameraIcon" selectedImage="CameraIcon" id="upf-f4-egq"/>
+                    <connections>
+                        <segue destination="70s-M2-AB7" kind="show" identifier="confirmationsegue" id="NoH-se-frb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZcD-hY-AZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
