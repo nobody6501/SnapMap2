@@ -15,6 +15,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     var imagePicker = UIImagePickerController()
     var originalphoto: UIImage? = nil
 
+  
     @IBOutlet weak var anotherPicBtn: UIButton!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var postBtn: UIButton!
@@ -28,6 +29,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
         postBtn.hidden = true
         shareBtn.hidden = true
+        anotherPicBtn.hidden = true
         if (UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil && UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil){
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
@@ -52,10 +54,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         image.image = originalphoto
         postBtn.hidden = false
         shareBtn.hidden = false
+        anotherPicBtn.hidden = false
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        anotherPicBtn.hidden = false
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -70,7 +74,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     @IBAction func takeAnotherPhoto(sender: AnyObject) {
-        presentViewController(imagePicker, animated: true, completion: nil)        
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     

@@ -15,9 +15,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var messageBtn: UIButton!
     @IBOutlet weak var messageTab: UITabBarItem!
     @IBOutlet weak var cameraTab: UITabBarItem!
     @IBOutlet weak var settingsTab: UITabBarItem!
+    var alertController: UIAlertController? = nil
     
     let locationManager = CLLocationManager()
     var regionRadius: CLLocationDistance = 1000
@@ -96,4 +98,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         print("Region radius: \(regionRadius)")
     }
     
+    @IBAction func postMessage(sender: AnyObject) {
+        self.alertController = UIAlertController(title: "Message", message: "Type your message", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let postAction = UIAlertAction(title: "Post", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+             print("message posted")
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+            print("message cancelled")
+        }
+        
+        self.alertController!.addAction(postAction)
+        self.alertController!.addAction(cancelAction)
+        
+        self.alertController!.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.placeholder = "Enter your message"
+        }
+        
+        presentViewController(self.alertController!, animated: true, completion: nil)
+        
+    }
 }
