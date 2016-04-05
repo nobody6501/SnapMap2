@@ -20,6 +20,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var settingsTab: UITabBarItem!
     
     let locationManager = CLLocationManager()
+    var location: CLLocation? = nil
     var regionRadius: CLLocationDistance = 1000
     var clients = [NSManagedObject]()
     var client: NSManagedObject? = nil
@@ -39,11 +40,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         mapView.delegate = self
         mapView.showsUserLocation = true
+        
+        addNotificationObservers()
+        updateRadius()
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let location = locations.last
+        location = locations.last
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
         
@@ -53,6 +56,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height * 0.7)
         
         centerMapOnLocation(location!)
+        
+        self.addMessageAnnotation("This is a comment")
+
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -94,6 +100,64 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         regionRadius = client?.valueForKey("radius") as! Double
         print("Region radius: \(regionRadius)")
+    }
+    
+    // This gets called for every annotation you add to the map. Returns the view for a given annotation.
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? Post {
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view.canShowCallout = true
+                view.calloutOffset = CGPoint(x: -5, y: 5)
+                view.pinTintColor = UIColor.redColor()
+                view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+            }
+            return view
+        }
+        return nil
+    }
+    
+    func addMessageAnnotation(comment: String) {
+        let artwork = Post(title: comment,
+                           locationName: client?.valueForKey("name") as! String!,
+                           discipline: "Message",
+                           coordinate: CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude))
+        
+        mapView.addAnnotation(artwork)
+        
+    }
+    
+    func addPictureAnnotation(image: UIImage, comment: String) {
+        let artwork = Post(title: comment,
+                           locationName: client?.valueForKey("name") as! String!,
+                           discipline: "Picture",
+                           coordinate: CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude))
+        
+        mapView.addAnnotation(artwork)
+        
+    }
+    
+    func updateRadius () {
+        regionRadius = client?.valueForKey("radius") as! Double
+        print("Region radius reset to: \(regionRadius)")
+        
+        self.locationManager.startUpdatingLocation()
+        
+        dispatch_async(dispatch_get_main_queue(),{
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    // MARK: Notification Observer(s)
+    
+    func addNotificationObservers() {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: #selector(MapViewController.updateRadius), name:SnapMapNotificationCenterConstants.RadiusProfileUpdatedName , object: nil)
     }
     
 }

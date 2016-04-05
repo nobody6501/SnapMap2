@@ -21,21 +21,46 @@ class TabBarViewController: UITabBarController {
         fetchClients()
 
         // Do any additional setup after loading the view.
-        self.tabBar.tintColor = .redColor()
+        
+        self.addNotificationObservers()
+        self.updateColors()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    // MARK: Notification Observer(s)
+    
+    func addNotificationObservers() {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: #selector(TabBarViewController.updateColors), name:SnapMapNotificationCenterConstants.TabBarColorProfileUpdatedName , object: nil)
+    }
+    
+    // MARK: Private Functions
+    
+    func updateColors() {
+        self.tabBar.translucent = true;
         
         if let darkMode = client?.valueForKey("darkMode") as? Bool {
             if darkMode {
                 print("Dark Mode enabled")
                 self.tabBar.barTintColor = .blackColor()
                 self.tabBar.tintColor = .whiteColor()
+            } else {
+                self.tabBar.tintColor = .redColor()
+                self.tabBar.barTintColor = .whiteColor()
             }
         }
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        dispatch_async(dispatch_get_main_queue(),{
+            self.view.layoutIfNeeded()
+        })
     }
     
 

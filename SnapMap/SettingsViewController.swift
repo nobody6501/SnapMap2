@@ -96,6 +96,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
             abort()
         }
         
+        SnapMapNotificationCenter.postTabBarColorProfileUpdatedNotification()
     }
     
     @IBAction func radiusSet(sender: AnyObject) {
@@ -117,6 +118,8 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
+        
+        SnapMapNotificationCenter.postRadiusUpdateNotification()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

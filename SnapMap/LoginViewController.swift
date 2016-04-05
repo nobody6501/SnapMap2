@@ -105,6 +105,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         let client = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
                         
                         client.setValue(id, forKey: "id")
+                        client.setValue(result.valueForKey("name"), forKey: "name")
                         client.setValue(false, forKey: "darkMode")
                         client.setValue(false, forKey: "allowPush")
                         client.setValue(10.0, forKey: "radius")

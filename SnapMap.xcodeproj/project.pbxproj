@@ -13,6 +13,8 @@
 		33216C0A1C8361C300F249B1 /* SnapMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33216C081C8361C300F249B1 /* SnapMap.xcdatamodeld */; };
 		33216C0C1C8361C300F249B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33216C0B1C8361C300F249B1 /* Assets.xcassets */; };
 		33216C0F1C8361C300F249B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */; };
+		3323B2031CB43D4F00FF3A97 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3323B2021CB43D4F00FF3A97 /* Post.swift */; };
+		3323B2051CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3323B2041CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift */; };
 		338AC1A11CA1EB3800170CF6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A01CA1EB3800170CF6 /* FBSDKCoreKit.framework */; };
 		338AC1A51CA1EB5800170CF6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A41CA1EB5800170CF6 /* Bolts.framework */; };
 		338AC1A91CA1EBC300170CF6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A81CA1EBC300170CF6 /* FBSDKLoginKit.framework */; };
@@ -34,6 +36,8 @@
 		33216C0B1C8361C300F249B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33216C0E1C8361C300F249B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		33216C101C8361C300F249B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3323B2021CB43D4F00FF3A97 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		3323B2041CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapMapNotificationCenterConstants.swift; sourceTree = "<group>"; };
 		338AC1A01CA1EB3800170CF6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		338AC1A41CA1EB5800170CF6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "FacebookSDKs-iOS-20163016/Bolts.framework"; sourceTree = "<group>"; };
 		338AC1A81CA1EBC300170CF6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 				338AC1B21CA22EB400170CF6 /* MapViewController.swift */,
 				338AC1C31CA2454500170CF6 /* TabBarViewController.swift */,
 				DCBAABE01CA3175800560A92 /* SettingsViewController.swift */,
+				3323B2021CB43D4F00FF3A97 /* Post.swift */,
+				3323B2041CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift */,
 				DC8899B41CA0784200EEAC2E /* Bridging-header.h */,
 				33216C051C8361C300F249B1 /* Main.storyboard */,
 				33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */,
@@ -186,11 +192,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3323B2051CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift in Sources */,
 				33216C041C8361C300F249B1 /* LoginViewController.swift in Sources */,
 				33216C021C8361C300F249B1 /* AppDelegate.swift in Sources */,
 				DCBAABE11CA3175800560A92 /* SettingsViewController.swift in Sources */,
 				33216C0A1C8361C300F249B1 /* SnapMap.xcdatamodeld in Sources */,
 				338AC1C41CA2454500170CF6 /* TabBarViewController.swift in Sources */,
+				3323B2031CB43D4F00FF3A97 /* Post.swift in Sources */,
 				338AC1B31CA22EB400170CF6 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
