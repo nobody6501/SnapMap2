@@ -10,16 +10,18 @@
 import UIKit
 import AVFoundation
 
-class CameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class CameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
     
     var imagePicker = UIImagePickerController()
     var originalphoto: UIImage? = nil
+    var alertController: UIAlertController? = nil
 
   
+    @IBOutlet weak var commentBox: UITextField!
+    @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var anotherPicBtn: UIButton!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var postBtn: UIButton!
-    @IBOutlet weak var shareBtn: UIButton!
     var ButtonRect: CGRect!
     
     override func viewDidLoad() {
@@ -27,9 +29,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
 
         // Do any additional setup after loading the view.
         
-        postBtn.hidden = true
         shareBtn.hidden = true
+        postBtn.hidden = true
         anotherPicBtn.hidden = true
+        commentBox.delegate = self
+        commentBox.hidden = true
+        commentBox.placeholder = "Add comment..."
         if (UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil && UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil){
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
@@ -53,8 +58,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         originalphoto = info[UIImagePickerControllerOriginalImage] as? UIImage
         image.image = originalphoto
         postBtn.hidden = false
-        shareBtn.hidden = false
         anotherPicBtn.hidden = false
+        shareBtn.hidden = false
+        commentBox.hidden = false
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -63,7 +69,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func shareToFB(sender: AnyObject){
+    @IBAction func shareToFB(sender: AnyObject) {
         let photo: FBSDKSharePhoto = FBSDKSharePhoto()
         photo.image = originalphoto
         photo.userGenerated = true
@@ -77,6 +83,26 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
+    @IBAction func postPhoto(sender: AnyObject) {
+        self.alertController = UIAlertController(title: "Post Successful!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in self.commentBox.text = ""
+        })
+        
+        self.alertController!.addAction(okAction)
+        
+        presentViewController(self.alertController!, animated: true, completion: nil)
+    }
     
      /*  // MARK: - Navigation
 
