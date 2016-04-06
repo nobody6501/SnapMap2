@@ -2,16 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "SnapMapIcon.png",
       "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "SnapMapIcon.jpg",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
     }
   ],
   "info" : {

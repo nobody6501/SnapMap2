@@ -45,6 +45,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         updateRadius()
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
@@ -116,31 +120,46 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 view.calloutOffset = CGPoint(x: -5, y: 5)
                 view.pinTintColor = UIColor.redColor()
                 view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+                view.animatesDrop = true
+                let imageView: UIImageView = UIImageView.init(image: resizeImage(annotation.postImage(), newWidth: 50))
+                view.leftCalloutAccessoryView = imageView
             }
             return view
         }
         return nil
     }
     
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
     func addMessageAnnotation(comment: String) {
         let artwork = Post(title: comment,
                            locationName: client?.valueForKey("name") as! String!,
                            discipline: "Message",
-                           coordinate: CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude))
+                           coordinate: CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude),
+                           image: UIImage(named: "CityNight.jpg")!)
         
         mapView.addAnnotation(artwork)
         
     }
     
-    func addPictureAnnotation(image: UIImage, comment: String) {
-        let artwork = Post(title: comment,
-                           locationName: client?.valueForKey("name") as! String!,
-                           discipline: "Picture",
-                           coordinate: CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude))
-        
-        mapView.addAnnotation(artwork)
-        
-    }
+//    func addPictureAnnotation(image: UIImage, comment: String) {
+//        let artwork = Post(title: comment,
+//                           locationName: client?.valueForKey("name") as! String!,
+//                           discipline: "Picture",
+//                           coordinate: CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude))
+//        
+//        mapView.addAnnotation(artwork)
+//        
+//    }
     
     func updateRadius () {
         regionRadius = client?.valueForKey("radius") as! Double

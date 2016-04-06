@@ -15,6 +15,8 @@
 		33216C0F1C8361C300F249B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */; };
 		3323B2031CB43D4F00FF3A97 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3323B2021CB43D4F00FF3A97 /* Post.swift */; };
 		3323B2051CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3323B2041CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift */; };
+		333574CD1CB57C77007F6AC2 /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 333574CC1CB57C77007F6AC2 /* Camera.png */; };
+		333574CF1CB58337007F6AC2 /* SnapMapIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 333574CE1CB58337007F6AC2 /* SnapMapIcon.png */; };
 		338AC1A11CA1EB3800170CF6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A01CA1EB3800170CF6 /* FBSDKCoreKit.framework */; };
 		338AC1A51CA1EB5800170CF6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A41CA1EB5800170CF6 /* Bolts.framework */; };
 		338AC1A91CA1EBC300170CF6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A81CA1EBC300170CF6 /* FBSDKLoginKit.framework */; };
@@ -38,6 +40,8 @@
 		33216C101C8361C300F249B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3323B2021CB43D4F00FF3A97 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3323B2041CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapMapNotificationCenterConstants.swift; sourceTree = "<group>"; };
+		333574CC1CB57C77007F6AC2 /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
+		333574CE1CB58337007F6AC2 /* SnapMapIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnapMapIcon.png; sourceTree = "<group>"; };
 		338AC1A01CA1EB3800170CF6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		338AC1A41CA1EB5800170CF6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "FacebookSDKs-iOS-20163016/Bolts.framework"; sourceTree = "<group>"; };
 		338AC1A81CA1EBC300170CF6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 				DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */,
 				DC8594591CA1BDF500AD106B /* SnapMapTitle.jpg */,
 				338AC1C51CA3619B00170CF6 /* CityNight.jpg */,
+				333574CC1CB57C77007F6AC2 /* Camera.png */,
+				333574CE1CB58337007F6AC2 /* SnapMapIcon.png */,
 			);
 			path = SnapMap;
 			sourceTree = "<group>";
@@ -181,6 +187,8 @@
 				DC85945C1CA1BFDC00AD106B /* LoginBackground.jpg in Resources */,
 				DC85945A1CA1BDF500AD106B /* SnapMapTitle.jpg in Resources */,
 				33216C0C1C8361C300F249B1 /* Assets.xcassets in Resources */,
+				333574CF1CB58337007F6AC2 /* SnapMapIcon.png in Resources */,
+				333574CD1CB57C77007F6AC2 /* Camera.png in Resources */,
 				33216C071C8361C300F249B1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -107,6 +107,10 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         print("Saving Radius")
         
         // Set the attribute values
+        
+        // TODO: enforce restrictions on radius
+        // ************************************
+        
         client?.setValue(Double(radius.text!), forKey: "radius")
         
         // Commit the changes.
