@@ -26,6 +26,7 @@
 		338AC1C01CA23C9F00170CF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 338AC1BF1CA23C9F00170CF6 /* Images.xcassets */; };
 		338AC1C41CA2454500170CF6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338AC1C31CA2454500170CF6 /* TabBarViewController.swift */; };
 		338AC1C61CA3619B00170CF6 /* CityNight.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338AC1C51CA3619B00170CF6 /* CityNight.jpg */; };
+		83CCB6EB1CB5BA4700025506 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CCB6E31CB5B9A000025506 /* Firebase.framework */; };
 		DC85945A1CA1BDF500AD106B /* SnapMapTitle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DC8594591CA1BDF500AD106B /* SnapMapTitle.jpg */; };
 		DC85945C1CA1BFDC00AD106B /* LoginBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */; };
 		DCBAABE11CA3175800560A92 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAABE01CA3175800560A92 /* SettingsViewController.swift */; };
@@ -53,6 +54,20 @@
 		338AC1BF1CA23C9F00170CF6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		338AC1C31CA2454500170CF6 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		338AC1C51CA3619B00170CF6 /* CityNight.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CityNight.jpg; sourceTree = "<group>"; };
+		83CCB6DD1CB5B9A000025506 /* Empty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Empty.m; sourceTree = "<group>"; };
+		83CCB6DE1CB5B9A000025506 /* FAuthData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FAuthData.h; sourceTree = "<group>"; };
+		83CCB6DF1CB5B9A000025506 /* FAuthType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FAuthType.h; sourceTree = "<group>"; };
+		83CCB6E01CB5B9A000025506 /* FConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FConfig.h; sourceTree = "<group>"; };
+		83CCB6E11CB5B9A000025506 /* FDataSnapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDataSnapshot.h; sourceTree = "<group>"; };
+		83CCB6E21CB5B9A000025506 /* FEventType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FEventType.h; sourceTree = "<group>"; };
+		83CCB6E31CB5B9A000025506 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
+		83CCB6E41CB5B9A000025506 /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
+		83CCB6E51CB5B9A000025506 /* FirebaseApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseApp.h; sourceTree = "<group>"; };
+		83CCB6E61CB5B9A000025506 /* FirebaseServerValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseServerValue.h; sourceTree = "<group>"; };
+		83CCB6E71CB5B9A000025506 /* FMutableData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMutableData.h; sourceTree = "<group>"; };
+		83CCB6E81CB5B9A000025506 /* FQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQuery.h; sourceTree = "<group>"; };
+		83CCB6E91CB5B9A000025506 /* FTransactionResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTransactionResult.h; sourceTree = "<group>"; };
+		83CCB6EA1CB5B9A000025506 /* libFirebaseStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFirebaseStatic.a; sourceTree = "<group>"; };
 		DC8594591CA1BDF500AD106B /* SnapMapTitle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SnapMapTitle.jpg; sourceTree = "<group>"; };
 		DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LoginBackground.jpg; sourceTree = "<group>"; };
 		DC8899B41CA0784200EEAC2E /* Bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-header.h"; sourceTree = "<group>"; };
@@ -64,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83CCB6EB1CB5BA4700025506 /* Firebase.framework in Frameworks */,
 				333574D31CB59097007F6AC2 /* FBSDKShareKit.framework in Frameworks */,
 				338AC1A11CA1EB3800170CF6 /* FBSDKCoreKit.framework in Frameworks */,
 				338AC1A91CA1EBC300170CF6 /* FBSDKLoginKit.framework in Frameworks */,
@@ -79,6 +95,7 @@
 			children = (
 				33216C001C8361C300F249B1 /* SnapMap */,
 				33216BFF1C8361C300F249B1 /* Products */,
+				756109F509A6F20C792F122E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +133,35 @@
 				333574CE1CB58337007F6AC2 /* SnapMapIcon.png */,
 			);
 			path = SnapMap;
+			sourceTree = "<group>";
+		};
+		756109F509A6F20C792F122E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83CCB6DC1CB5B9A000025506 /* Firebase */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83CCB6DC1CB5B9A000025506 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				83CCB6E31CB5B9A000025506 /* Firebase.framework */,
+				83CCB6DD1CB5B9A000025506 /* Empty.m */,
+				83CCB6DE1CB5B9A000025506 /* FAuthData.h */,
+				83CCB6DF1CB5B9A000025506 /* FAuthType.h */,
+				83CCB6E01CB5B9A000025506 /* FConfig.h */,
+				83CCB6E11CB5B9A000025506 /* FDataSnapshot.h */,
+				83CCB6E21CB5B9A000025506 /* FEventType.h */,
+				83CCB6E41CB5B9A000025506 /* Firebase.h */,
+				83CCB6E51CB5B9A000025506 /* FirebaseApp.h */,
+				83CCB6E61CB5B9A000025506 /* FirebaseServerValue.h */,
+				83CCB6E71CB5B9A000025506 /* FMutableData.h */,
+				83CCB6E81CB5B9A000025506 /* FQuery.h */,
+				83CCB6E91CB5B9A000025506 /* FTransactionResult.h */,
+				83CCB6EA1CB5B9A000025506 /* libFirebaseStatic.a */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		DC8899B11CA0750900EEAC2E /* Frameworks */ = {
@@ -328,6 +374,7 @@
 		33216C141C8361C300F249B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -335,6 +382,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-20160316",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-20163016",
+					"$(PROJECT_DIR)/Firebase/**",
+					"$(SRCROOT)/**",
 				);
 				INFOPLIST_FILE = SnapMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -342,12 +391,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SnapMap/Bridging-header.h";
+				USER_HEADER_SEARCH_PATHS = "/Users/martinhuang/Desktop/snapmap/Firebase/** /Users/martinhuang/Desktop/snapmap/**";
 			};
 			name = Debug;
 		};
 		33216C151C8361C300F249B1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -355,6 +406,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-20160316",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-20163016",
+					"$(PROJECT_DIR)/Firebase/**",
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)/**",
 				);
 				INFOPLIST_FILE = SnapMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -362,6 +416,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SnapMap/Bridging-header.h";
+				USER_HEADER_SEARCH_PATHS = "/Users/martinhuang/Desktop/snapmap/Firebase/** /Users/martinhuang/Desktop/snapmap/**";
 			};
 			name = Release;
 		};
