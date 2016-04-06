@@ -11,17 +11,13 @@ import CoreData
 import Firebase
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
-    
-    let ROOT = Firebase(url:"https://intense-inferno-7933.firebaseio.com/")
-    var uid = ""
-    
+
     @IBOutlet weak var SnapMapTitle: UIImageView!
     var clients = [NSManagedObject]()
     var identifier: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.fetchClients()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -165,22 +161,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             settings.id = self.identifier!
             map.id = self.identifier!
             print("identifier in segue = \(self.identifier!)")
-        }
-    }
-    
-    //get user's facebook UID and store in firebase
-    func fbCurrentUserID() {
-        let userRoot = ROOT!.childByAppendingPath("users")
-        var fbRequest = FBSDKGraphRequest(graphPath:"/me/", parameters: nil);
-        fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
-            if error == nil {
-                self.uid = result.valueForKey("id") as! String
-                let currentUser = userRoot.childByAppendingPath(self.uid)
-                currentUser.setValue(self.uid)
-                
-            } else {
-                print("Error Getting Friends \(error)");
-            }
         }
     }
     

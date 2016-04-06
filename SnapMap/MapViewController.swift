@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 import CoreLocation
 import CoreData
+import Firebase
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
     
@@ -21,6 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var cameraTab: UITabBarItem!
     @IBOutlet weak var settingsTab: UITabBarItem!
     
+    let ROOT = Firebase(url:"https://intense-inferno-7933.firebaseio.com/")
     let locationManager = CLLocationManager()
     var location: CLLocation? = nil
     var regionRadius: CLLocationDistance = 1000
@@ -28,7 +30,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var client: NSManagedObject? = nil
     var id: NSString? = nil
     var alertController: UIAlertController? = nil
-
+    var longitude: CLLocationDegrees!
+    var latitude: CLLocationDegrees!
+    var uid:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +51,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         addNotificationObservers()
         updateRadius()
+        fbCurrentUserID()
     }
     
     deinit {
@@ -64,6 +69,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height * 0.7)
         
         centerMapOnLocation(location!)
+        
+        //get the cooridnates
+        longitude = location!.coordinate.longitude
+        latitude = location!.coordinate.latitude
+        var coordinates : [String:CLLocationDegrees] = [
+            "longitude": longitude,
+            "latitude": latitude
+        ]
+        //store the coordinates for user
+        let locationRoot = ROOT!.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("locations")
+        locationRoot.setValue(coordinates)
         
 //        self.addMessageAnnotation("This is a comment")
     }
@@ -201,6 +217,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func addNotificationObservers() {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: #selector(MapViewController.updateRadius), name:SnapMapNotificationCenterConstants.RadiusProfileUpdatedName , object: nil)
+    }
+    
+    //get user's facebook UID and store in firebase
+    func fbCurrentUserID() {
+        let userRoot = ROOT!.childByAppendingPath("users")
+        var fbRequest = FBSDKGraphRequest(graphPath:"/me/", parameters: nil);
+        fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            if error == nil {
+                self.uid = result.valueForKey("id") as! String
+                let currentUser = userRoot.childByAppendingPath(self.uid)
+                currentUser.setValue(self.uid)
+                
+            } else {
+                print("Error Getting Friends \(error)");
+            }
+        }
     }
     
 }
