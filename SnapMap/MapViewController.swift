@@ -15,6 +15,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var messageBtn: UIButton!
+
     @IBOutlet weak var messageTab: UITabBarItem!
     @IBOutlet weak var cameraTab: UITabBarItem!
     @IBOutlet weak var settingsTab: UITabBarItem!
@@ -25,6 +27,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var clients = [NSManagedObject]()
     var client: NSManagedObject? = nil
     var id: NSString? = nil
+    var alertController: UIAlertController? = nil
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,8 +65,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         centerMapOnLocation(location!)
         
-        self.addMessageAnnotation("This is a comment")
-
+//        self.addMessageAnnotation("This is a comment")
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -170,6 +173,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         dispatch_async(dispatch_get_main_queue(),{
             self.view.layoutIfNeeded()
         })
+    }
+    
+    @IBAction func postMessage(sender: AnyObject) {
+        self.alertController = UIAlertController(title: "Message", message: "Type your message", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let postAction = UIAlertAction(title: "Post", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            print("message posted")
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+            print("message cancelled")
+        }
+        
+        self.alertController!.addAction(postAction)
+        self.alertController!.addAction(cancelAction)
+        
+        self.alertController!.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.placeholder = "Enter your message"
+        }
+        
+        presentViewController(self.alertController!, animated: true, completion: nil)
+        
     }
     
     // MARK: Notification Observer(s)

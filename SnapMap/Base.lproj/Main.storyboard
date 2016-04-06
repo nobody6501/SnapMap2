@@ -117,7 +117,7 @@
         <!--Camera-->
         <scene sceneID="qai-kk-9MS">
             <objects>
-                <viewController id="unM-Fn-fk5" sceneMemberID="viewController">
+                <viewController id="unM-Fn-fk5" customClass="CameraViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gNp-wb-F1b"/>
                         <viewControllerLayoutGuide type="bottom" id="NDT-yz-MGA"/>
@@ -125,9 +125,47 @@
                     <view key="view" contentMode="scaleToFill" id="IU3-sf-xvm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xZe-n9-ez8">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="439"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fcm-1t-B2f">
+                                <rect key="frame" x="0.0" y="440" width="414" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-pX-KLm">
+                                <rect key="frame" x="63" y="529" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="postPhoto:" destination="unM-Fn-fk5" eventType="touchUpInside" id="0AH-m2-cO2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGP-S3-Mf4">
+                                <rect key="frame" x="274" y="529" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="takeAnotherPhoto:" destination="unM-Fn-fk5" eventType="touchUpInside" id="e8z-8n-iZc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-DH-lUw">
+                                <rect key="frame" x="176" y="597" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="shareToFB:" destination="unM-Fn-fk5" eventType="touchUpInside" id="acW-Wk-Lwe"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Camera" image="CameraIcon" selectedImage="CameraIcon" id="upf-f4-egq"/>
+                    <connections>
+                        <outlet property="anotherPicBtn" destination="PGP-S3-Mf4" id="6Xw-H1-t1y"/>
+                        <outlet property="commentBox" destination="fcm-1t-B2f" id="ViO-jI-bGl"/>
+                        <outlet property="image" destination="xZe-n9-ez8" id="ZIe-sP-y1q"/>
+                        <outlet property="postBtn" destination="6Iv-pX-KLm" id="gd5-hl-xQi"/>
+                        <outlet property="shareBtn" destination="RSG-DH-lUw" id="LOe-Fc-WG9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZcD-hY-AZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
