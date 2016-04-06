@@ -10,15 +10,18 @@
 import UIKit
 import AVFoundation
 import MapKit
+import CoreData
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
     
+    let locationManager = CLLocationManager()
+    var location: CLLocation? = nil
     var imagePicker = UIImagePickerController()
     var originalphoto: UIImage? = nil
     var alertController: UIAlertController? = nil
-    
-    let locationManager = CLLocationManager()
-    var location: CLLocation? = nil
+    var id: NSString? = nil
+    var clients = [NSManagedObject]()
+    var client: NSManagedObject? = nil
     
     @IBOutlet weak var commentBox: UITextField!
     @IBOutlet weak var shareBtn: UIButton!
@@ -33,10 +36,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
         // Do any additional setup after loading the view.
         
-//        locationManager.delegate = self
-//        locationManager.requestAlwaysAuthorization()
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
         
         shareBtn.hidden = true
         postBtn.hidden = true
@@ -54,6 +57,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             print("Sorry no Camera")
         }
         
+        fetchClients()
         
         presentViewController(imagePicker, animated: true, completion: nil)
     }
@@ -104,6 +108,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     
     @IBAction func postPhoto(sender: AnyObject) {
+        
+        savePost("")
+        
         self.alertController = UIAlertController(title: "Post Successful!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in self.commentBox.text = ""
@@ -114,10 +121,65 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         presentViewController(self.alertController!, animated: true, completion: nil)
     }
     
-//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        location = locations.last        
-//        self.locationManager.stopUpdatingLocation()
-//    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        location = locations.last        
+        self.locationManager.stopUpdatingLocation()
+    }
+
+    func savePost(message: String) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity = NSEntityDescription.entityForName("Post", inManagedObjectContext: managedContext)
+        
+        let post = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        post.setValue(client!.valueForKey("name") as? String, forKey: "user")
+        post.setValue(commentBox!.text, forKey: "title")
+        post.setValue(commentBox!.text, forKey: "message")
+        post.setValue(UIImageJPEGRepresentation(originalphoto!, 1), forKey: "image")
+        post.setValue(location!.coordinate.latitude as Double, forKey: "lat")
+        post.setValue(location!.coordinate.longitude as Double, forKey: "long")
+        
+        do {
+            try managedContext.save()
+        } catch {
+            // what to do if an error occurs?
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo) in CameraView::savePost()")
+            abort()
+        }
+    }
+    
+    func fetchClients() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName:"Client")
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedResults {
+            clients = results
+        } else {
+            print("Could not fetch")
+        }
+        
+        for x in clients {
+            if let identifier: NSString = x.valueForKey("id") as? NSString{
+                if(identifier == id){
+                    print("Client found in Settings View")
+                    client = x
+                }
+            }
+        }
+    }
     
     /*  // MARK: - Navigation
      

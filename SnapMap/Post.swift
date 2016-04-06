@@ -13,24 +13,20 @@ import MapKit
 
 class Post: NSObject, MKAnnotation {
     
+    let user: String?
     let title: String?
-    let locationName: String
-    let discipline: String
+    let message: String
     let coordinate: CLLocationCoordinate2D
     let image: UIImage?
     
-    init(title: String, locationName: String, discipline: String, coordinate: CLLocationCoordinate2D, image: UIImage) {
+    init(user: String, title: String, message: String, coordinate: CLLocationCoordinate2D, image: UIImage) {
+        self.user = user
         self.title = title
-        self.locationName = locationName
-        self.discipline = discipline
+        self.message = message
         self.coordinate = coordinate
         self.image = image
         
         super.init()
-    }
-    
-    var subtitle: String? {
-        return locationName
     }
     
     func postImage() ->  UIImage {

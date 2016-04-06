@@ -26,6 +26,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var regionRadius: CLLocationDistance = 1000
     var clients = [NSManagedObject]()
     var client: NSManagedObject? = nil
+    var posts = [NSManagedObject]()
     var id: NSString? = nil
     var alertController: UIAlertController? = nil
 
@@ -40,7 +41,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         
-        fetchClients()
+        fetchData()
         
         mapView.delegate = self
         mapView.showsUserLocation = true
@@ -77,21 +78,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func fetchClients() {
+    func fetchData() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName:"Client")
-        var fetchedResults:[NSManagedObject]? = nil
+        let fetchClients = NSFetchRequest(entityName:"Client")
+        var fetchedClients:[NSManagedObject]? = nil
         
         do {
-            try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+            try fetchedClients = managedContext.executeFetchRequest(fetchClients) as? [NSManagedObject]
         } catch {
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
         
-        if let results = fetchedResults {
+        if let results = fetchedClients {
             clients = results
         } else {
             print("Could not fetch")
@@ -107,6 +108,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         regionRadius = client?.valueForKey("radius") as! Double
         print("Region radius: \(regionRadius)")
+        
+        let fetchPosts = NSFetchRequest(entityName:"Post")
+        var fetchedPosts:[NSManagedObject]? = nil
+        
+        do {
+            try fetchedPosts = managedContext.executeFetchRequest(fetchPosts) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedPosts {
+            posts = results
+        } else {
+            print("Could not fetch")
+        }
+        
+        for post in posts {
+            let artwork = Post(user: post.valueForKey("user") as! String,
+                               title: post.valueForKey("title") as! String,
+                               message: post.valueForKey("message") as! String,
+                               coordinate: CLLocationCoordinate2D(latitude: post.valueForKey("lat") as! Double, longitude: post.valueForKey("long") as! Double),
+                               image: UIImage(data: (post.valueForKey("image") as? NSData)!)!)
+            
+            mapView.addAnnotation(artwork)
+        }
     }
     
     // This gets called for every annotation you add to the map. Returns the view for a given annotation.
@@ -143,26 +171,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return newImage
     }
     
-    func addMessageAnnotation(comment: String) {
-        let artwork = Post(title: comment,
-                           locationName: client?.valueForKey("name") as! String!,
-                           discipline: "Message",
-                           coordinate: CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude),
-                           image: UIImage(named: "CityNight.jpg")!)
-        
-        mapView.addAnnotation(artwork)
-        
-    }
-    
-//    func addPictureAnnotation(image: UIImage, comment: String) {
+//    func addMessageAnnotation(comment: String) {
 //        let artwork = Post(title: comment,
 //                           locationName: client?.valueForKey("name") as! String!,
-//                           discipline: "Picture",
-//                           coordinate: CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude))
+//                           discipline: "Message",
+//                           coordinate: CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude),
+//                           image: UIImage(named: "CityNight.jpg")!)
 //        
 //        mapView.addAnnotation(artwork)
 //        
 //    }
+    
+    func addAnnotation(post: NSManagedObject) {
+        let artwork = Post(user: post.valueForKey("user") as! String,
+                           title: post.valueForKey("title") as! String,
+                           message: post.valueForKey("message") as! String,
+                           coordinate: CLLocationCoordinate2D(latitude: post.valueForKey("lat") as! Double, longitude: post.valueForKey("long") as! Double),
+                           image: UIImage(data: (post.valueForKey("image") as? NSData)!)!)
+        
+        mapView.addAnnotation(artwork)
+    }
     
     func updateRadius () {
         regionRadius = client?.valueForKey("radius") as! Double
@@ -173,6 +201,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         dispatch_async(dispatch_get_main_queue(),{
             self.view.layoutIfNeeded()
         })
+    }
+    
+    func updateMap() {
+        
+        
+        
     }
     
     @IBAction func postMessage(sender: AnyObject) {

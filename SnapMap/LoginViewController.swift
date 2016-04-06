@@ -18,6 +18,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController!.navigationBar.hidden = true
+        
         self.fetchClients()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -157,9 +159,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             let dvc = segue.destinationViewController as! TabBarViewController
             let settings = dvc.viewControllers![3] as! SettingsViewController
             let map = dvc.viewControllers![0] as! MapViewController
+            let camera = dvc.viewControllers![1] as! CameraViewController
             dvc.id = self.identifier!
             settings.id = self.identifier!
             map.id = self.identifier!
+            camera.id = self.identifier!
+            
             print("identifier in segue = \(self.identifier!)")
         }
     }
