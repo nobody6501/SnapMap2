@@ -9,8 +9,8 @@
 import UIKit
 
 struct SnapMapNotificationCenterConstants {
-    static let TabBarColorProfileUpdatedName = "kTabBarColorProfileUpdatedName"
-    static let RadiusProfileUpdatedName = "kRadiusProfileUpdatedName"
+    static let TabBarColorProfileUpdatedName = "TabBarColorProfileUpdatedName"
+    static let MapViewUpdatedName = "MapViewUpdatedName"
 }
 
 class SnapMapNotificationCenter: NSObject {
@@ -20,8 +20,8 @@ class SnapMapNotificationCenter: NSObject {
         notificationCenter.postNotificationName(SnapMapNotificationCenterConstants.TabBarColorProfileUpdatedName, object: nil)
     }
     
-    class func postRadiusUpdateNotification() {
+    class func mapViewUpdateNotification() {
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName(SnapMapNotificationCenterConstants.RadiusProfileUpdatedName, object: nil)
+        notificationCenter.postNotificationName(SnapMapNotificationCenterConstants.MapViewUpdatedName, object: nil)
     }
 }

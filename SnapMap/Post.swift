@@ -13,14 +13,14 @@ import MapKit
 
 class Post: NSObject, MKAnnotation {
     
-    let user: String?
+    let locationName: String?
     let title: String?
     let message: String
     let coordinate: CLLocationCoordinate2D
     let image: UIImage?
     
     init(user: String, title: String, message: String, coordinate: CLLocationCoordinate2D, image: UIImage) {
-        self.user = user
+        self.locationName = user
         self.title = title
         self.message = message
         self.coordinate = coordinate

@@ -123,7 +123,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
             abort()
         }
         
-        SnapMapNotificationCenter.postRadiusUpdateNotification()
+        SnapMapNotificationCenter.mapViewUpdateNotification()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

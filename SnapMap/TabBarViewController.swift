@@ -18,8 +18,6 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchClients()
-
         // Do any additional setup after loading the view.
         
         self.addNotificationObservers()
@@ -45,6 +43,10 @@ class TabBarViewController: UITabBarController {
     // MARK: Private Functions
     
     func updateColors() {
+        fetchClients()
+        
+        self.tabBar
+        
         self.tabBar.translucent = true;
         
         if let darkMode = client?.valueForKey("darkMode") as? Bool {

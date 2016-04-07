@@ -149,6 +149,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             NSLog("Unresolved error \(nserror), \(nserror.userInfo) in CameraView::savePost()")
             abort()
         }
+        
+        SnapMapNotificationCenter.mapViewUpdateNotification()
     }
     
     func fetchClients() {
@@ -174,7 +176,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         for x in clients {
             if let identifier: NSString = x.valueForKey("id") as? NSString{
                 if(identifier == id){
-                    print("Client found in Settings View")
+                    print("Client found in Camera View")
                     client = x
                 }
             }
