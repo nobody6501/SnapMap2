@@ -28,6 +28,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var anotherPicBtn: UIButton!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var postBtn: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var ButtonRect: CGRect!
     
@@ -47,17 +48,24 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         commentBox.delegate = self
         commentBox.hidden = true
         commentBox.placeholder = "Add comment..."
+        
+        addNotificationObservers()
+        
+        self.scrollView.frame = self.view.frame
+        self.scrollView.contentSize = self.view.frame.size
+        
+        fetchClients()
+        
         if (UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil && UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil){
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
             imagePicker.cameraCaptureMode = .Photo
             imagePicker.modalPresentationStyle = .FullScreen
         }
-        else{
+            
+        else {
             print("Sorry no Camera")
         }
-        
-        fetchClients()
         
         presentViewController(imagePicker, animated: true, completion: nil)
     }
@@ -67,6 +75,19 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Notification Observer(s)
+    
+    func addNotificationObservers() {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        // Register for when the keyboard is shown.
+        notificationCenter.addObserver(self, selector: #selector(CameraViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        // Register for when the keyboard is hidden.
+        notificationCenter.addObserver(self, selector: #selector(CameraViewController.keyboardDidHide(_:)), name: UIKeyboardDidHideNotification, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         originalphoto = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -98,12 +119,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         self.view.endEditing(true)
-        return false
+        return true
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
+//        self.view.endEditing(true)
     }
     
     
@@ -181,6 +203,34 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
                 }
             }
         }
+    }
+    
+    // MARK: - Keyboard Scroll
+ 
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        // Get keyboard frame from notification object.
+        let info:NSDictionary = notification.userInfo!
+        let keyboardFrame = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        
+        // Pad for some space between the field and the keyboard.
+        let pad:CGFloat = 5.0;
+        
+        UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            // Set inset bottom, which will cause the scroll view to move up.
+            self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, keyboardFrame.size.height + pad, 0.0);
+            }, completion: nil)
+    }
+    
+    func keyboardDidHide(notification: NSNotification) {
+        UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            // Restore starting insets.
+            self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+            }, completion: nil)
     }
     
     /*  // MARK: - Navigation

@@ -33,11 +33,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KmF-2X-GFt">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KmF-2X-GFt">
                                 <rect key="frame" x="0.0" y="152" width="414" height="117"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KmF-2X-GFt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1X9-cq-sIz"/>
+                            <constraint firstAttribute="trailing" secondItem="KmF-2X-GFt" secondAttribute="trailing" id="HPR-9h-LyL"/>
+                            <constraint firstItem="KmF-2X-GFt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="132" id="I0M-aC-5xR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KmF-2X-GFt" secondAttribute="bottom" constant="418" id="XAK-NX-4Rx"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dx2-qJ-PXF"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -126,45 +132,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xZe-n9-ez8">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="439"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fcm-1t-B2f">
-                                <rect key="frame" x="0.0" y="440" width="414" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-pX-KLm">
-                                <rect key="frame" x="63" y="529" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="postPhoto:" destination="unM-Fn-fk5" eventType="touchUpInside" id="0AH-m2-cO2"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGP-S3-Mf4">
-                                <rect key="frame" x="274" y="529" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="takeAnotherPhoto:" destination="unM-Fn-fk5" eventType="touchUpInside" id="e8z-8n-iZc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-DH-lUw">
-                                <rect key="frame" x="176" y="597" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="shareToFB:" destination="unM-Fn-fk5" eventType="touchUpInside" id="acW-Wk-Lwe"/>
-                                </connections>
-                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Xf-bR-OlU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xZe-n9-ez8">
+                                        <rect key="frame" x="0.0" y="18" width="414" height="470"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fcm-1t-B2f">
+                                        <rect key="frame" x="0.0" y="487" width="414" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGP-S3-Mf4">
+                                        <rect key="frame" x="296" y="559" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="takeAnotherPhoto:" destination="unM-Fn-fk5" eventType="touchUpInside" id="Rtx-Wu-gPE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-DH-lUw">
+                                        <rect key="frame" x="42" y="552" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="postPhoto:" destination="unM-Fn-fk5" eventType="touchUpInside" id="pP8-mW-UlG"/>
+                                            <action selector="shareToFB:" destination="unM-Fn-fk5" eventType="touchUpInside" id="acW-Wk-Lwe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-pX-KLm">
+                                        <rect key="frame" x="166" y="598" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="postPhoto:" destination="unM-Fn-fk5" eventType="touchUpInside" id="0AH-m2-cO2"/>
+                                            <action selector="shareToFB:" destination="unM-Fn-fk5" eventType="touchUpInside" id="AtE-ff-IhL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Camera" image="CameraIcon" selectedImage="CameraIcon" id="upf-f4-egq"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="anotherPicBtn" destination="PGP-S3-Mf4" id="6Xw-H1-t1y"/>
-                        <outlet property="commentBox" destination="fcm-1t-B2f" id="ViO-jI-bGl"/>
-                        <outlet property="image" destination="xZe-n9-ez8" id="ZIe-sP-y1q"/>
-                        <outlet property="postBtn" destination="6Iv-pX-KLm" id="gd5-hl-xQi"/>
-                        <outlet property="shareBtn" destination="RSG-DH-lUw" id="LOe-Fc-WG9"/>
+                        <outlet property="anotherPicBtn" destination="PGP-S3-Mf4" id="PaK-vB-ggj"/>
+                        <outlet property="commentBox" destination="fcm-1t-B2f" id="VKq-Ce-kXe"/>
+                        <outlet property="image" destination="xZe-n9-ez8" id="9ie-gG-f6m"/>
+                        <outlet property="postBtn" destination="6Iv-pX-KLm" id="Qlo-aQ-hDB"/>
+                        <outlet property="scrollView" destination="3Xf-bR-OlU" id="Zzp-LO-98n"/>
+                        <outlet property="shareBtn" destination="RSG-DH-lUw" id="7Rp-iy-yaE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZcD-hY-AZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
