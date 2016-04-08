@@ -16,9 +16,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var messageBtn: UIButton!
-
+    
     @IBOutlet weak var messageTab: UITabBarItem!
-    @IBOutlet weak var cameraTab: UITabBarItem!
     @IBOutlet weak var settingsTab: UITabBarItem!
     
     let locationManager = CLLocationManager()
@@ -29,7 +28,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var posts = [NSManagedObject]()
     var id: NSString? = nil
     var alertController: UIAlertController? = nil
-
+    var messageBox: UITextField? = nil
+    var titleBox: UITextField? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
-                
+        
         mapView.delegate = self
         mapView.showsUserLocation = true
         
@@ -70,8 +71,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height * 0.7)
         
         centerMapOnLocation(location!)
-        
-//        self.addMessageAnnotation("This is a comment")
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -100,7 +99,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if let results = fetchedClients {
             clients = results
         }
-        
+            
         else {
             print("Could not fetch")
         }
@@ -131,17 +130,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if let results = fetchedPosts {
             posts = results
         }
-        
+            
         else {
             print("Could not fetch")
         }
         
         for post in posts {
             let artwork = Post(user: post.valueForKey("user") as! String,
-                                title: post.valueForKey("title") as! String,
-                                message: post.valueForKey("message") as! String,
-                                coordinate: CLLocationCoordinate2D(latitude: post.valueForKey("lat") as! Double, longitude: post.valueForKey("long") as! Double),
-                                image: UIImage(data: (post.valueForKey("image") as? NSData)!)!)
+                               title: post.valueForKey("title") as! String,
+                               message: post.valueForKey("message") as! String,
+                               coordinate: CLLocationCoordinate2D(latitude: post.valueForKey("lat") as! Double, longitude: post.valueForKey("long") as! Double),
+                               image: UIImage(data: (post.valueForKey("image") as? NSData)!)!)
             
             mapView.addAnnotation(artwork)
         }
@@ -157,7 +156,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             }
-            
+                
             else {
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 view.canShowCallout = true
@@ -185,15 +184,70 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return newImage
     }
     
-//    func addMessageAnnotation(comment: String) {
-//        let artwork = Post(user: "user",
-//                           title: comment,
-//                           message: "message",
-//                           coordinate: CLLocationCoordinate2D(latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!),
-//                           image: UIImage(named: "CityNight.jpg")!)
-//        
-//        mapView.addAnnotation(artwork)
-//    }
+    //    func addMessageAnnotation(comment: String) {
+    //        let artwork = Post(user: "user",
+    //                           title: comment,
+    //                           message: "message",
+    //                           coordinate: CLLocationCoordinate2D(latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!),
+    //                           image: UIImage(named: "CityNight.jpg")!)
+    //
+    //        mapView.addAnnotation(artwork)
+    //    }
+    
+    @IBAction func postMessage(sender: AnyObject) {
+        
+        self.alertController = UIAlertController(title: "Post a message to the world!", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let postAction = UIAlertAction(title: "Post", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            
+            let entity = NSEntityDescription.entityForName("Post", inManagedObjectContext: managedContext)
+            
+            let post = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            
+            post.setValue(self.client!.valueForKey("name") as? String, forKey: "user")
+            post.setValue(self.titleBox!.text, forKey: "title")
+            post.setValue(self.messageBox!.text, forKey: "message")
+            post.setValue(UIImageJPEGRepresentation(UIImage(named: "iMessageIcon.png")!, 1), forKey: "image")
+            post.setValue(self.location!.coordinate.latitude as Double, forKey: "lat")
+            post.setValue(self.location!.coordinate.longitude as Double, forKey: "long")
+            
+            do {
+                try managedContext.save()
+            } catch {
+                // what to do if an error occurs?
+                let nserror = error as NSError
+                NSLog("Unresolved error \(nserror), \(nserror.userInfo) in CameraView::savePost()")
+                abort()
+            }
+            SnapMapNotificationCenter.mapViewUpdateNotification()
+            self.updateMap()
+            print("message posted")
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+            print("message cancelled")
+        }
+        
+        self.alertController!.addAction(postAction)
+        self.alertController!.addAction(cancelAction)
+        
+        self.alertController!.addTextFieldWithConfigurationHandler(configureTitleField)
+        self.alertController!.addTextFieldWithConfigurationHandler(configureMessageField)
+        
+        presentViewController(self.alertController!, animated: true, completion: nil)
+    }
+    
+    func configureMessageField(textField: UITextField){
+        textField.placeholder = "Message"
+        messageBox = textField
+    }
+    
+    func configureTitleField(textField: UITextField){
+        textField.placeholder = "Title"
+        titleBox = textField
+    }
     
     func addAnnotation(post: NSManagedObject) {
         let artwork = Post(user: post.valueForKey("user") as! String,
@@ -213,26 +267,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         dispatch_async(dispatch_get_main_queue(),{
             self.view.layoutIfNeeded()
         })
-    }
-    
-    @IBAction func postMessage(sender: AnyObject) {
-        self.alertController = UIAlertController(title: "Message", message: "Type your message", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let postAction = UIAlertAction(title: "Post", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            print("message posted")
-        })
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
-            print("message cancelled")
-        }
-        
-        self.alertController!.addAction(postAction)
-        self.alertController!.addAction(cancelAction)
-        
-        self.alertController!.addTextFieldWithConfigurationHandler { (textField) -> Void in
-            textField.placeholder = "Enter your message"
-        }
-        
-        presentViewController(self.alertController!, animated: true, completion: nil)
     }
     
 }

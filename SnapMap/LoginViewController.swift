@@ -12,6 +12,8 @@ import CoreData
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var SnapMapTitle: UIImageView!
+    @IBOutlet weak var guestLoginButton: UIButton!
+
     var clients = [NSManagedObject]()
     var identifier: String? = nil
     
@@ -103,7 +105,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         client.setValue(result.valueForKey("name"), forKey: "name")
                         client.setValue(false, forKey: "darkMode")
                         client.setValue(false, forKey: "allowPush")
-                        client.setValue(10.0, forKey: "radius")
+                        client.setValue(100.0, forKey: "radius")
                     }
                     
                     self.identifier = id as String
@@ -149,7 +151,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         if(segue.identifier == "LoginSegue"){
             let dvc = segue.destinationViewController as! TabBarViewController
-            let settings = dvc.viewControllers![3] as! SettingsViewController
+            let settings = dvc.viewControllers![2] as! SettingsViewController
             let map = dvc.viewControllers![0] as! MapViewController
             let camera = dvc.viewControllers![1] as! CameraViewController
             dvc.id = self.identifier!
@@ -161,6 +163,26 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
     
+    @IBAction func guestLoginButtonAction(sender: AnyObject) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity = NSEntityDescription.entityForName("Client", inManagedObjectContext: managedContext)
+        
+        let client = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        let id = "1"
+        client.setValue(id, forKey: "id")
+        client.setValue("Guest", forKey: "name")
+        client.setValue(false, forKey: "darkMode")
+        client.setValue(false, forKey: "allowPush")
+        client.setValue(100.0, forKey: "radius")
+    
+        self.identifier = id as String
+        print("identifier after settings is \(self.identifier!)")
+    
+        self.performSegueWithIdentifier("LoginSegue", sender: self)
+    }
 }
 
 
