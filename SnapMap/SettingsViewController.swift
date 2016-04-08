@@ -38,9 +38,9 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Facebook Login/Logout
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         print("Logged In")
@@ -52,31 +52,13 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         performSegueWithIdentifier("backtologin", sender: self)
     }
     
+    // MARK: Update User Settings
+    
     @IBAction func notificationSwitched(sender: AnyObject) {
-        
         print("Saving Notifications")
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-        // Set the attribute values
-        client?.setValue(allowPushSwitch.on, forKey: "darkMode")
-        
-        // Commit the changes.
-        do {
-            try managedContext.save()
-        } catch {
-            // what to do if an error occurs?
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-        
     }
     
     @IBAction func darkModeChanged(sender: AnyObject) {
-        
         print("Saving Dark mode")
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -109,7 +91,6 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         // Set the attribute values
         
         // TODO: enforce restrictions on radius
-        // ************************************
         
         client?.setValue(Double(radius.text!), forKey: "radius")
         
@@ -130,6 +111,8 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         super.touchesBegan(touches, withEvent: event)
         view.endEditing(true)
     }
+    
+    // MARK: Core Data
     
     func fetchClients() {
         print("ID in SettingsView = \((id)!)S")

@@ -24,9 +24,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         self.fetchClients()
         
-        // Do any additional setup after loading the view, typically from a nib.
         SnapMapTitle.image = UIImage(named: "SnapMapTitle.jpg")!
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "LoginBackground.jpg")!)
+        
+        let background = UIImage(named: "LoginBackground2.jpg")
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubviewToBack(imageView)
         
         let loginView: FBSDKLoginButton = FBSDKLoginButton()
         self.view.addSubview(loginView)
@@ -44,6 +52,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: Core Data
     
     func fetchClients() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -67,6 +77,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             print("Could not fetch")
         }
     }
+    
+    // MARK: Facebook Login
     
     func fetchOrCreateClient(){
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
@@ -143,6 +155,31 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("Logged Out")
     }
     
+    // MARK: Guest Login
+    
+    @IBAction func guestLoginButtonAction(sender: AnyObject) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity = NSEntityDescription.entityForName("Client", inManagedObjectContext: managedContext)
+        
+        let client = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        let id = "1"
+        client.setValue(id, forKey: "id")
+        client.setValue("Guest", forKey: "name")
+        client.setValue(false, forKey: "darkMode")
+        client.setValue(false, forKey: "allowPush")
+        client.setValue(100.0, forKey: "radius")
+        
+        self.identifier = id as String
+        print("identifier after settings is \(self.identifier!)")
+        
+        self.performSegueWithIdentifier("LoginSegue", sender: self)
+    }
+    
+    // MARK: Navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (self.identifier == nil) {
             print("ID is nil in prepare for segue")
@@ -162,27 +199,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             print("identifier in segue = \(self.identifier!)")
         }
     }
-    
-    @IBAction func guestLoginButtonAction(sender: AnyObject) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        
-        let entity = NSEntityDescription.entityForName("Client", inManagedObjectContext: managedContext)
-        
-        let client = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        
-        let id = "1"
-        client.setValue(id, forKey: "id")
-        client.setValue("Guest", forKey: "name")
-        client.setValue(false, forKey: "darkMode")
-        client.setValue(false, forKey: "allowPush")
-        client.setValue(100.0, forKey: "radius")
-    
-        self.identifier = id as String
-        print("identifier after settings is \(self.identifier!)")
-    
-        self.performSegueWithIdentifier("LoginSegue", sender: self)
-    }
+
 }
 
 

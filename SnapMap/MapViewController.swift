@@ -60,6 +60,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    // MARK: Location Services
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
@@ -81,6 +83,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
+    
+    // MARK: Core Data
     
     func fetchData() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -146,6 +150,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
+    // MARK: Map Annotation
+    
     // This gets called for every annotation you add to the map. Returns the view for a given annotation.
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? Post {
@@ -183,16 +189,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         return newImage
     }
-    
-    //    func addMessageAnnotation(comment: String) {
-    //        let artwork = Post(user: "user",
-    //                           title: comment,
-    //                           message: "message",
-    //                           coordinate: CLLocationCoordinate2D(latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!),
-    //                           image: UIImage(named: "CityNight.jpg")!)
-    //
-    //        mapView.addAnnotation(artwork)
-    //    }
     
     @IBAction func postMessage(sender: AnyObject) {
         

@@ -37,6 +37,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
         // Do any additional setup after loading the view.
         
+//        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "BlackTexture.jpg")!)
+        
+        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
+        backgroundImage.image = UIImage(named: "BlackTexture.jpg")
+        backgroundImage.center = view.center
+        self.view.insertSubview(backgroundImage, atIndex: 0)
+        
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -72,7 +79,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: Notification Observer(s)
@@ -89,6 +95,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    // MARK: Camera
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         originalphoto = info[UIImagePickerControllerOriginalImage] as? UIImage
         image.image = originalphoto
@@ -104,51 +112,36 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func shareToFB(sender: AnyObject) {
-        let photo: FBSDKSharePhoto = FBSDKSharePhoto()
-        photo.image = originalphoto
-        photo.userGenerated = true
-        let content: FBSDKSharePhotoContent = FBSDKSharePhotoContent()
-        content.photos = [photo]
-        
-        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
-    }
-    
     @IBAction func takeAnotherPhoto(sender: AnyObject) {
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        self.view.endEditing(true)
-        return true
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        self.view.endEditing(true)
-    }
-    
-    
-    @IBAction func postPhoto(sender: AnyObject) {
-        
-        savePost("")
-        
-        self.alertController = UIAlertController(title: "Post Successful!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in self.commentBox.text = ""
-        })
-        
-        self.alertController!.addAction(okAction)
-        
-        presentViewController(self.alertController!, animated: true, completion: nil)
-    }
+    // MARK: Location Services
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last        
         self.locationManager.stopUpdatingLocation()
     }
+    
+    // MARK: Map Annotation
+    
+    @IBAction func postPhoto(sender: AnyObject) {
+        
+        if savePost() {
+            self.alertController = UIAlertController(title: "Post Successful!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
+        }
+        
+        else {
+            self.alertController = UIAlertController(title: "Post Failed!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
+        }
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in self.commentBox.text = ""})
+        self.alertController!.addAction(okAction)
+        
+        presentViewController(self.alertController!, animated: true, completion: nil)
+    }
 
-    func savePost(message: String) {
+    func savePost() -> Bool {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
@@ -168,11 +161,37 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             // what to do if an error occurs?
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo) in CameraView::savePost()")
-            abort()
+            return false
         }
         
         SnapMapNotificationCenter.mapViewUpdateNotification()
+        
+        return true
     }
+    
+    // MARK: Facebook share
+    
+    @IBAction func shareToFB(sender: AnyObject) {
+        
+        if client?.valueForKey("id") as! String == "1" {
+            self.alertController = UIAlertController(title: "You must be logged in to FB to share!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in self.commentBox.text = ""})
+            self.alertController!.addAction(okAction)
+            presentViewController(self.alertController!, animated: true, completion: nil)
+        }
+        
+        else {
+            let photo: FBSDKSharePhoto = FBSDKSharePhoto()
+            photo.image = originalphoto
+            photo.userGenerated = true
+            let content: FBSDKSharePhotoContent = FBSDKSharePhotoContent()
+            content.photos = [photo]
+        
+            FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
+        }
+    }
+    
+    // MARK: Core Data
     
     func fetchClients() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -204,7 +223,17 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
-    // MARK: - Keyboard Scroll
+    // MARK: - Keyboard
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.view.endEditing(true)
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        //        self.view.endEditing(true)
+    }
  
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
@@ -233,19 +262,5 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
             }, completion: nil)
     }
-    
-    /*  // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     if(segue.identifier == "confirmationsegue"){
-     let dvc = segue.destinationViewController as! PhotoConfirmationViewController
-     dvc.originalphoto = self.photo
-     
-     }
-     }*/
-    
     
 }
