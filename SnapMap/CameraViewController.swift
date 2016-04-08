@@ -153,7 +153,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         let managedContext = appDelegate.managedObjectContext
         
         let entity = NSEntityDescription.entityForName("Post", inManagedObjectContext: managedContext)
-        
         let post = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         post.setValue(client!.valueForKey("name") as? String, forKey: "user")
@@ -215,13 +214,15 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     func keyboardWillShow(notification: NSNotification) {
         // Get keyboard frame from notification object.
         let info:NSDictionary = notification.userInfo!
-        let keyboardFrame = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        var keyboardFrame = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
         
         // Pad for some space between the field and the keyboard.
         let pad:CGFloat = 5.0;
         
         UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             // Set inset bottom, which will cause the scroll view to move up.
+            self.scrollView.contentInset.bottom = keyboardFrame.size.height + pad
             self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, keyboardFrame.size.height + pad, 0.0);
             }, completion: nil)
     }

@@ -26,23 +26,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         SnapMapTitle.image = UIImage(named: "SnapMapTitle.jpg")!
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "LoginBackground.jpg")!)
         
-        if (FBSDKAccessToken.currentAccessToken() != nil) {
-            let loginView: FBSDKLoginButton = FBSDKLoginButton()
-            self.view.addSubview(loginView)
-            loginView.center = self.view.center
-            loginView.delegate = self
-            // User is already logged in, do work such as go to next view controller.
-            createNewClient()
-        }
-            
-        else {
-            let loginView : FBSDKLoginButton = FBSDKLoginButton()
-            self.view.addSubview(loginView)
-            loginView.center = self.view.center
+        let loginView: FBSDKLoginButton = FBSDKLoginButton()
+        self.view.addSubview(loginView)
+        loginView.center = self.view.center
+        loginView.delegate = self
+        
+        if (FBSDKAccessToken.currentAccessToken() == nil) {
             loginView.readPermissions = ["public_profile", "email", "user_friends"]
-            loginView.delegate = self
-            self.createNewClient()
         }
+        
+        fetchOrCreateClient()
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,7 +66,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
     
-    func createNewClient(){
+    func fetchOrCreateClient(){
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
@@ -127,20 +120,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        print("Logged In")
-        
         if error != nil {
-            //There was an error
+            print("Error with FB login")
         }
             
         else if result.isCancelled {
-            //Cancelled
+            print("User cancelled login")
         }
         
         else {
+            print("Logged In")
             if result.grantedPermissions.contains("email") {
                 fetchClients()
-                createNewClient()
+                fetchOrCreateClient()
             }
         }
     }

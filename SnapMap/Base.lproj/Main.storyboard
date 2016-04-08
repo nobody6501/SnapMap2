@@ -101,25 +101,6 @@
             </objects>
             <point key="canvasLocation" x="1641" y="133"/>
         </scene>
-        <!--Message-->
-        <scene sceneID="SQD-cK-yvg">
-            <objects>
-                <viewController id="c0E-Ow-HH4" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Omk-tP-LYo"/>
-                        <viewControllerLayoutGuide type="bottom" id="pUp-pe-ItW"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2kC-1F-ydo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Message" image="MessageIcon" selectedImage="MessageIcon" id="djP-ha-cQJ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ChY-bO-s8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="994" y="1186"/>
-        </scene>
         <!--Camera-->
         <scene sceneID="qai-kk-9MS">
             <objects>
@@ -132,13 +113,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Xf-bR-OlU">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Xf-bR-OlU">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xZe-n9-ez8">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xZe-n9-ez8">
                                         <rect key="frame" x="0.0" y="18" width="414" height="470"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="470" id="5Pf-Nm-8ha"/>
+                                        </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fcm-1t-B2f">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fcm-1t-B2f">
                                         <rect key="frame" x="0.0" y="487" width="414" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -150,7 +134,7 @@
                                             <action selector="takeAnotherPhoto:" destination="unM-Fn-fk5" eventType="touchUpInside" id="Rtx-Wu-gPE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-DH-lUw">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-DH-lUw">
                                         <rect key="frame" x="42" y="552" width="46" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
@@ -167,9 +151,27 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="xZe-n9-ez8" firstAttribute="centerX" secondItem="3Xf-bR-OlU" secondAttribute="centerX" id="5kE-G0-NUB"/>
+                                    <constraint firstAttribute="bottom" secondItem="xZe-n9-ez8" secondAttribute="bottom" constant="199" id="DY9-je-Ef8"/>
+                                    <constraint firstItem="RSG-DH-lUw" firstAttribute="top" secondItem="fcm-1t-B2f" secondAttribute="bottom" constant="35" id="QT6-yx-XcS"/>
+                                    <constraint firstItem="xZe-n9-ez8" firstAttribute="top" secondItem="3Xf-bR-OlU" secondAttribute="top" constant="18" id="Rj2-AF-Gfc"/>
+                                    <constraint firstItem="xZe-n9-ez8" firstAttribute="leading" secondItem="3Xf-bR-OlU" secondAttribute="leading" id="f52-yE-ocn"/>
+                                    <constraint firstItem="RSG-DH-lUw" firstAttribute="top" secondItem="xZe-n9-ez8" secondAttribute="bottom" constant="64" id="gnU-hu-cmF"/>
+                                    <constraint firstItem="xZe-n9-ez8" firstAttribute="leading" secondItem="fcm-1t-B2f" secondAttribute="leading" id="h6S-4b-gzZ"/>
+                                    <constraint firstItem="xZe-n9-ez8" firstAttribute="trailing" secondItem="fcm-1t-B2f" secondAttribute="trailing" id="hel-oK-hZf"/>
+                                    <constraint firstItem="RSG-DH-lUw" firstAttribute="leading" secondItem="3Xf-bR-OlU" secondAttribute="leading" constant="42" id="jig-83-VID"/>
+                                    <constraint firstAttribute="trailing" secondItem="xZe-n9-ez8" secondAttribute="trailing" id="yZE-Lh-cdh"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3Xf-bR-OlU" firstAttribute="top" secondItem="IU3-sf-xvm" secondAttribute="top" id="4ve-pQ-F2S"/>
+                            <constraint firstItem="3Xf-bR-OlU" firstAttribute="leading" secondItem="IU3-sf-xvm" secondAttribute="leading" id="I3G-Nl-06h"/>
+                            <constraint firstAttribute="trailing" secondItem="3Xf-bR-OlU" secondAttribute="trailing" id="JGT-qx-Xeq"/>
+                            <constraint firstItem="3Xf-bR-OlU" firstAttribute="bottom" secondItem="NDT-yz-MGA" secondAttribute="top" id="Zcy-z3-dpW"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Camera" image="CameraIcon" selectedImage="CameraIcon" id="upf-f4-egq"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -273,7 +275,6 @@
                     <connections>
                         <segue destination="FqQ-Aq-a2V" kind="relationship" relationship="viewControllers" id="00o-ZP-IMJ"/>
                         <segue destination="unM-Fn-fk5" kind="relationship" relationship="viewControllers" id="eLC-Tp-vJ4"/>
-                        <segue destination="c0E-Ow-HH4" kind="relationship" relationship="viewControllers" id="EB3-R4-7gs"/>
                         <segue destination="WgH-ib-IFx" kind="relationship" relationship="viewControllers" id="aUW-2N-YWw"/>
                     </connections>
                 </tabBarController>

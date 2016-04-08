@@ -29,15 +29,15 @@ class TabBarViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
     // MARK: Notification Observer(s)
     
     func addNotificationObservers() {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: #selector(TabBarViewController.updateColors), name:SnapMapNotificationCenterConstants.TabBarColorProfileUpdatedName , object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     // MARK: Private Functions
