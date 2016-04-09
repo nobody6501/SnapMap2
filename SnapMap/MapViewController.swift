@@ -140,13 +140,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         for post in posts {
-            let artwork = Post(user: post.valueForKey("user") as! String,
-                               title: post.valueForKey("title") as! String,
-                               message: post.valueForKey("message") as! String,
-                               coordinate: CLLocationCoordinate2D(latitude: post.valueForKey("lat") as! Double, longitude: post.valueForKey("long") as! Double),
-                               image: UIImage(data: (post.valueForKey("image") as? NSData)!)!)
-            
-            mapView.addAnnotation(artwork)
+            self.addAnnotation(post)
         }
     }
     
@@ -170,7 +164,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 view.pinTintColor = UIColor.redColor()
                 view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
                 view.animatesDrop = true
-                view.leftCalloutAccessoryView = UIImageView.init(image: resizeImage(annotation.postImage(), newWidth: 50))
+                view.leftCalloutAccessoryView = UIImageView.init(image: resizeImage(annotation.getImage(), newWidth: 50))
             }
             
             return view
@@ -217,8 +211,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo) in CameraView::savePost()")
                 abort()
             }
-            SnapMapNotificationCenter.mapViewUpdateNotification()
+            
             self.updateMap()
+            
             print("message posted")
         })
         
@@ -235,17 +230,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         presentViewController(self.alertController!, animated: true, completion: nil)
     }
     
-    func configureMessageField(textField: UITextField){
-        textField.placeholder = "Message"
-        messageBox = textField
-    }
-    
     func configureTitleField(textField: UITextField){
-        textField.placeholder = "Title"
+        textField.placeholder = "Add a title..."
         titleBox = textField
     }
     
+    func configureMessageField(textField: UITextField){
+        textField.placeholder = "Add a message..."
+        messageBox = textField
+    }
+    
     func addAnnotation(post: NSManagedObject) {
+        print("user name: in addAnnotation: \(post.valueForKey("user") as! String)")
         let artwork = Post(user: post.valueForKey("user") as! String,
                            title: post.valueForKey("title") as! String,
                            message: post.valueForKey("message") as! String,
@@ -255,10 +251,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.addAnnotation(artwork)
     }
     
+    // Mark: Map Update
+    
     func updateMap() {
-        fetchData()
-        
         self.locationManager.startUpdatingLocation()
+        
+        fetchData()
         
         dispatch_async(dispatch_get_main_queue(),{
             self.view.layoutIfNeeded()

@@ -29,6 +29,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var postBtn: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var postOutlet: UILabel!
+    @IBOutlet weak var resnapOutlet: UILabel!
     
     var ButtonRect: CGRect!
     
@@ -37,12 +39,15 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
         // Do any additional setup after loading the view.
         
-//        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "BlackTexture.jpg")!)
-        
-        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
-        backgroundImage.image = UIImage(named: "BlackTexture.jpg")
-        backgroundImage.center = view.center
-        self.view.insertSubview(backgroundImage, atIndex: 0)
+        let background = UIImage(named: "BlackMetal.jpg")
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubviewToBack(imageView)
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -54,7 +59,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         anotherPicBtn.hidden = true
         commentBox.delegate = self
         commentBox.hidden = true
-        commentBox.placeholder = "Add comment..."
+        postOutlet.hidden = true
+        commentBox.placeholder = "Add title..."
         
         addNotificationObservers()
         
@@ -63,7 +69,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
         fetchClients()
         
-        if (UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil && UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil){
+        if (UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil && UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil) {
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
             imagePicker.cameraCaptureMode = .Photo
@@ -72,6 +78,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             
         else {
             print("Sorry no Camera")
+            return
         }
         
         presentViewController(imagePicker, animated: true, completion: nil)
@@ -104,6 +111,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         anotherPicBtn.hidden = false
         shareBtn.hidden = false
         commentBox.hidden = false
+        postOutlet.hidden = false
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -128,11 +136,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBAction func postPhoto(sender: AnyObject) {
         
         if savePost() {
-            self.alertController = UIAlertController(title: "Post Successful!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
+            self.alertController = UIAlertController(title: "Post Successful!", message: "Nice shot!", preferredStyle: UIAlertControllerStyle.Alert)
         }
         
         else {
-            self.alertController = UIAlertController(title: "Post Failed!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
+            self.alertController = UIAlertController(title: "Post Failed!", message: "womp womp", preferredStyle: UIAlertControllerStyle.Alert)
         }
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in self.commentBox.text = ""})
@@ -154,7 +162,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         post.setValue(UIImageJPEGRepresentation(originalphoto!, 1), forKey: "image")
         post.setValue(location!.coordinate.latitude as Double, forKey: "lat")
         post.setValue(location!.coordinate.longitude as Double, forKey: "long")
-        
+                
         do {
             try managedContext.save()
         } catch {
@@ -174,7 +182,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBAction func shareToFB(sender: AnyObject) {
         
         if client?.valueForKey("id") as! String == "1" {
-            self.alertController = UIAlertController(title: "You must be logged in to FB to share!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
+            self.alertController = UIAlertController(title: "You must be logged in to share!", message: " ", preferredStyle: UIAlertControllerStyle.Alert)
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in self.commentBox.text = ""})
             self.alertController!.addAction(okAction)
             presentViewController(self.alertController!, animated: true, completion: nil)

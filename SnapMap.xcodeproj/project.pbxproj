@@ -27,12 +27,14 @@
 		338AC1C41CA2454500170CF6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338AC1C31CA2454500170CF6 /* TabBarViewController.swift */; };
 		338AC1C61CA3619B00170CF6 /* CityNight.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338AC1C51CA3619B00170CF6 /* CityNight.jpg */; };
 		33DCFE521CB840D200ACDAEA /* GuestLoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE511CB840D200ACDAEA /* GuestLoginButton.png */; };
-		33DCFE571CB8611200ACDAEA /* BlackTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE531CB8611200ACDAEA /* BlackTexture.jpg */; };
 		33DCFE581CB8611200ACDAEA /* FacebookShareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE541CB8611200ACDAEA /* FacebookShareButton.png */; };
 		33DCFE591CB8611200ACDAEA /* SnapMapIcon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE551CB8611200ACDAEA /* SnapMapIcon120.png */; };
 		33DCFE5A1CB8611200ACDAEA /* SnapMapIcon180.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE561CB8611200ACDAEA /* SnapMapIcon180.png */; };
 		33DCFE5C1CB8659D00ACDAEA /* LoginBackground2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE5B1CB8659D00ACDAEA /* LoginBackground2.jpg */; };
-		DC85945A1CA1BDF500AD106B /* SnapMapTitle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DC8594591CA1BDF500AD106B /* SnapMapTitle.jpg */; };
+		33DCFE5E1CB8674900ACDAEA /* BlackGradiant.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE5D1CB8674900ACDAEA /* BlackGradiant.jpg */; };
+		33DCFE601CB8688300ACDAEA /* BlackCanvasTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE5F1CB8688300ACDAEA /* BlackCanvasTexture.jpg */; };
+		33DCFE621CB86BB400ACDAEA /* BlackMetal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE611CB86BB400ACDAEA /* BlackMetal.jpg */; };
+		33DCFE641CB8966F00ACDAEA /* SnapMapTitle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE631CB8966F00ACDAEA /* SnapMapTitle.jpg */; };
 		DC85945C1CA1BFDC00AD106B /* LoginBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */; };
 		DCBAABE11CA3175800560A92 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAABE01CA3175800560A92 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -60,12 +62,14 @@
 		338AC1C31CA2454500170CF6 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		338AC1C51CA3619B00170CF6 /* CityNight.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CityNight.jpg; sourceTree = "<group>"; };
 		33DCFE511CB840D200ACDAEA /* GuestLoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GuestLoginButton.png; sourceTree = "<group>"; };
-		33DCFE531CB8611200ACDAEA /* BlackTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackTexture.jpg; sourceTree = "<group>"; };
 		33DCFE541CB8611200ACDAEA /* FacebookShareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookShareButton.png; sourceTree = "<group>"; };
 		33DCFE551CB8611200ACDAEA /* SnapMapIcon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnapMapIcon120.png; sourceTree = "<group>"; };
 		33DCFE561CB8611200ACDAEA /* SnapMapIcon180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnapMapIcon180.png; sourceTree = "<group>"; };
 		33DCFE5B1CB8659D00ACDAEA /* LoginBackground2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LoginBackground2.jpg; sourceTree = "<group>"; };
-		DC8594591CA1BDF500AD106B /* SnapMapTitle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SnapMapTitle.jpg; sourceTree = "<group>"; };
+		33DCFE5D1CB8674900ACDAEA /* BlackGradiant.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackGradiant.jpg; sourceTree = "<group>"; };
+		33DCFE5F1CB8688300ACDAEA /* BlackCanvasTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackCanvasTexture.jpg; sourceTree = "<group>"; };
+		33DCFE611CB86BB400ACDAEA /* BlackMetal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackMetal.jpg; sourceTree = "<group>"; };
+		33DCFE631CB8966F00ACDAEA /* SnapMapTitle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SnapMapTitle.jpg; sourceTree = "<group>"; };
 		DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LoginBackground.jpg; sourceTree = "<group>"; };
 		DC8899B41CA0784200EEAC2E /* Bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-header.h"; sourceTree = "<group>"; };
 		DCBAABE01CA3175800560A92 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +109,9 @@
 		33216C001C8361C300F249B1 /* SnapMap */ = {
 			isa = PBXGroup;
 			children = (
-				33DCFE5B1CB8659D00ACDAEA /* LoginBackground2.jpg */,
+				33DCFE631CB8966F00ACDAEA /* SnapMapTitle.jpg */,
+				33DCFE611CB86BB400ACDAEA /* BlackMetal.jpg */,
+				33DCFE5F1CB8688300ACDAEA /* BlackCanvasTexture.jpg */,
 				DC8899B11CA0750900EEAC2E /* Frameworks */,
 				DC8899B41CA0784200EEAC2E /* Bridging-header.h */,
 				33216C011C8361C300F249B1 /* AppDelegate.swift */,
@@ -123,7 +129,7 @@
 				33216C101C8361C300F249B1 /* Info.plist */,
 				33216C081C8361C300F249B1 /* SnapMap.xcdatamodeld */,
 				DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */,
-				DC8594591CA1BDF500AD106B /* SnapMapTitle.jpg */,
+				33DCFE5B1CB8659D00ACDAEA /* LoginBackground2.jpg */,
 				338AC1C51CA3619B00170CF6 /* CityNight.jpg */,
 				333574CC1CB57C77007F6AC2 /* Camera.png */,
 				333574D41CB5DF84007F6AC2 /* iMessageIcon.png */,
@@ -131,7 +137,7 @@
 				33DCFE541CB8611200ACDAEA /* FacebookShareButton.png */,
 				33DCFE551CB8611200ACDAEA /* SnapMapIcon120.png */,
 				33DCFE561CB8611200ACDAEA /* SnapMapIcon180.png */,
-				33DCFE531CB8611200ACDAEA /* BlackTexture.jpg */,
+				33DCFE5D1CB8674900ACDAEA /* BlackGradiant.jpg */,
 			);
 			path = SnapMap;
 			sourceTree = "<group>";
@@ -211,17 +217,19 @@
 				33216C0F1C8361C300F249B1 /* LaunchScreen.storyboard in Resources */,
 				338AC1C61CA3619B00170CF6 /* CityNight.jpg in Resources */,
 				33DCFE5C1CB8659D00ACDAEA /* LoginBackground2.jpg in Resources */,
+				33DCFE641CB8966F00ACDAEA /* SnapMapTitle.jpg in Resources */,
+				33DCFE5E1CB8674900ACDAEA /* BlackGradiant.jpg in Resources */,
 				DC85945C1CA1BFDC00AD106B /* LoginBackground.jpg in Resources */,
-				33DCFE571CB8611200ACDAEA /* BlackTexture.jpg in Resources */,
 				333574D51CB5DF84007F6AC2 /* iMessageIcon.png in Resources */,
-				DC85945A1CA1BDF500AD106B /* SnapMapTitle.jpg in Resources */,
 				33DCFE5A1CB8611200ACDAEA /* SnapMapIcon180.png in Resources */,
 				33216C0C1C8361C300F249B1 /* Assets.xcassets in Resources */,
 				333574CD1CB57C77007F6AC2 /* Camera.png in Resources */,
+				33DCFE621CB86BB400ACDAEA /* BlackMetal.jpg in Resources */,
 				33DCFE521CB840D200ACDAEA /* GuestLoginButton.png in Resources */,
 				33216C071C8361C300F249B1 /* Main.storyboard in Resources */,
 				33DCFE591CB8611200ACDAEA /* SnapMapIcon120.png in Resources */,
 				33DCFE581CB8611200ACDAEA /* FacebookShareButton.png in Resources */,
+				33DCFE601CB8688300ACDAEA /* BlackCanvasTexture.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
