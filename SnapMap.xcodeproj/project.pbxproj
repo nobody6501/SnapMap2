@@ -109,9 +109,6 @@
 		33216C001C8361C300F249B1 /* SnapMap */ = {
 			isa = PBXGroup;
 			children = (
-				33DCFE631CB8966F00ACDAEA /* SnapMapTitle.jpg */,
-				33DCFE611CB86BB400ACDAEA /* BlackMetal.jpg */,
-				33DCFE5F1CB8688300ACDAEA /* BlackCanvasTexture.jpg */,
 				DC8899B11CA0750900EEAC2E /* Frameworks */,
 				DC8899B41CA0784200EEAC2E /* Bridging-header.h */,
 				33216C011C8361C300F249B1 /* AppDelegate.swift */,
@@ -135,8 +132,11 @@
 				333574D41CB5DF84007F6AC2 /* iMessageIcon.png */,
 				33DCFE511CB840D200ACDAEA /* GuestLoginButton.png */,
 				33DCFE541CB8611200ACDAEA /* FacebookShareButton.png */,
+				33DCFE631CB8966F00ACDAEA /* SnapMapTitle.jpg */,
 				33DCFE551CB8611200ACDAEA /* SnapMapIcon120.png */,
 				33DCFE561CB8611200ACDAEA /* SnapMapIcon180.png */,
+				33DCFE5F1CB8688300ACDAEA /* BlackCanvasTexture.jpg */,
+				33DCFE611CB86BB400ACDAEA /* BlackMetal.jpg */,
 				33DCFE5D1CB8674900ACDAEA /* BlackGradiant.jpg */,
 			);
 			path = SnapMap;
