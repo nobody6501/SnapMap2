@@ -39,20 +39,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationController!.navigationBar.hidden = true
         fbCurrentUserID()
+
+        navigationController!.navigationBar.hidden = true
         
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-        
+//        locationManager.delegate = self
+//        locationManager.requestAlwaysAuthorization()
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.startUpdatingLocation()
+//        
+//        mapView.delegate = self
+//        mapView.showsUserLocation = true
+//        
+//        addNotificationObservers()
+//        updateMap()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.startUpdatingLocation()
         mapView.delegate = self
         mapView.showsUserLocation = true
         
         addNotificationObservers()
         updateMap()
+        
     }
     
     // get facebook ID and send to firebase
@@ -100,10 +113,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             "latitude": latitude
         ]
         
-        let locationRoot = root!.childByAppendingPath("users").childByAppendingPath(self.uid)
-        let testRoot = locationRoot.childByAppendingPath("locations")
-        testRoot.setValue(coordinates)
-//        locationRoot.setValue(coordinates)
+        let locationRoot = root!.childByAppendingPath("users").childByAppendingPath(self.uid).childByAppendingPath("locations")
+        locationRoot.setValue(coordinates)
 
         
         mapView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height * 0.7)
