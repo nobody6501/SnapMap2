@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 import CoreLocation
 import CoreData
+import Firebase
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
     
@@ -20,6 +21,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var messageTab: UITabBarItem!
     @IBOutlet weak var settingsTab: UITabBarItem!
     
+    let root = Firebase(url:"https://intense-inferno-7933.firebaseio.com/")
     let locationManager = CLLocationManager()
     var location: CLLocation? = nil
     var regionRadius: CLLocationDistance = 1000
@@ -30,12 +32,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var alertController: UIAlertController? = nil
     var messageBox: UITextField? = nil
     var titleBox: UITextField? = nil
+    var uid = ""
+    var longitude: CLLocationDegrees!
+    var latitude: CLLocationDegrees!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController!.navigationBar.hidden = true
+        fbCurrentUserID()
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -47,6 +53,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         addNotificationObservers()
         updateMap()
+    }
+    
+    // get facebook ID and send to firebase
+    func fbCurrentUserID() {
+        let userRoot = root!.childByAppendingPath("users")
+        var fbRequest = FBSDKGraphRequest(graphPath:"/me/", parameters: nil);
+        fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            if error == nil {
+                self.uid = result.valueForKey("id") as! String
+                let currentUser = userRoot.childByAppendingPath(self.uid)
+                currentUser.setValue(self.uid)
+                
+            } else {
+                print("Error Getting Friends \(error)");
+            }
+        }
     }
     
     // MARK: Notification Observer(s)
@@ -69,6 +91,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
+        
+        longitude = location!.coordinate.longitude
+        latitude = location!.coordinate.latitude
+        
+        var coordinates : [String:CLLocationDegrees] = [
+            "longitude": longitude,
+            "latitude": latitude
+        ]
+        
+        let locationRoot = root!.childByAppendingPath("users").childByAppendingPath(self.uid)
+        let testRoot = locationRoot.childByAppendingPath("locations")
+        testRoot.setValue(coordinates)
+//        locationRoot.setValue(coordinates)
+
         
         mapView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height * 0.7)
         
