@@ -10,7 +10,6 @@ import Foundation
 import MapKit
 import CoreLocation
 import CoreData
-import Firebase
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
     
@@ -21,7 +20,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var messageTab: UITabBarItem!
     @IBOutlet weak var settingsTab: UITabBarItem!
     
-    let root = Firebase(url:"https://intense-inferno-7933.firebaseio.com/")
+    let root = User.currentUser().root
     let locationManager = CLLocationManager()
     var location: CLLocation? = nil
     var regionRadius: CLLocationDistance = 1000
@@ -32,7 +31,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var alertController: UIAlertController? = nil
     var messageBox: UITextField? = nil
     var titleBox: UITextField? = nil
-    var uid = ""
+    var uid = User.currentUser().uid
     var longitude: CLLocationDegrees!
     var latitude: CLLocationDegrees!
     

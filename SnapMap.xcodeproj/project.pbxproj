@@ -41,6 +41,7 @@
 		830141251CBEFB710021582F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830141241CBEFB710021582F /* CFNetwork.framework */; };
 		830141271CBEFB850021582F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 830141261CBEFB850021582F /* libc++.tbd */; };
 		830141291CBEFB940021582F /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 830141281CBEFB940021582F /* libicucore.tbd */; };
+		8301412B1CC14EC00021582F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8301412A1CC14EC00021582F /* User.swift */; };
 		DC85945C1CA1BFDC00AD106B /* LoginBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */; };
 		DCBAABE11CA3175800560A92 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAABE01CA3175800560A92 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		830141241CBEFB710021582F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		830141261CBEFB850021582F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		830141281CBEFB940021582F /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		8301412A1CC14EC00021582F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LoginBackground.jpg; sourceTree = "<group>"; };
 		DC8899B41CA0784200EEAC2E /* Bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-header.h"; sourceTree = "<group>"; };
 		DCBAABE01CA3175800560A92 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				DCBAABE01CA3175800560A92 /* SettingsViewController.swift */,
 				333574D01CB5900D007F6AC2 /* CameraViewController.swift */,
 				3323B2021CB43D4F00FF3A97 /* Post.swift */,
+				8301412A1CC14EC00021582F /* User.swift */,
 				3323B2041CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift */,
 				33216C051C8361C300F249B1 /* Main.storyboard */,
 				33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */,
@@ -272,6 +275,7 @@
 				338AC1C41CA2454500170CF6 /* TabBarViewController.swift in Sources */,
 				3323B2031CB43D4F00FF3A97 /* Post.swift in Sources */,
 				338AC1B31CA22EB400170CF6 /* MapViewController.swift in Sources */,
+				8301412B1CC14EC00021582F /* User.swift in Sources */,
 				333574D11CB5900D007F6AC2 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
