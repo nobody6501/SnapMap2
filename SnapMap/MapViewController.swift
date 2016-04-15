@@ -38,20 +38,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fbCurrentUserID()
-
         navigationController!.navigationBar.hidden = true
-        
-//        locationManager.delegate = self
-//        locationManager.requestAlwaysAuthorization()
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.startUpdatingLocation()
-//        
-//        mapView.delegate = self
-//        mapView.showsUserLocation = true
-//        
-//        addNotificationObservers()
-//        updateMap()
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -67,21 +55,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    // get facebook ID and send to firebase
-    func fbCurrentUserID() {
-        let userRoot = root!.childByAppendingPath("users")
-        var fbRequest = FBSDKGraphRequest(graphPath:"/me/", parameters: nil);
-        fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
-            if error == nil {
-                self.uid = result.valueForKey("id") as! String
-                let currentUser = userRoot.childByAppendingPath(self.uid)
-                currentUser.setValue(self.uid)
-                
-            } else {
-                print("Error Getting Friends \(error)");
-            }
-        }
-    }
     
     // MARK: Notification Observer(s)
     

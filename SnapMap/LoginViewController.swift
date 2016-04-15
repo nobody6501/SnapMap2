@@ -81,6 +81,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     // MARK: Facebook Login
     
     func fetchOrCreateClient(){
+        let userRoot = User.currentUser().root.childByAppendingPath("users")
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
@@ -93,10 +94,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
                 
             else {
+                
+//                self.uid = result.valueForKey("id") as! String
+//                let currentUser = userRoot.childByAppendingPath(self.uid)
+//                currentUser.setValue(self.uid)
+                User.currentUser().uid = result.valueForKey("id") as! String
+                
                 print("fetched user: \(result)")
                 
                 if let id: NSString = result.valueForKey("id") as? NSString {
                     print("ID is: \(id)")
+                    let currentUser = userRoot.childByAppendingPath(User.currentUser().uid)
+                    currentUser.setValue(User.currentUser().uid)
                     
                     for x in self.clients{
                         let clientid = x.valueForKey("id") as? NSString
