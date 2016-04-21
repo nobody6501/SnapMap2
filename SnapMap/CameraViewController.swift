@@ -22,6 +22,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     var id: NSString? = nil
     var clients = [NSManagedObject]()
     var client: NSManagedObject? = nil
+    var base64String: NSString!
     
     @IBOutlet weak var commentBox: UITextField!
     @IBOutlet weak var shareBtn: UIButton!
@@ -136,6 +137,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBAction func postPhoto(sender: AnyObject) {
         
         if savePost() {
+            var imageData: NSData = UIImagePNGRepresentation(originalphoto!)!
+            self.base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+            var quoteString = ["string": self.base64String]
+            var imageRef = User.currentUser().root.childByAppendingPath("users").childByAppendingPath(User.currentUser().uid).childByAppendingPath("images")
+            var storeImage = ["image": quoteString]
+            imageRef.setValue(storeImage)
             self.alertController = UIAlertController(title: "Post Successful!", message: "Nice shot!", preferredStyle: UIAlertControllerStyle.Alert)
         }
         
