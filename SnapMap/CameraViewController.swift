@@ -140,7 +140,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             var imageData: NSData = UIImagePNGRepresentation(originalphoto!)!
             self.base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
             var quoteString = ["string": self.base64String]
-            var imageRef = User.currentUser().root.childByAppendingPath("users").childByAppendingPath(User.currentUser().uid).childByAppendingPath("images")
+            var imageRef = User.currentUser().root.childByAppendingPath("users").childByAppendingPath(User.currentUser().uid).childByAppendingPath("posts")
             var storeImage = ["image": quoteString]
             imageRef.setValue(storeImage)
             self.alertController = UIAlertController(title: "Post Successful!", message: "Nice shot!", preferredStyle: UIAlertControllerStyle.Alert)

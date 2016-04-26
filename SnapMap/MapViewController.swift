@@ -222,6 +222,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             post.setValue(self.location!.coordinate.latitude as Double, forKey: "lat")
             post.setValue(self.location!.coordinate.longitude as Double, forKey: "long")
             
+            var messageText = self.messageBox!.text
+            var postRoot = User.currentUser().root.childByAppendingPath("users").childByAppendingPath(User.currentUser().uid).childByAppendingPath("posts").childByAppendingPath("message")
+            var storeMessage : [String: String] = ["title" : self.titleBox!.text!,
+                "message" : self.messageBox!.text!]
+            if(self.messageBox != nil && self.titleBox != nil) {
+                postRoot.setValue(storeMessage)
+            }
+            
             do {
                 try managedContext.save()
             } catch {
