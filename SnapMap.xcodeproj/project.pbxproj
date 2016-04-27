@@ -21,6 +21,7 @@
 		333574D51CB5DF84007F6AC2 /* iMessageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 333574D41CB5DF84007F6AC2 /* iMessageIcon.png */; };
 		337D04C61CCEF597008C7822 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D04C51CCEF597008C7822 /* AnnotationViewController.swift */; };
 		337D04C81CD025E5008C7822 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D04C71CD025E5008C7822 /* ImageViewController.swift */; };
+		337D04CA1CD04622008C7822 /* WhiteTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337D04C91CD04622008C7822 /* WhiteTexture.jpg */; };
 		338AC1A11CA1EB3800170CF6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A01CA1EB3800170CF6 /* FBSDKCoreKit.framework */; };
 		338AC1A51CA1EB5800170CF6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A41CA1EB5800170CF6 /* Bolts.framework */; };
 		338AC1A91CA1EBC300170CF6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A81CA1EBC300170CF6 /* FBSDKLoginKit.framework */; };
@@ -58,6 +59,7 @@
 		333574D41CB5DF84007F6AC2 /* iMessageIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iMessageIcon.png; sourceTree = "<group>"; };
 		337D04C51CCEF597008C7822 /* AnnotationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		337D04C71CD025E5008C7822 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		337D04C91CD04622008C7822 /* WhiteTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WhiteTexture.jpg; sourceTree = "<group>"; };
 		338AC1A01CA1EB3800170CF6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		338AC1A41CA1EB5800170CF6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "FacebookSDKs-iOS-20163016/Bolts.framework"; sourceTree = "<group>"; };
 		338AC1A81CA1EBC300170CF6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				338AC1C31CA2454500170CF6 /* TabBarViewController.swift */,
 				338AC1B21CA22EB400170CF6 /* MapViewController.swift */,
 				337D04C51CCEF597008C7822 /* AnnotationViewController.swift */,
+				337D04C71CD025E5008C7822 /* ImageViewController.swift */,
 				DCBAABE01CA3175800560A92 /* SettingsViewController.swift */,
 				333574D01CB5900D007F6AC2 /* CameraViewController.swift */,
 				3323B2021CB43D4F00FF3A97 /* Post.swift */,
@@ -143,7 +146,7 @@
 				33DCFE5F1CB8688300ACDAEA /* BlackCanvasTexture.jpg */,
 				33DCFE611CB86BB400ACDAEA /* BlackMetal.jpg */,
 				33DCFE5D1CB8674900ACDAEA /* BlackGradiant.jpg */,
-				337D04C71CD025E5008C7822 /* ImageViewController.swift */,
+				337D04C91CD04622008C7822 /* WhiteTexture.jpg */,
 			);
 			path = SnapMap;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				338AC1C61CA3619B00170CF6 /* CityNight.jpg in Resources */,
 				33DCFE5C1CB8659D00ACDAEA /* LoginBackground2.jpg in Resources */,
 				33DCFE641CB8966F00ACDAEA /* SnapMapTitle.jpg in Resources */,
+				337D04CA1CD04622008C7822 /* WhiteTexture.jpg in Resources */,
 				33DCFE5E1CB8674900ACDAEA /* BlackGradiant.jpg in Resources */,
 				DC85945C1CA1BFDC00AD106B /* LoginBackground.jpg in Resources */,
 				333574D51CB5DF84007F6AC2 /* iMessageIcon.png in Resources */,

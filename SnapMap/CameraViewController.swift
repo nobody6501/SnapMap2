@@ -22,6 +22,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     var id: NSString? = nil
     var clients = [NSManagedObject]()
     var client: NSManagedObject? = nil
+    var ButtonRect: CGRect!
+    var saving = false
     
     @IBOutlet weak var commentBox: UITextField!
     @IBOutlet weak var shareBtn: UIButton!
@@ -31,8 +33,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var postOutlet: UILabel!
     @IBOutlet weak var resnapOutlet: UILabel!
-    
-    var ButtonRect: CGRect!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +90,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     override func viewDidAppear(animated: Bool) {
-        presentViewController(imagePicker, animated: true, completion: nil)
+        if (!saving) {
+            presentViewController(imagePicker, animated: true, completion: nil)
+        }
     }
     
     // MARK: Notification Observer(s)
@@ -110,6 +112,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     // MARK: Camera
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        saving = true
         originalphoto = info[UIImagePickerControllerOriginalImage] as? UIImage
         image.image = originalphoto
         postBtn.hidden = false
@@ -154,6 +157,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         self.alertController!.addAction(okAction)
         
         presentViewController(self.alertController!, animated: true, completion: nil)
+        saving = false
+        
+        SnapMapNotificationCenter.mapViewUpdateNotification()
+        dismissViewControllerAnimated(true, completion: nil)
+        performSegueWithIdentifier("showMap", sender: self)
     }
 
     func savePost() -> Bool {
@@ -279,6 +287,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     // Mark: Navigation:
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        if (segue.identifier == "showMap") {
 //            let mvc = segue.destinationViewController as? MapViewController

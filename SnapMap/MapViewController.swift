@@ -30,6 +30,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var alertController: UIAlertController? = nil
     var messageBox: UITextField? = nil
     var titleBox: UITextField? = nil
+    var image: UIImage? = nil
+    var post: Post? = nil
     
     
     override func viewDidLoad() {
@@ -182,15 +184,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return nil
     }
     
-    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        return newImage
+        if let annotation = view.annotation as? Post {
+            print("Annotation is a Post")
+            post = annotation
+            print("\(post?.getImage()) -  \(post?.user)) - \(post?.message)")
+        }
+        
+        if control == view.rightCalloutAccessoryView {
+            performSegueWithIdentifier("showAnnotation", sender: view)
+            
+        }
+        
+        //        if control == view.leftCalloutAccessoryView {
+        //            performSegueWithIdentifier("showAnnotation", sender: view)
+        //        }
     }
     
     @IBAction func postMessage(sender: AnyObject) {
@@ -262,30 +271,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     // Mark: Navigation
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-//        if let post = view.annotation as? Post {
-//            // display popover to show message annotation
-//            return
-//        }
-        
-        if control == view.rightCalloutAccessoryView {
-            performSegueWithIdentifier("showAnnotation", sender: view)
-        }
-        
-        if control == view.leftCalloutAccessoryView {
-            performSegueWithIdentifier("showAnnotation", sender: view)
-        }
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if (segue.identifier == "showAnnotation" )
-        {
-//            var ikinciEkran = segue.destinationViewController as! AnnotationViewController
+        if (segue.identifier == "showAnnotation" ) {
+            let avc = segue.destinationViewController as! AnnotationViewController
             
-//            ikinciEkran.tekelName = (sender as! MKAnnotationView).annotation!.title
-            
+//            avc.imageView.image = image
+//            avc.image = image
+            avc.post = post
         }
         
     }
@@ -303,5 +296,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.view.layoutIfNeeded()
         })
     }
+    
+    // Mark: Helper Functions
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
     
 }

@@ -9,13 +9,30 @@
 import UIKit
 
 class AnnotationViewController: UIViewController {
-
+    
+    var post: Post? = nil
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var postTitle: UILabel!
+    @IBOutlet weak var postMessage: UILabel!
+    @IBOutlet weak var postUserName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setBackgroundImage()
+        
         self.navigationController?.navigationBar.hidden = false
-
-        // Do any additional setup after loading the view.
+        
+        imageView.image = post!.getImage()
+        postTitle.text = post!.title
+        postMessage.text = post!.message
+        postUserName.text = post!.user
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+//        imageView.image = image
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,9 +40,18 @@ class AnnotationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func backButtonPressed(sender: AnyObject) {
-        self.performSegueWithIdentifier("backToMap", sender: self)
-        
+    // Mark: Helper Functions
+    
+    func setBackgroundImage () {
+        let background = UIImage(named: "WhiteTexture.jpg")
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubviewToBack(imageView)
     }
 
     /*
