@@ -187,9 +187,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if let annotation = view.annotation as? Post {
-            print("Annotation is a Post")
             post = annotation
-            print("\(post?.getImage()) -  \(post?.user)) - \(post?.message)")
         }
         
         if control == view.rightCalloutAccessoryView {
@@ -275,9 +273,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         if (segue.identifier == "showAnnotation" ) {
             let avc = segue.destinationViewController as! AnnotationViewController
-            
-//            avc.imageView.image = image
-//            avc.image = image
             avc.post = post
         }
         

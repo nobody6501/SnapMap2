@@ -39,15 +39,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
         // Do any additional setup after loading the view.
         
-        let background = UIImage(named: "BlackMetal.jpg")
-        var imageView : UIImageView!
-        imageView = UIImageView(frame: view.bounds)
-        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = background
-        imageView.center = view.center
-        view.addSubview(imageView)
-        self.view.sendSubviewToBack(imageView)
+        setBackgroundImage()
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -131,6 +123,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     @IBAction func takeAnotherPhoto(sender: AnyObject) {
+        saving = false
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
@@ -192,7 +185,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         return true
     }
     
-    // MARK: Facebook share
+    // MARK: Facebook Share
     
     @IBAction func shareToFB(sender: AnyObject) {
         
@@ -293,6 +286,20 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
 //            let mvc = segue.destinationViewController as? MapViewController
 //            mvc?.client = client
 //        }
+    }
+    
+    // Mark: Helper Functions
+    
+    func setBackgroundImage () {
+        let background = UIImage(named: "BlackMetal.jpg")
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubviewToBack(imageView)
     }
     
 }

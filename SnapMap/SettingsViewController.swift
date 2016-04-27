@@ -44,7 +44,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         print("Logged In")
-
+        performSegueWithIdentifier("backtologin", sender: self)
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
