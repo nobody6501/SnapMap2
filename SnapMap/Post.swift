@@ -18,13 +18,15 @@ class Post: NSObject, MKAnnotation {
     let message: String
     let coordinate: CLLocationCoordinate2D
     let image: UIImage?
+    let comments: NSMutableArray?
     
-    init(user: String, title: String, message: String, coordinate: CLLocationCoordinate2D, image: UIImage) {
+    init(user: String, title: String, message: String, coordinate: CLLocationCoordinate2D, image: UIImage, comments: NSMutableArray) {
         self.title = title
         self.user = user
         self.message = message
         self.coordinate = coordinate
         self.image = image
+        self.comments = comments
         
         super.init()
     }

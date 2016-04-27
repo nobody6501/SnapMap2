@@ -170,6 +170,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         post.setValue(UIImageJPEGRepresentation(originalphoto!, 1), forKey: "image")
         post.setValue(location!.coordinate.latitude as Double, forKey: "lat")
         post.setValue(location!.coordinate.longitude as Double, forKey: "long")
+//        let comments: NSMutableArray = []
+        post.setValue(NSMutableArray(), forKey: "comments")
                 
         do {
             try managedContext.save()

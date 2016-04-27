@@ -20,8 +20,8 @@
 		333574D31CB59097007F6AC2 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 333574D21CB59097007F6AC2 /* FBSDKShareKit.framework */; };
 		333574D51CB5DF84007F6AC2 /* iMessageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 333574D41CB5DF84007F6AC2 /* iMessageIcon.png */; };
 		337D04C61CCEF597008C7822 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D04C51CCEF597008C7822 /* AnnotationViewController.swift */; };
-		337D04C81CD025E5008C7822 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D04C71CD025E5008C7822 /* ImageViewController.swift */; };
 		337D04CA1CD04622008C7822 /* WhiteTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337D04C91CD04622008C7822 /* WhiteTexture.jpg */; };
+		337D04CE1CD16C1D008C7822 /* GrayTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 337D04CD1CD16C1D008C7822 /* GrayTexture.png */; };
 		338AC1A11CA1EB3800170CF6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A01CA1EB3800170CF6 /* FBSDKCoreKit.framework */; };
 		338AC1A51CA1EB5800170CF6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A41CA1EB5800170CF6 /* Bolts.framework */; };
 		338AC1A91CA1EBC300170CF6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338AC1A81CA1EBC300170CF6 /* FBSDKLoginKit.framework */; };
@@ -58,8 +58,8 @@
 		333574D21CB59097007F6AC2 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		333574D41CB5DF84007F6AC2 /* iMessageIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iMessageIcon.png; sourceTree = "<group>"; };
 		337D04C51CCEF597008C7822 /* AnnotationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
-		337D04C71CD025E5008C7822 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		337D04C91CD04622008C7822 /* WhiteTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WhiteTexture.jpg; sourceTree = "<group>"; };
+		337D04CD1CD16C1D008C7822 /* GrayTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GrayTexture.png; sourceTree = "<group>"; };
 		338AC1A01CA1EB3800170CF6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		338AC1A41CA1EB5800170CF6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "FacebookSDKs-iOS-20163016/Bolts.framework"; sourceTree = "<group>"; };
 		338AC1A81CA1EBC300170CF6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -122,7 +122,6 @@
 				338AC1C31CA2454500170CF6 /* TabBarViewController.swift */,
 				338AC1B21CA22EB400170CF6 /* MapViewController.swift */,
 				337D04C51CCEF597008C7822 /* AnnotationViewController.swift */,
-				337D04C71CD025E5008C7822 /* ImageViewController.swift */,
 				DCBAABE01CA3175800560A92 /* SettingsViewController.swift */,
 				333574D01CB5900D007F6AC2 /* CameraViewController.swift */,
 				3323B2021CB43D4F00FF3A97 /* Post.swift */,
@@ -146,6 +145,7 @@
 				33DCFE5F1CB8688300ACDAEA /* BlackCanvasTexture.jpg */,
 				33DCFE611CB86BB400ACDAEA /* BlackMetal.jpg */,
 				33DCFE5D1CB8674900ACDAEA /* BlackGradiant.jpg */,
+				337D04CD1CD16C1D008C7822 /* GrayTexture.png */,
 				337D04C91CD04622008C7822 /* WhiteTexture.jpg */,
 			);
 			path = SnapMap;
@@ -231,6 +231,7 @@
 				33DCFE5E1CB8674900ACDAEA /* BlackGradiant.jpg in Resources */,
 				DC85945C1CA1BFDC00AD106B /* LoginBackground.jpg in Resources */,
 				333574D51CB5DF84007F6AC2 /* iMessageIcon.png in Resources */,
+				337D04CE1CD16C1D008C7822 /* GrayTexture.png in Resources */,
 				33DCFE5A1CB8611200ACDAEA /* SnapMapIcon180.png in Resources */,
 				33216C0C1C8361C300F249B1 /* Assets.xcassets in Resources */,
 				333574CD1CB57C77007F6AC2 /* Camera.png in Resources */,
@@ -259,7 +260,6 @@
 				3323B2031CB43D4F00FF3A97 /* Post.swift in Sources */,
 				337D04C61CCEF597008C7822 /* AnnotationViewController.swift in Sources */,
 				338AC1B31CA22EB400170CF6 /* MapViewController.swift in Sources */,
-				337D04C81CD025E5008C7822 /* ImageViewController.swift in Sources */,
 				333574D11CB5900D007F6AC2 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

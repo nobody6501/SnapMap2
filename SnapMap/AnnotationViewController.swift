@@ -8,42 +8,66 @@
 
 import UIKit
 
-class AnnotationViewController: UIViewController {
+class AnnotationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var post: Post? = nil
+    var comments: NSMutableArray? = nil
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var postTitle: UILabel!
     @IBOutlet weak var postMessage: UILabel!
-    @IBOutlet weak var postUserName: UILabel!
+    @IBOutlet weak var commentTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setBackgroundImage()
-        
         self.navigationController?.navigationBar.hidden = false
         
+        self.setBackgroundImage()
         imageView.image = post!.getImage()
         postTitle.text = post!.title
         postMessage.text = post!.message
-        postUserName.text = post!.user
+        comments = post!.comments
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-//        imageView.image = image
+        self.commentTableView.delegate = self
+        self.commentTableView.dataSource = self
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+    
+    // Mark: Comments Table View
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return comments!.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath)
+        cell.textLabel!.text = self.comments![indexPath.row] as? String
+//        cell.detailTextLabel!.text = candidate.valueForKey("party") as? String
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Comments"
+    }
+    
+    @IBAction func addCommentButtonPressed(sender: AnyObject) {
+        
+    }
+    
     
     // Mark: Helper Functions
     
     func setBackgroundImage () {
-        let background = UIImage(named: "WhiteTexture.jpg")
+        let background = UIImage(named: "GrayTexture.png")
         var imageView : UIImageView!
         imageView = UIImageView(frame: view.bounds)
         imageView.contentMode =  UIViewContentMode.ScaleAspectFill
@@ -54,14 +78,5 @@ class AnnotationViewController: UIViewController {
         self.view.sendSubviewToBack(imageView)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

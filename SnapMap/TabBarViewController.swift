@@ -54,7 +54,9 @@ class TabBarViewController: UITabBarController {
                 print("Dark Mode enabled")
                 self.tabBar.barTintColor = .blackColor()
                 self.tabBar.tintColor = .whiteColor()
-            } else {
+            }
+            
+            else {
                 self.tabBar.tintColor = .redColor()
                 self.tabBar.barTintColor = .whiteColor()
             }

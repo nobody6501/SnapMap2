@@ -194,10 +194,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             performSegueWithIdentifier("showAnnotation", sender: view)
             
         }
-        
-        //        if control == view.leftCalloutAccessoryView {
-        //            performSegueWithIdentifier("showAnnotation", sender: view)
-        //        }
     }
     
     @IBAction func postMessage(sender: AnyObject) {
@@ -218,6 +214,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             post.setValue(UIImageJPEGRepresentation(UIImage(named: "iMessageIcon.png")!, 1), forKey: "image")
             post.setValue(self.location!.coordinate.latitude as Double, forKey: "lat")
             post.setValue(self.location!.coordinate.longitude as Double, forKey: "long")
+            let comments: NSMutableArray = ["test", "hahahaha", "rubbish app"]
+            post.setValue(comments, forKey: "comments")
             
             do {
                 try managedContext.save()
@@ -262,7 +260,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                            title: post.valueForKey("title") as! String,
                            message: post.valueForKey("message") as! String,
                            coordinate: CLLocationCoordinate2D(latitude: post.valueForKey("lat") as! Double, longitude: post.valueForKey("long") as! Double),
-                           image: UIImage(data: (post.valueForKey("image") as? NSData)!)!)
+                           image: UIImage(data: (post.valueForKey("image") as? NSData)!)!,
+                           comments: post.valueForKey("comments") as! NSMutableArray)
         
         mapView.addAnnotation(artwork)
     }
