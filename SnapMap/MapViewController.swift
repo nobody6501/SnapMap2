@@ -44,9 +44,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         mapView.delegate = self
         mapView.showsUserLocation = true
+        mapView.showsCompass = true
         
         addNotificationObservers()
         updateMap()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.navigationController?.navigationBar.hidden = true
     }
     
     // MARK: Notification Observer(s)
@@ -164,7 +169,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 view.pinTintColor = UIColor.redColor()
                 view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
                 view.animatesDrop = true
+//                let btn = UIButton(type: .Custom)
+//                btn.setImage(annotation.getImage(), forState: UIControlState.Normal)
+//                view.leftCalloutAccessoryView = btn as UIView
                 view.leftCalloutAccessoryView = UIImageView.init(image: resizeImage(annotation.getImage(), newWidth: 50))
+//                view.detailCalloutAccessoryView = UIImageView.init(image: annotation.getImage())
             }
             
             return view
@@ -250,6 +259,38 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         mapView.addAnnotation(artwork)
     }
+    
+    // Mark: Navigation
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+//        if let post = view.annotation as? Post {
+//            // display popover to show message annotation
+//            return
+//        }
+        
+        if control == view.rightCalloutAccessoryView {
+            performSegueWithIdentifier("showAnnotation", sender: view)
+        }
+        
+        if control == view.leftCalloutAccessoryView {
+            performSegueWithIdentifier("showAnnotation", sender: view)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if (segue.identifier == "showAnnotation" )
+        {
+//            var ikinciEkran = segue.destinationViewController as! AnnotationViewController
+            
+//            ikinciEkran.tekelName = (sender as! MKAnnotationView).annotation!.title
+            
+        }
+        
+    }
+    
+    @IBAction func unwindToMap(segue: UIStoryboardSegue) {}
     
     // Mark: Map Update
     

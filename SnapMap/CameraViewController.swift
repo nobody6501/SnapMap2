@@ -60,6 +60,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         commentBox.delegate = self
         commentBox.hidden = true
         postOutlet.hidden = true
+        resnapOutlet.hidden = true
         commentBox.placeholder = "Add title..."
         
         addNotificationObservers()
@@ -88,6 +89,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         super.didReceiveMemoryWarning()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
     // MARK: Notification Observer(s)
     
     func addNotificationObservers() {
@@ -112,12 +117,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         shareBtn.hidden = false
         commentBox.hidden = false
         postOutlet.hidden = false
+        resnapOutlet.hidden = false
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        anotherPicBtn.hidden = false
+        SnapMapNotificationCenter.mapViewUpdateNotification()
         dismissViewControllerAnimated(true, completion: nil)
+        performSegueWithIdentifier("showMap", sender: self)
     }
     
     @IBAction func takeAnotherPhoto(sender: AnyObject) {
@@ -269,6 +276,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             // Restore starting insets.
             self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
             }, completion: nil)
+    }
+    
+    // Mark: Navigation:
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if (segue.identifier == "showMap") {
+//            let mvc = segue.destinationViewController as? MapViewController
+//            mvc?.client = client
+//        }
     }
     
 }

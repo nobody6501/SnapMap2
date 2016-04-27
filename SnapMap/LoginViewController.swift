@@ -42,7 +42,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         loginView.delegate = self
         
         if (FBSDKAccessToken.currentAccessToken() == nil) {
-            loginView.readPermissions = ["public_profile", "email", "user_friends"]
+            loginView.readPermissions = ["email"]
+//            loginView.readPermissions = ["public_profile", "email", "user_friends"]
         }
         
         fetchOrCreateClient()

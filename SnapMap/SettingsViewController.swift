@@ -11,13 +11,13 @@ import CoreData
 
 class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
 
-    @IBOutlet weak var allowPushSwitch: UISwitch!
     @IBOutlet weak var darkModeSwitch: UISwitch!
     @IBOutlet weak var radius: UITextField!
     
     var id: NSString? = nil
     var client: NSManagedObject? = nil
     var clients = [NSManagedObject]()
+    var alertController: UIAlertController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         
         fetchClients()
         
-        allowPushSwitch.setOn(client?.valueForKey("allowPush") as! Bool, animated: true)
+
         darkModeSwitch.setOn(client?.valueForKey("darkMode") as! Bool, animated: true)
         radius.text = String((client?.valueForKey("radius"))!)
     }
@@ -53,10 +53,6 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
     }
     
     // MARK: Update User Settings
-    
-    @IBAction func notificationSwitched(sender: AnyObject) {
-        print("Saving Notifications")
-    }
     
     @IBAction func darkModeChanged(sender: AnyObject) {
         print("Saving Dark mode")
@@ -146,4 +142,12 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         }
     }
 
+    @IBAction func aboutButtonPressed(sender: AnyObject) {
+        self.alertController = UIAlertController(title: "iOS Spring 2016 Project", message: "Group 15", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in print("")})
+        self.alertController!.addAction(okAction)
+    
+        presentViewController(self.alertController!, animated: true, completion: nil)
+    }
 }
