@@ -35,6 +35,7 @@
 		33DCFE601CB8688300ACDAEA /* BlackCanvasTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE5F1CB8688300ACDAEA /* BlackCanvasTexture.jpg */; };
 		33DCFE621CB86BB400ACDAEA /* BlackMetal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE611CB86BB400ACDAEA /* BlackMetal.jpg */; };
 		33DCFE641CB8966F00ACDAEA /* SnapMapTitle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33DCFE631CB8966F00ACDAEA /* SnapMapTitle.jpg */; };
+		DC7A14BC1CD40A5700E3BAEE /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7A14BB1CD40A5700E3BAEE /* EditViewController.swift */; };
 		DC85945C1CA1BFDC00AD106B /* LoginBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */; };
 		DCBAABE11CA3175800560A92 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAABE01CA3175800560A92 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		33DCFE5F1CB8688300ACDAEA /* BlackCanvasTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackCanvasTexture.jpg; sourceTree = "<group>"; };
 		33DCFE611CB86BB400ACDAEA /* BlackMetal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackMetal.jpg; sourceTree = "<group>"; };
 		33DCFE631CB8966F00ACDAEA /* SnapMapTitle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SnapMapTitle.jpg; sourceTree = "<group>"; };
+		DC7A14BB1CD40A5700E3BAEE /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		DC85945B1CA1BFDC00AD106B /* LoginBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LoginBackground.jpg; sourceTree = "<group>"; };
 		DC8899B41CA0784200EEAC2E /* Bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-header.h"; sourceTree = "<group>"; };
 		DCBAABE01CA3175800560A92 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				333574D01CB5900D007F6AC2 /* CameraViewController.swift */,
 				3323B2021CB43D4F00FF3A97 /* Post.swift */,
 				3323B2041CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift */,
+				DC7A14BB1CD40A5700E3BAEE /* EditViewController.swift */,
 				33216C051C8361C300F249B1 /* Main.storyboard */,
 				33216C0D1C8361C300F249B1 /* LaunchScreen.storyboard */,
 				33216C0B1C8361C300F249B1 /* Assets.xcassets */,
@@ -186,7 +189,7 @@
 				TargetAttributes = {
 					33216BFD1C8361C300F249B1 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 3B345RT359;
+						DevelopmentTeam = 239X95NK3H;
 					};
 				};
 			};
@@ -242,6 +245,7 @@
 			files = (
 				3323B2051CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift in Sources */,
 				33216C041C8361C300F249B1 /* LoginViewController.swift in Sources */,
+				DC7A14BC1CD40A5700E3BAEE /* EditViewController.swift in Sources */,
 				33216C021C8361C300F249B1 /* AppDelegate.swift in Sources */,
 				DCBAABE11CA3175800560A92 /* SettingsViewController.swift in Sources */,
 				33216C0A1C8361C300F249B1 /* SnapMap.xcdatamodeld in Sources */,
@@ -370,7 +374,7 @@
 				);
 				INFOPLIST_FILE = SnapMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = SnapMap;
+				PRODUCT_BUNDLE_IDENTIFIER = SnapMap1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SnapMap/Bridging-header.h";
@@ -390,7 +394,7 @@
 				);
 				INFOPLIST_FILE = SnapMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = SnapMap;
+				PRODUCT_BUNDLE_IDENTIFIER = SnapMap1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SnapMap/Bridging-header.h";

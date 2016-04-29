@@ -18,6 +18,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     var location: CLLocation? = nil
     var imagePicker = UIImagePickerController()
     var originalphoto: UIImage? = nil
+    var firstphoto: UIImage? = nil
+    var presentCamera = true
     var alertController: UIAlertController? = nil
     var id: NSString? = nil
     var clients = [NSManagedObject]()
@@ -69,19 +71,26 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
         fetchClients()
         
-        if (UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil && UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil) {
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-            imagePicker.cameraCaptureMode = .Photo
-            imagePicker.modalPresentationStyle = .FullScreen
-        }
+        if(presentCamera){
+            dispatch_async(dispatch_get_main_queue(), {
+                if (UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil && UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil) {
+                    self.imagePicker.delegate = self
+                    self.imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+                    self.imagePicker.cameraCaptureMode = .Photo
+                    self.imagePicker.modalPresentationStyle = .FullScreen
+                }
             
-        else {
-            print("Sorry no Camera")
-            return
-        }
+                else {
+                    print("Sorry no Camera")
+                    return
+                }
         
-        presentViewController(imagePicker, animated: true, completion: nil)
+                self.presentViewController(self.imagePicker, animated: true, completion: nil)
+            })
+        }
+        else{
+            image.image = originalphoto
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -106,6 +115,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         originalphoto = info[UIImagePickerControllerOriginalImage] as? UIImage
+        firstphoto = originalphoto
         image.image = originalphoto
         postBtn.hidden = false
         anotherPicBtn.hidden = false
@@ -269,6 +279,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             // Restore starting insets.
             self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
             }, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "editsegue"){
+            let dvc = segue.destinationViewController as! EditViewController
+            dvc.beginImage = CIImage(image: originalphoto!)
+        }
     }
     
 }
