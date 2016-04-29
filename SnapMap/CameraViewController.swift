@@ -25,14 +25,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     var ButtonRect: CGRect!
     var saving = false
     
+    @IBOutlet weak var titleBox: UITextField!
     @IBOutlet weak var commentBox: UITextField!
     @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var anotherPicBtn: UIButton!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var postBtn: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var postOutlet: UILabel!
-    @IBOutlet weak var resnapOutlet: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,14 +45,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         
-        shareBtn.hidden = true
-        postBtn.hidden = true
-        anotherPicBtn.hidden = true
+        titleBox.delegate = self
+        titleBox.placeholder = "Add title..."
         commentBox.delegate = self
-        commentBox.hidden = true
-        postOutlet.hidden = true
-        resnapOutlet.hidden = true
-        commentBox.placeholder = "Add title..."
+        commentBox.placeholder = "Add comment..."
+        
+        showOrHideFields(true)
         
         addNotificationObservers()
         
@@ -83,6 +80,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     override func viewDidAppear(animated: Bool) {
         if (!saving) {
+            titleBox.placeholder = "Add title..."
+            commentBox.placeholder = "Add comment..."
+            showOrHideFields(true)
             presentViewController(imagePicker, animated: true, completion: nil)
         }
     }
@@ -107,12 +107,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         saving = true
         originalphoto = info[UIImagePickerControllerOriginalImage] as? UIImage
         image.image = originalphoto
-        postBtn.hidden = false
-        anotherPicBtn.hidden = false
-        shareBtn.hidden = false
-        commentBox.hidden = false
-        postOutlet.hidden = false
-        resnapOutlet.hidden = false
+        showOrHideFields(false)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -146,15 +141,19 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             self.alertController = UIAlertController(title: "Post Failed!", message: "womp womp", preferredStyle: UIAlertControllerStyle.Alert)
         }
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in self.commentBox.text = ""})
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            self.commentBox.text = ""
+            self.titleBox.text = ""
+            SnapMapNotificationCenter.mapViewUpdateNotification()
+            self.dismissViewControllerAnimated(true, completion: nil)
+            self.performSegueWithIdentifier("showMap", sender: self)
+        })
         self.alertController!.addAction(okAction)
         
         presentViewController(self.alertController!, animated: true, completion: nil)
         saving = false
         
-        SnapMapNotificationCenter.mapViewUpdateNotification()
-        dismissViewControllerAnimated(true, completion: nil)
-        performSegueWithIdentifier("showMap", sender: self)
+//        performSegueWithIdentifier("showMap", sender: self)
     }
 
     func savePost() -> Bool {
@@ -165,13 +164,16 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         let post = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         post.setValue(client!.valueForKey("name") as? String, forKey: "user")
-        post.setValue(commentBox!.text, forKey: "title")
+        
+        // TODO: error check against title
+        post.setValue(titleBox!.text, forKey: "title")
         post.setValue(commentBox!.text, forKey: "message")
+        
         post.setValue(UIImageJPEGRepresentation(originalphoto!, 1), forKey: "image")
         post.setValue(location!.coordinate.latitude as Double, forKey: "lat")
         post.setValue(location!.coordinate.longitude as Double, forKey: "long")
-//        let comments: NSMutableArray = []
-        post.setValue(NSMutableArray(), forKey: "comments")
+        let comments: NSMutableArray = []
+        post.setValue(comments, forKey: "comments")
                 
         do {
             try managedContext.save()
@@ -302,6 +304,15 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         imageView.center = view.center
         view.addSubview(imageView)
         self.view.sendSubviewToBack(imageView)
+    }
+    
+    func showOrHideFields (hide: Bool) {
+        shareBtn.hidden = hide
+        postBtn.hidden = hide
+        anotherPicBtn.hidden = hide
+        commentBox.hidden = hide
+        titleBox.hidden = hide
+        image.hidden = hide
     }
     
 }

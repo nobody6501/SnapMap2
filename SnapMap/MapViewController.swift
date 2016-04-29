@@ -13,10 +13,8 @@ import CoreData
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
     
-    @IBOutlet weak var mapView: MKMapView!
-    
+    @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var messageBtn: UIButton!
-    
     @IBOutlet weak var messageTab: UITabBarItem!
     @IBOutlet weak var settingsTab: UITabBarItem!
     
@@ -203,9 +201,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let postAction = UIAlertAction(title: "Post", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let managedContext = appDelegate.managedObjectContext
-            
             let entity = NSEntityDescription.entityForName("Post", inManagedObjectContext: managedContext)
-            
             let post = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
             
             post.setValue(self.client!.valueForKey("name") as? String, forKey: "user")
@@ -214,7 +210,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             post.setValue(UIImageJPEGRepresentation(UIImage(named: "iMessageIcon.png")!, 1), forKey: "image")
             post.setValue(self.location!.coordinate.latitude as Double, forKey: "lat")
             post.setValue(self.location!.coordinate.longitude as Double, forKey: "long")
-            let comments: NSMutableArray = ["test", "hahahaha", "rubbish app"]
+            let comments: NSMutableArray = []
             post.setValue(comments, forKey: "comments")
             
             do {
@@ -260,10 +256,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                            title: post.valueForKey("title") as! String,
                            message: post.valueForKey("message") as! String,
                            coordinate: CLLocationCoordinate2D(latitude: post.valueForKey("lat") as! Double, longitude: post.valueForKey("long") as! Double),
-                           image: UIImage(data: (post.valueForKey("image") as? NSData)!)!,
-                           comments: post.valueForKey("comments") as! NSMutableArray)
+                           image: UIImage(data: (post.valueForKey("image") as! NSData))!,
+                           comments: (post.valueForKey("comments") as! NSMutableArray),
+                           uniqueID: String(post.objectID))
+        
+        print("\(artwork.user) \(artwork.title) \(artwork.comments) \(artwork.message) \(artwork.coordinate)")
         
         mapView.addAnnotation(artwork)
+        
+        
+        
+        
     }
     
     // Mark: Navigation
@@ -273,6 +276,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if (segue.identifier == "showAnnotation" ) {
             let avc = segue.destinationViewController as! AnnotationViewController
             avc.post = post
+            
         }
         
     }
