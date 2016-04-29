@@ -28,7 +28,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var titleBox: UITextField!
     @IBOutlet weak var commentBox: UITextField!
     @IBOutlet weak var shareBtn: UIButton!
-    @IBOutlet weak var anotherPicBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var postBtn: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -117,7 +117,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         performSegueWithIdentifier("showMap", sender: self)
     }
     
-    @IBAction func takeAnotherPhoto(sender: AnyObject) {
+    @IBAction func cancelPost(sender: AnyObject) {
         saving = false
         presentViewController(imagePicker, animated: true, completion: nil)
     }
@@ -152,8 +152,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
         presentViewController(self.alertController!, animated: true, completion: nil)
         saving = false
-        
-//        performSegueWithIdentifier("showMap", sender: self)
     }
 
     func savePost() -> Bool {
@@ -309,7 +307,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     func showOrHideFields (hide: Bool) {
         shareBtn.hidden = hide
         postBtn.hidden = hide
-        anotherPicBtn.hidden = hide
+        cancelBtn.hidden = hide
         commentBox.hidden = hide
         titleBox.hidden = hide
         image.hidden = hide
