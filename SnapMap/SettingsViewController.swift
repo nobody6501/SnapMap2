@@ -22,7 +22,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "CityNight.jpg")!)
+//        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "CityNight.jpg")!)
         
         let loginView: FBSDKLoginButton = FBSDKLoginButton()
         self.view.addSubview(loginView)

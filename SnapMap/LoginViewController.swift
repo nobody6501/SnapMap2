@@ -24,17 +24,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         self.fetchClients()
         
-        SnapMapTitle.image = UIImage(named: "SnapMapTitle.jpg")!
-        
-        let background = UIImage(named: "LoginBackground2.jpg")
-        var imageView : UIImageView!
-        imageView = UIImageView(frame: view.bounds)
-        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = background
-        imageView.center = view.center
-        view.addSubview(imageView)
-        self.view.sendSubviewToBack(imageView)
+//        SnapMapTitle.image = UIImage(named: "SnapMapTitle.jpg")!
+//        
+//        let background = UIImage(named: "LoginBackground2.jpg")
+//        var imageView : UIImageView!
+//        imageView = UIImageView(frame: view.bounds)
+//        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
+//        imageView.clipsToBounds = true
+//        imageView.image = background
+//        imageView.center = view.center
+//        view.addSubview(imageView)
+//        self.view.sendSubviewToBack(imageView)
         
         let loginView: FBSDKLoginButton = FBSDKLoginButton()
         self.view.addSubview(loginView)
