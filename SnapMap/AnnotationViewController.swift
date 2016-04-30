@@ -27,8 +27,6 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.navigationController?.navigationBar.hidden = false
         
-        self.setBackgroundImage()
-        
         imageView.image = post!.getImage()
         postTitle.text = post!.title
         postMessage.text = post!.message
@@ -56,7 +54,6 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath)
         cell.textLabel!.text = self.comments![indexPath.row] as? String
-//        cell.detailTextLabel!.text = candidate.valueForKey("party") as? String
         return cell
     }
     
@@ -74,13 +71,9 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
             // TODO: error check against empty input
             
             self.comments!.addObject((self.commentBox?.text)!)
-            
             self.fetchData()
-//
             self.savedPost?.setValue(self.comments, forKey: "comments")
-//
-//            _ = NSManagedObject(entity: self.savedPost!.entity, insertIntoManagedObjectContext: managedContext)
-//            
+            
             do {
                 try managedContext.save()
             } catch {
@@ -89,7 +82,7 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
                 print("Unresolved error \(nserror), \(nserror.userInfo) in AnnotationView::addComment()")
                 abort()
             }
-//
+
             print("comment posted")
             
             self.commentTableView.reloadData()
@@ -118,11 +111,7 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName:"Post")
         
-        // Retrieve post based on title, messagem, and user name
-//        let firstPred = NSPredicate(format: "title = %@", post!.title!)
-//        let secondPred = NSPredicate(format: "message = %@", post!.message)
-//        let thirdPred = NSPredicate(format: "user = %@", post!.user)
-//        let predicate = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [firstPred, secondPred, thirdPred])
+        // TODO: Fetch by a unique identifier
         fetchRequest.predicate = NSPredicate(format: "title = %@", post!.title!)
         var fetchedPosts:[NSManagedObject]? = nil
         
@@ -145,18 +134,5 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     // Mark: Helper Functions
-    
-    func setBackgroundImage () {
-        let background = UIImage(named: "BlackMetal.jpg")
-        var imageView : UIImageView!
-        imageView = UIImageView(frame: view.bounds)
-        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = background
-        imageView.center = view.center
-        view.addSubview(imageView)
-        self.view.sendSubviewToBack(imageView)
-    }
-
 
 }

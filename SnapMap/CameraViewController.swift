@@ -36,10 +36,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        
-        setBackgroundImage()
-        
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -291,18 +287,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     // Mark: Helper Functions
-    
-    func setBackgroundImage () {
-        let background = UIImage(named: "BlackMetal.jpg")
-        var imageView : UIImageView!
-        imageView = UIImageView(frame: view.bounds)
-        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = background
-        imageView.center = view.center
-        view.addSubview(imageView)
-        self.view.sendSubviewToBack(imageView)
-    }
     
     func showOrHideFields (hide: Bool) {
         shareBtn.hidden = hide

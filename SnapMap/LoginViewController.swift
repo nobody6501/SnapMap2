@@ -24,18 +24,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         self.fetchClients()
         
-//        SnapMapTitle.image = UIImage(named: "SnapMapTitle.jpg")!
-//        
-//        let background = UIImage(named: "LoginBackground2.jpg")
-//        var imageView : UIImageView!
-//        imageView = UIImageView(frame: view.bounds)
-//        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
-//        imageView.clipsToBounds = true
-//        imageView.image = background
-//        imageView.center = view.center
-//        view.addSubview(imageView)
-//        self.view.sendSubviewToBack(imageView)
-        
         let loginView: FBSDKLoginButton = FBSDKLoginButton()
         self.view.addSubview(loginView)
         loginView.center = self.view.center
@@ -43,7 +31,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             loginView.readPermissions = ["email"]
-//            loginView.readPermissions = ["public_profile", "email", "user_friends"]
+            // loginView.readPermissions = ["public_profile", "email", "user_friends"]
         }
         
         fetchOrCreateClient()
