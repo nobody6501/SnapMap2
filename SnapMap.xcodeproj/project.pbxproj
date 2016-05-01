@@ -19,6 +19,7 @@
 		333574D11CB5900D007F6AC2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333574D01CB5900D007F6AC2 /* CameraViewController.swift */; };
 		333574D31CB59097007F6AC2 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 333574D21CB59097007F6AC2 /* FBSDKShareKit.framework */; };
 		333574D51CB5DF84007F6AC2 /* iMessageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 333574D41CB5DF84007F6AC2 /* iMessageIcon.png */; };
+		33786FFC1CD59C560009E777 /* PictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33786FFB1CD59C560009E777 /* PictureViewController.swift */; };
 		337D04C61CCEF597008C7822 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D04C51CCEF597008C7822 /* AnnotationViewController.swift */; };
 		337D04CA1CD04622008C7822 /* WhiteTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337D04C91CD04622008C7822 /* WhiteTexture.jpg */; };
 		337D04CE1CD16C1D008C7822 /* GrayTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 337D04CD1CD16C1D008C7822 /* GrayTexture.png */; };
@@ -58,6 +59,7 @@
 		333574D01CB5900D007F6AC2 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		333574D21CB59097007F6AC2 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-20163016/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		333574D41CB5DF84007F6AC2 /* iMessageIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iMessageIcon.png; sourceTree = "<group>"; };
+		33786FFB1CD59C560009E777 /* PictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureViewController.swift; sourceTree = "<group>"; };
 		337D04C51CCEF597008C7822 /* AnnotationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		337D04C91CD04622008C7822 /* WhiteTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WhiteTexture.jpg; sourceTree = "<group>"; };
 		337D04CD1CD16C1D008C7822 /* GrayTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GrayTexture.png; sourceTree = "<group>"; };
@@ -123,9 +125,10 @@
 				33216C031C8361C300F249B1 /* LoginViewController.swift */,
 				338AC1C31CA2454500170CF6 /* TabBarViewController.swift */,
 				338AC1B21CA22EB400170CF6 /* MapViewController.swift */,
-				337D04C51CCEF597008C7822 /* AnnotationViewController.swift */,
-				DCBAABE01CA3175800560A92 /* SettingsViewController.swift */,
 				333574D01CB5900D007F6AC2 /* CameraViewController.swift */,
+				DCBAABE01CA3175800560A92 /* SettingsViewController.swift */,
+				337D04C51CCEF597008C7822 /* AnnotationViewController.swift */,
+				33786FFB1CD59C560009E777 /* PictureViewController.swift */,
 				3323B2021CB43D4F00FF3A97 /* Post.swift */,
 				3323B2041CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift */,
 				33216C051C8361C300F249B1 /* Main.storyboard */,
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3323B2051CB4844700FF3A97 /* SnapMapNotificationCenterConstants.swift in Sources */,
+				33786FFC1CD59C560009E777 /* PictureViewController.swift in Sources */,
 				33216C041C8361C300F249B1 /* LoginViewController.swift in Sources */,
 				33216C021C8361C300F249B1 /* AppDelegate.swift in Sources */,
 				DCBAABE11CA3175800560A92 /* SettingsViewController.swift in Sources */,

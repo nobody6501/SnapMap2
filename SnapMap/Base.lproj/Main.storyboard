@@ -77,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="268" y="133"/>
         </scene>
-        <!--Map-->
+        <!--Map View Controller-->
         <scene sceneID="tc3-WH-tJT">
             <objects>
-                <viewController id="FqQ-Aq-a2V" customClass="MapViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Map View Controller" id="FqQ-Aq-a2V" customClass="MapViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jV0-wB-xK9"/>
                         <viewControllerLayoutGuide type="bottom" id="yoP-ip-VpA"/>
@@ -126,6 +126,25 @@
             </objects>
             <point key="canvasLocation" x="1677" y="1049"/>
         </scene>
+        <!--Picture View Controller-->
+        <scene sceneID="xW4-lC-uR0">
+            <objects>
+                <viewController id="cJs-xF-25B" customClass="PictureViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <imageView key="view" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ceo-tM-LAa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="imageView" destination="ceo-tM-LAa" id="5rW-OO-kh7"/>
+                        <segue destination="AbJ-R5-kwi" kind="unwind" identifier="showAnnotation" unwindAction="unwindToAnnotation:" id="5nb-0J-Itk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9xP-23-MCF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="AbJ-R5-kwi" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2956" y="1049"/>
+        </scene>
         <!--Post-->
         <scene sceneID="KSu-Ou-ekl">
             <objects>
@@ -144,11 +163,23 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xuj-lG-sUd">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1RD-e1-BOI">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JlF-JM-NQf">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="431"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fm-A9-1dZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="431"/>
+                                    </containerView>
+                                    <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1RD-e1-BOI">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="431"/>
+                                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="431" id="L4Y-vQ-Xvk"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="44i-eh-AIF" appends="YES" id="8fe-dQ-wGT"/>
+                                        </connections>
                                     </imageView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VTH-ys-br5">
                                         <rect key="frame" x="0.0" y="553" width="414" height="133"/>
@@ -204,6 +235,7 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="1RD-e1-BOI" firstAttribute="top" secondItem="xuj-lG-sUd" secondAttribute="top" id="3hc-Vx-ulx"/>
                                     <constraint firstAttribute="bottom" secondItem="1RD-e1-BOI" secondAttribute="bottom" constant="305" id="4pi-eA-qsk"/>
@@ -223,6 +255,11 @@
                                     <constraint firstItem="8qu-mD-dMF" firstAttribute="top" secondItem="nqj-ex-7F2" secondAttribute="bottom" constant="4" id="xbV-iR-Si1"/>
                                     <constraint firstItem="VTH-ys-br5" firstAttribute="top" secondItem="xuj-lG-sUd" secondAttribute="top" constant="553" id="y8n-ld-3Gq"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="7fm-A9-1dZ"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.7337837815284729" green="0.081235863268375397" blue="0.18886762857437134" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -236,14 +273,23 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="commentTableView" destination="VTH-ys-br5" id="kTz-oA-TCR"/>
+                        <outlet property="container" destination="xuj-lG-sUd" id="eyG-gL-juE"/>
+                        <outlet property="gestureOutlet" destination="44i-eh-AIF" id="yMq-fO-gMO"/>
+                        <outlet property="imageController" destination="JlF-JM-NQf" id="ati-lt-OAw"/>
                         <outlet property="imageView" destination="1RD-e1-BOI" id="pvi-yz-zai"/>
                         <outlet property="postMessage" destination="8qu-mD-dMF" id="H6m-ik-6kj"/>
                         <outlet property="postTitle" destination="nqj-ex-7F2" id="Um4-vZ-i4i"/>
                         <segue destination="uFI-Yn-I22" kind="unwind" identifier="backToMap" unwindAction="unwindToMap:" id="qYs-VK-sX7"/>
+                        <segue destination="cJs-xF-25B" kind="presentation" identifier="expandPicture" modalTransitionStyle="partialCurl" id="cyL-jD-H79"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZw-5m-vpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="uFI-Yn-I22" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="44i-eh-AIF">
+                    <connections>
+                        <action selector="tapGesture:" destination="FPW-L2-mXj" id="kV6-JB-Ezq"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2308" y="1049"/>
         </scene>

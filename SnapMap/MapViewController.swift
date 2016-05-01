@@ -251,7 +251,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func addAnnotation(post: NSManagedObject) {
-        print("user name: in addAnnotation: \(post.valueForKey("user") as! String)")
+        print("user name in addAnnotation: \(post.valueForKey("user") as! String)")
         let artwork = Post(user: post.valueForKey("user") as! String,
                            title: post.valueForKey("title") as! String,
                            message: post.valueForKey("message") as! String,
@@ -259,8 +259,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                            image: UIImage(data: (post.valueForKey("image") as! NSData))!,
                            comments: (post.valueForKey("comments") as! NSMutableArray),
                            uniqueID: String(post.objectID))
-        
-        print("\(artwork.user) \(artwork.title) \(artwork.comments) \(artwork.message) \(artwork.coordinate)")
         
         mapView.addAnnotation(artwork)
         

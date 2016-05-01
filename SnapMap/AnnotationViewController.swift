@@ -15,6 +15,9 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var postTitle: UILabel!
     @IBOutlet weak var postMessage: UILabel!
     @IBOutlet weak var commentTableView: UITableView!
+    @IBOutlet weak var container: UIScrollView!
+    @IBOutlet weak var imageController: UIView!
+    @IBOutlet var gestureOutlet: UITapGestureRecognizer!
     
     var post: Post? = nil
     var savedPost: NSManagedObject? = nil
@@ -35,8 +38,12 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
         self.commentTableView.delegate = self
         self.commentTableView.dataSource = self
         
+//        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+//        tap.delegate = self
+//        myView.addGestureRecognizer(tap)
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -82,10 +89,10 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
                 print("Unresolved error \(nserror), \(nserror.userInfo) in AnnotationView::addComment()")
                 abort()
             }
-
-            print("comment posted")
             
             self.commentTableView.reloadData()
+            
+            print("comment posted")
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
@@ -133,6 +140,58 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
 
     }
     
+    // Mark: Navigation
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("touch")
+        
+        if let touch = touches.first {
+            print("\(touch)")
+        }
+        super.touchesBegan(touches, withEvent:event)
+        
+        if (imageController.focused) {
+            print("focused")
+            performSegueWithIdentifier("expandPicture", sender: self)
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        if let touch = touches.first{
+            print("\(touch)")
+        }
+        super.touchesEnded(touches, withEvent: event)
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        if let touch = touches.first{
+            print("\(touch)")
+        }
+        super.touchesMoved(touches, withEvent: event)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let pvc = segue.destinationViewController as? PictureViewController {
+            print("is a pvc")
+            pvc.post = self.post
+        }
+    }
+    
+    @IBAction func tapGesture(sender: AnyObject) {
+        print("tapGesture")
+        performSegueWithIdentifier("expandPicture", sender: self)
+    }
+    
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        print("handleTap")
+    }
+    
+    @IBAction func unwindToAnnotation(segue: UIStoryboardSegue) {}
+
     // Mark: Helper Functions
+    
 
 }
