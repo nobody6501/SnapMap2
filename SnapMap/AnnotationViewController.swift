@@ -24,6 +24,7 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
     var comments: NSMutableArray? = nil
     var alertController: UIAlertController? = nil
     var commentBox: UITextField? = nil
+    var blurEffectView: UIView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,10 +144,10 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
     // Mark: Navigation
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("touch")
+        print("touches began")
         
         if let touch = touches.first {
-            print("\(touch)")
+            print("touches began: \(touch)")
         }
         super.touchesBegan(touches, withEvent:event)
         
@@ -159,7 +160,7 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         if let touch = touches.first{
-            print("\(touch)")
+            print("touches ended: \(touch)")
         }
         super.touchesEnded(touches, withEvent: event)
     }
@@ -167,7 +168,7 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         if let touch = touches.first{
-            print("\(touch)")
+            print("touches moved: \(touch)")
         }
         super.touchesMoved(touches, withEvent: event)
     }
