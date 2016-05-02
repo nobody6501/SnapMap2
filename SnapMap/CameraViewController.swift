@@ -33,6 +33,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var postOutlet: UILabel!
     @IBOutlet weak var resnapOutlet: UILabel!
+    @IBOutlet weak var backgroundView: UIImageView!
     
     var ButtonRect: CGRect!
     
@@ -41,12 +42,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
         // Do any additional setup after loading the view.
         
+        self.navigationController?.navigationBar.hidden = true
+        
         let background = UIImage(named: "BlackMetal.jpg")
         var imageView : UIImageView!
         imageView = UIImageView(frame: view.bounds)
         imageView.contentMode =  UIViewContentMode.ScaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = background
+        backgroundView.image = background
         imageView.center = view.center
         view.addSubview(imageView)
         self.view.sendSubviewToBack(imageView)
@@ -97,6 +100,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         super.didReceiveMemoryWarning()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.navigationController?.navigationBar.hidden = true
+        image.image = originalphoto
+    }
     // MARK: Notification Observer(s)
     
     func addNotificationObservers() {
@@ -284,7 +291,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "editsegue"){
             let dvc = segue.destinationViewController as! EditViewController
-            dvc.beginImage = CIImage(image: originalphoto!)
+            dvc.beginImage = CIImage(image: firstphoto!)
+            dvc.cvc = self
         }
     }
     

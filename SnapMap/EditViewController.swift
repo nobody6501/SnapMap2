@@ -15,16 +15,19 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var beginImage: CIImage? = nil
     var newImage: UIImage? = nil
     var context: CIContext? = nil
+    var cvc: CameraViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.hidden = false
+        
         self.picker.delegate = self
         self.picker.dataSource = self
         context = CIContext(options: nil)
         
-        pickerData = ["Black and White", "Sepia", "None"]
+        pickerData = ["None", "Black and White", "Sepia", "Invert", "Cool", "Comic", "Edges", "Sketch"]
         
         pickerView(picker, didSelectRow: 0, inComponent: 0)
     }
@@ -34,6 +37,9 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.navigationBar.hidden = true
+    }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -67,6 +73,21 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         else if(title == "Black and White"){
             makePhotoFilter("CIPhotoEffectMono")
         }
+        else if(title == "Invert"){
+            makePhotoFilter("CIColorInvert")
+        }
+        else if(title == "Cool"){
+            makePhotoFilter("CIPhotoEffectProcess")
+        }
+        else if(title == "Comic"){
+            makePhotoFilter("CIComicEffect")
+        }
+        else if(title == "Edges"){
+            makePhotoFilter("CIEdges")
+        }
+        else if(title == "Sketch"){
+            makePhotoFilter("CILineOverlay")
+        }
     }
     
     func makePhotoFilter(nameOfFilter: String){
@@ -77,6 +98,12 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         newImage = UIImage(CGImage: cgimage)
         self.myImage.image = newImage
     }
+    
+    
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        cvc!.originalphoto = newImage
+        cvc!.presentCamera = false
+    }
 
     
     // MARK: - Navigation
@@ -86,11 +113,11 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        if(segue.identifier == "backtocamera"){
+        //if(segue.identifier == "backtocamera"){
             let dvc = segue.destinationViewController as! CameraViewController
             dvc.originalphoto = newImage
             dvc.presentCamera = false
-        }
+        //}
     }
     
 

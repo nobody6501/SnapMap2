@@ -86,18 +86,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AyC-5d-Rj4">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="459"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="514"/>
                             </imageView>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YAz-Ie-hiE">
-                                <rect key="frame" x="0.0" y="461" width="414" height="165"/>
+                                <rect key="frame" x="0.0" y="522" width="414" height="165"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ss-hM-rRn">
-                                <rect key="frame" x="183" y="644" width="48" height="30"/>
-                                <state key="normal" title="FINISH"/>
-                                <connections>
-                                    <segue destination="unM-Fn-fk5" kind="show" identifier="backtocamera" id="OPj-yk-vmL"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -172,7 +165,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Xf-bR-OlU">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Xf-bR-OlU">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xZe-n9-ez8">
@@ -191,6 +184,16 @@
                                         <state key="normal" image="RedButton"/>
                                         <connections>
                                             <action selector="takeAnotherPhoto:" destination="unM-Fn-fk5" eventType="touchUpInside" id="Rtx-Wu-gPE"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zVM-SC-1Nh">
+                                        <rect key="frame" x="0.0" y="513" width="414" height="174"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjf-Su-plc">
+                                        <rect key="frame" x="162" y="544" width="82" height="30"/>
+                                        <state key="normal" title="ADD FILTER"/>
+                                        <connections>
+                                            <segue destination="gUP-Zq-tG1" kind="show" identifier="editsegue" id="Vtb-Lr-ZMY"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-pX-KLm">
@@ -238,13 +241,6 @@
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjf-Su-plc">
-                                        <rect key="frame" x="162" y="544" width="82" height="30"/>
-                                        <state key="normal" title="ADD FILTER"/>
-                                        <connections>
-                                            <segue destination="gUP-Zq-tG1" kind="show" identifier="editsegue" id="Vtb-Lr-ZMY"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="PGP-S3-Mf4" secondAttribute="trailing" constant="29" id="0tl-F4-3xy"/>
@@ -287,6 +283,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="anotherPicBtn" destination="PGP-S3-Mf4" id="PaK-vB-ggj"/>
+                        <outlet property="backgroundView" destination="zVM-SC-1Nh" id="qlN-Lu-buw"/>
                         <outlet property="commentBox" destination="fcm-1t-B2f" id="VKq-Ce-kXe"/>
                         <outlet property="image" destination="xZe-n9-ez8" id="9ie-gG-f6m"/>
                         <outlet property="postBtn" destination="RSG-DH-lUw" id="2HK-ih-liK"/>
@@ -406,7 +403,6 @@
         <image name="SettingsIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OPj-yk-vmL"/>
         <segue reference="lRp-cv-bjq"/>
     </inferredMetricsTieBreakers>
 </document>
