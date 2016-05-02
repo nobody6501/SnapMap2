@@ -84,7 +84,13 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate{
         
         // Set the attribute values
         
-        // TODO: enforce restrictions on radius
+        // Enforce restriction on radius
+        if Double(radius.text!) > 999999.0 {
+            self.alertController =  UIAlertController(title: "Error", message: "Radius must be less than or equal to 999,999 meters.", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in self.radius.text! = "999999"})
+            self.alertController!.addAction(okAction)
+            presentViewController(self.alertController!, animated: true, completion: nil)
+        }
         
         client?.setValue(Double(radius.text!), forKey: "radius")
         

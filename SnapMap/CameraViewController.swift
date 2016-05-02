@@ -83,10 +83,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
-//    override func viewWillDisappear(animated: Bool) {
-//
-//    }
-    
     // MARK: Notification Observer(s)
     
     func addNotificationObservers() {
@@ -114,7 +110,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        SnapMapNotificationCenter.mapViewUpdateNotification()
         dismissViewControllerAnimated(true, completion: nil)
         performSegueWithIdentifier("showMap", sender: self)
     }
@@ -135,22 +130,34 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     @IBAction func postPhoto(sender: AnyObject) {
         
-        if savePost() {
-            self.alertController = UIAlertController(title: "Post Successful!", message: "Nice shot!", preferredStyle: UIAlertControllerStyle.Alert)
-        }
-        
-        else {
-            self.alertController = UIAlertController(title: "Post Failed!", message: "womp womp", preferredStyle: UIAlertControllerStyle.Alert)
-        }
-        
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+        let returnToMap = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
             self.commentBox.text = ""
             self.titleBox.text = ""
             SnapMapNotificationCenter.mapViewUpdateNotification()
             self.dismissViewControllerAnimated(true, completion: nil)
             self.performSegueWithIdentifier("showMap", sender: self)
         })
-        self.alertController!.addAction(okAction)
+        
+        let retakePhoto = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            SnapMapNotificationCenter.mapViewUpdateNotification()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+        
+        // Enforce titles to make sure the callouts on map annotations work
+        if self.titleBox.text == "" {
+            self.alertController = UIAlertController(title: "Error", message: "Your snap must have a title.", preferredStyle: UIAlertControllerStyle.Alert)
+            self.alertController!.addAction(retakePhoto)
+        }
+        
+        else if savePost() {
+            self.alertController = UIAlertController(title: "Post Successful", message: "Nice shot!", preferredStyle: UIAlertControllerStyle.Alert)
+            self.alertController!.addAction(returnToMap)
+        }
+        
+        else {
+            self.alertController = UIAlertController(title: "Post Failed!", message: "womp womp", preferredStyle: UIAlertControllerStyle.Alert)
+            self.alertController!.addAction(retakePhoto)
+        }
         
         presentViewController(self.alertController!, animated: true, completion: nil)
         saving = false
@@ -164,11 +171,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         let post = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         post.setValue(client!.valueForKey("name") as? String, forKey: "user")
-        
-        // TODO: error check against title
         post.setValue(titleBox!.text, forKey: "title")
         post.setValue(commentBox!.text, forKey: "message")
-        
         post.setValue(UIImageJPEGRepresentation(originalphoto!, 1), forKey: "image")
         post.setValue(location!.coordinate.latitude as Double, forKey: "lat")
         post.setValue(location!.coordinate.longitude as Double, forKey: "long")
@@ -247,7 +251,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-//        self.view.endEditing(true)
         return true
     }
     
@@ -268,7 +271,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             }, completion: nil)
     }
     
-    func keyboardDidHide(notification: NSNotification) {        
+    func keyboardDidHide(notification: NSNotification) {
         UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             // Restore starting insets.
             self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
@@ -276,13 +279,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     // Mark: Navigation:
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if (segue.identifier == "showMap") {
-//            let mvc = segue.destinationViewController as? MapViewController
-//            mvc?.client = client
-//        }
-//    }
     
     // Mark: Helper Functions
     

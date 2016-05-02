@@ -38,11 +38,6 @@ class AnnotationViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.commentTableView.delegate = self
         self.commentTableView.dataSource = self
-        
-//        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
-//        tap.delegate = self
-//        myView.addGestureRecognizer(tap)
-        
     }
     
     override func didReceiveMemoryWarning() {

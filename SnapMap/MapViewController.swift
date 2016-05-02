@@ -123,6 +123,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         regionRadius = client?.valueForKey("radius") as! Double
+        
+        if regionRadius > 999999.0 {
+            regionRadius = 999999.0
+        }
+        
         print("Region radius: \(regionRadius)")
         
         let fetchPosts = NSFetchRequest(entityName:"Post")
@@ -169,11 +174,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 view.pinTintColor = UIColor.redColor()
                 view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
                 view.animatesDrop = true
-//                let btn = UIButton(type: .Custom)
-//                btn.setImage(annotation.getImage(), forState: UIControlState.Normal)
-//                view.leftCalloutAccessoryView = btn as UIView
                 view.leftCalloutAccessoryView = UIImageView.init(image: resizeImage(annotation.getImage(), newWidth: 50))
-//                view.detailCalloutAccessoryView = UIImageView.init(image: annotation.getImage())
             }
             
             return view
@@ -199,32 +200,42 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.alertController = UIAlertController(title: "Post a message to the world!", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         
         let postAction = UIAlertAction(title: "Post", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let managedContext = appDelegate.managedObjectContext
-            let entity = NSEntityDescription.entityForName("Post", inManagedObjectContext: managedContext)
-            let post = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-            
-            post.setValue(self.client!.valueForKey("name") as? String, forKey: "user")
-            post.setValue(self.titleBox!.text, forKey: "title")
-            post.setValue(self.messageBox!.text, forKey: "message")
-            post.setValue(UIImageJPEGRepresentation(UIImage(named: "iMessageIcon.png")!, 1), forKey: "image")
-            post.setValue(self.location!.coordinate.latitude as Double, forKey: "lat")
-            post.setValue(self.location!.coordinate.longitude as Double, forKey: "long")
-            let comments: NSMutableArray = []
-            post.setValue(comments, forKey: "comments")
-            
-            do {
-                try managedContext.save()
-            } catch {
-                // what to do if an error occurs?
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo) in CameraView::savePost()")
-                abort()
+            if self.titleBox!.text == "" {
+                self.alertController = UIAlertController(title: "Error", message: "Your post must have a title.", preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+                    print("message cancelled")
+                }
+                self.alertController?.addAction(okAction)
+                self.presentViewController(self.alertController!, animated: true, completion: nil)
             }
             
-            self.updateMap()
+            else {
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let managedContext = appDelegate.managedObjectContext
+                let entity = NSEntityDescription.entityForName("Post", inManagedObjectContext: managedContext)
+                let post = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
             
-            print("message posted")
+                post.setValue(self.client!.valueForKey("name") as? String, forKey: "user")
+                post.setValue(self.titleBox!.text, forKey: "title")
+                post.setValue(self.messageBox!.text, forKey: "message")
+                post.setValue(UIImageJPEGRepresentation(UIImage(named: "iMessageIcon.png")!, 1), forKey: "image")
+                post.setValue(self.location!.coordinate.latitude as Double, forKey: "lat")
+                post.setValue(self.location!.coordinate.longitude as Double, forKey: "long")
+                let comments: NSMutableArray = []
+                post.setValue(comments, forKey: "comments")
+            
+                do {
+                    try managedContext.save()
+                } catch {
+                    let nserror = error as NSError
+                    NSLog("Unresolved error \(nserror), \(nserror.userInfo) in CameraView::savePost()")
+                    abort()
+                }
+            
+                self.updateMap()
+            
+                print("message posted")
+            }
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
@@ -261,10 +272,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                            uniqueID: String(post.objectID))
         
         mapView.addAnnotation(artwork)
-        
-        
-        
-        
     }
     
     // Mark: Navigation
@@ -274,7 +281,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if (segue.identifier == "showAnnotation" ) {
             let avc = segue.destinationViewController as! AnnotationViewController
             avc.post = post
-            
         }
         
     }
