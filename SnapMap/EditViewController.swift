@@ -39,6 +39,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.navigationBar.hidden = true
+        cvc!.image.image = newImage
     }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1

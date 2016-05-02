@@ -40,8 +40,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        
+        // Do any additional setup after loading the view.        
         self.navigationController?.navigationBar.hidden = true
         
         let background = UIImage(named: "BlackMetal.jpg")
@@ -102,6 +101,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.hidden = true
+        image.image = originalphoto
     }
     // MARK: Notification Observer(s)
     
