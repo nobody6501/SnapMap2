@@ -83,18 +83,24 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
+//    override func viewWillDisappear(animated: Bool) {
+//
+//    }
+    
     // MARK: Notification Observer(s)
     
     func addNotificationObservers() {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         // Register for when the keyboard is shown.
-        notificationCenter.addObserver(self, selector: #selector(CameraViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         // Register for when the keyboard is hidden.
-        notificationCenter.addObserver(self, selector: #selector(CameraViewController.keyboardDidHide(_:)), name: UIKeyboardDidHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(self.keyboardDidHide(_:)), name: UIKeyboardDidHideNotification, object: nil)
     }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
     // MARK: Camera
@@ -241,36 +247,28 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        self.view.endEditing(true)
+//        self.view.endEditing(true)
         return true
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //        self.view.endEditing(true)
-    }
- 
-    override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        self.view.endEditing(true)
     }
     
     func keyboardWillShow(notification: NSNotification) {
         // Get keyboard frame from notification object.
-        let info:NSDictionary = notification.userInfo!
+        let info: NSDictionary = notification.userInfo!
         var keyboardFrame = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
         keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
         
-        // Pad for some space between the field and the keyboard.
-        let pad:CGFloat = 5.0;
-        
         UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             // Set inset bottom, which will cause the scroll view to move up.
-            self.scrollView.contentInset.bottom = keyboardFrame.size.height + pad
-            self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, keyboardFrame.size.height + pad, 0.0);
+            self.scrollView.contentInset.bottom = keyboardFrame.size.height
+            self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, keyboardFrame.size.height, 0.0);
             }, completion: nil)
     }
     
-    func keyboardDidHide(notification: NSNotification) {
+    func keyboardDidHide(notification: NSNotification) {        
         UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             // Restore starting insets.
             self.scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
@@ -279,12 +277,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     // Mark: Navigation:
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        if (segue.identifier == "showMap") {
 //            let mvc = segue.destinationViewController as? MapViewController
 //            mvc?.client = client
 //        }
-    }
+//    }
     
     // Mark: Helper Functions
     
