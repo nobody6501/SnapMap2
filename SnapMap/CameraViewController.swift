@@ -102,7 +102,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.hidden = true
-        image.image = originalphoto
     }
     // MARK: Notification Observer(s)
     
