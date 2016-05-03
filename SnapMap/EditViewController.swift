@@ -25,6 +25,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.navigationController?.navigationBar.hidden = false
         
         self.navigationItem.title = "Adding Filters"
+        self.navigationController!.navigationBar.topItem!.title = "Next"
         
         self.picker.delegate = self
         self.picker.dataSource = self
@@ -43,8 +44,9 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.navigationBar.hidden = true
         cvc!.image.image = newImage
-        self.navigationItem.title = ""
+         self.navigationController!.navigationBar.topItem!.title = "Back"
     }
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }

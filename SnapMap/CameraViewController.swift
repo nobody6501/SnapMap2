@@ -43,6 +43,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         // Do any additional setup after loading the view.        
         self.navigationController?.navigationBar.hidden = true
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         let background = UIImage(named: "BlackMetal.jpg")
         var imageView : UIImageView!
         imageView = UIImageView(frame: view.bounds)
