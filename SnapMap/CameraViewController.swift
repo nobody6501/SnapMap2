@@ -129,6 +129,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         commentBox.hidden = false
         postOutlet.hidden = false
         dismissViewControllerAnimated(true, completion: nil)
+        performSegueWithIdentifier("editsegue", sender: self)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -290,6 +291,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "editsegue"){
             let dvc = segue.destinationViewController as! EditViewController
+            dvc.orientation = firstphoto!.imageOrientation
             dvc.beginImage = CIImage(image: firstphoto!)
             dvc.cvc = self
         }

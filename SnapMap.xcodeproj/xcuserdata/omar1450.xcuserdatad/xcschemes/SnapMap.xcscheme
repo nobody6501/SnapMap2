@@ -35,7 +35,7 @@
             BlueprintIdentifier = "33216BFD1C8361C300F249B1"
             BuildableName = "SnapMap.app"
             BlueprintName = "SnapMap"
-            ReferencedContainer = "container:../../../../u/omar1450/Desktop/snapmap/SnapMap.xcodeproj">
+            ReferencedContainer = "container:SnapMap.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "33216BFD1C8361C300F249B1"
             BuildableName = "SnapMap.app"
             BlueprintName = "SnapMap"
-            ReferencedContainer = "container:../../../../u/omar1450/Desktop/snapmap/SnapMap.xcodeproj">
+            ReferencedContainer = "container:SnapMap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>

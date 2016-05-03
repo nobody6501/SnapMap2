@@ -73,7 +73,7 @@
             </objects>
             <point key="canvasLocation" x="268" y="133"/>
         </scene>
-        <!--Edit View Controller-->
+        <!--Adding Filters-->
         <scene sceneID="6vN-0i-hw2">
             <objects>
                 <viewController id="gUP-Zq-tG1" customClass="EditViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -94,7 +94,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1xC-Nu-zUq"/>
+                    <navigationItem key="navigationItem" title="Adding Filters" id="1xC-Nu-zUq">
+                        <barButtonItem key="backBarButtonItem" title="Finished" id="XI8-3V-cdN"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="myImage" destination="AyC-5d-Rj4" id="hbZ-Lz-i2a"/>
@@ -103,7 +105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ec7-ac-otn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="994" y="1916"/>
+            <point key="canvasLocation" x="994" y="1902"/>
         </scene>
         <!--Map-->
         <scene sceneID="tc3-WH-tJT">
@@ -189,13 +191,6 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zVM-SC-1Nh">
                                         <rect key="frame" x="0.0" y="513" width="414" height="174"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjf-Su-plc">
-                                        <rect key="frame" x="162" y="544" width="82" height="30"/>
-                                        <state key="normal" title="ADD FILTER"/>
-                                        <connections>
-                                            <segue destination="gUP-Zq-tG1" kind="show" identifier="editsegue" id="Vtb-Lr-ZMY"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-pX-KLm">
                                         <rect key="frame" x="86" y="607" width="243" height="59"/>
                                         <constraints>
@@ -291,6 +286,7 @@
                         <outlet property="resnapOutlet" destination="HLu-vt-Nqx" id="fRr-da-5HH"/>
                         <outlet property="scrollView" destination="3Xf-bR-OlU" id="Zzp-LO-98n"/>
                         <outlet property="shareBtn" destination="6Iv-pX-KLm" id="i3L-XU-T0H"/>
+                        <segue destination="gUP-Zq-tG1" kind="show" identifier="editsegue" id="pK0-2C-R0o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZcD-hY-AZy" userLabel="First Responder" sceneMemberID="firstResponder"/>

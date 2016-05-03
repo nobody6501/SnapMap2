@@ -16,12 +16,15 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var newImage: UIImage? = nil
     var context: CIContext? = nil
     var cvc: CameraViewController? = nil
+    var orientation: UIImageOrientation? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.hidden = false
+        
+        self.navigationItem.title = "Adding Filters"
         
         self.picker.delegate = self
         self.picker.dataSource = self
@@ -40,6 +43,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.navigationBar.hidden = true
         cvc!.image.image = newImage
+        self.navigationItem.title = ""
     }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -68,7 +72,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
              
              let cgimage = context!.createCGImage((filter?.outputImage)!, fromRect: (filter?.outputImage!.extent)!)*/
             let cgimage = context!.createCGImage(beginImage!, fromRect: beginImage!.extent)
-            newImage = UIImage(CGImage: cgimage)
+            newImage = UIImage(CGImage: cgimage, scale: CGFloat(1.0), orientation: orientation!)
             self.myImage.image = newImage
         }
         else if(title == "Black and White"){
@@ -96,7 +100,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         filter?.setValue(beginImage, forKey: kCIInputImageKey)
         
         let cgimage = context!.createCGImage((filter?.outputImage)!, fromRect: (filter?.outputImage!.extent)!)
-        newImage = UIImage(CGImage: cgimage)
+        newImage = UIImage(CGImage: cgimage, scale: CGFloat(1.0), orientation: orientation!)
         self.myImage.image = newImage
     }
     
