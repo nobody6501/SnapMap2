@@ -34,6 +34,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var uid = User.currentUser().uid
     var longitude: CLLocationDegrees!
     var latitude: CLLocationDegrees!
+    var otherUserLong:CLLocationDegrees!
+    var otherUserLat:CLLocationDegrees!
     
     
     override func viewDidLoad() {
@@ -52,6 +54,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         addNotificationObservers()
         updateMap()
+        
+        setNilMessage()
+        getOtherMessagePosts()
         
     }
     
@@ -223,12 +228,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             post.setValue(self.location!.coordinate.longitude as Double, forKey: "long")
             
             var messageText = self.messageBox!.text
-            var postRoot = User.currentUser().root.childByAppendingPath("users").childByAppendingPath(User.currentUser().uid).childByAppendingPath("posts").childByAppendingPath("message")
+            var postRoot = User.currentUser().root.childByAppendingPath("users").childByAppendingPath(User.currentUser().uid).childByAppendingPath("posts").childByAppendingPath("messages")
             var storeMessage : [String: String] = ["title" : self.titleBox!.text!,
                 "message" : self.messageBox!.text!]
-            if(self.messageBox != nil && self.titleBox != nil) {
-                postRoot.setValue(storeMessage)
-            }
+//            if(self.messageBox != nil && self.titleBox != nil) {
+//                postRoot.setValue(storeMessage)
+//            }
+            postRoot.updateChildValues(storeMessage)
+
             
             do {
                 try managedContext.save()
@@ -276,6 +283,73 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                            image: UIImage(data: (post.valueForKey("image") as? NSData)!)!)
         
         mapView.addAnnotation(artwork)
+    }
+    
+    func getOtherMessagePosts() {
+        var title = ""
+        var message = ""
+        var otherImage = ""
+        root.childByAppendingPath("users").queryOrderedByKey().observeEventType(.ChildAdded, withBlock: {
+            snapshot in
+            print(snapshot.key)
+        
+        self.root.childByAppendingPath("users").childByAppendingPath(snapshot.key).childByAppendingPath("locations").observeEventType(.ChildAdded, withBlock: {
+                location in
+            //get the other location coordinates
+                if(location.key == "latitude") {
+                    self.otherUserLat = location.value as! CLLocationDegrees
+                } else {
+                    self.otherUserLong = location.value as! CLLocationDegrees
+                }
+            })
+        self.root.childByAppendingPath("users").childByAppendingPath(snapshot.key).childByAppendingPath("posts").childByAppendingPath("messages").observeEventType(.ChildAdded, withBlock: { messages in
+            //get the messages if they have any
+            
+                if(messages.key == "message") {
+                    message = messages.value as! String
+                } else {
+                    title = messages.value as! String
+                }
+            
+            })
+            self.root.childByAppendingPath("users").childByAppendingPath(snapshot.key).childByAppendingPath("posts").childByAppendingPath("image").observeEventType(.ChildAdded, withBlock: { image in
+                //get the images if they have any
+                
+                if(image.key == "string") {
+                    otherImage = image.value as! String
+                }
+                
+            })
+            
+        })
+    }
+    
+    func setNilMessage() {
+    
+        var postRoot = root.childByAppendingPath("users").childByAppendingPath(User.currentUser().uid).childByAppendingPath("posts").childByAppendingPath("messages")
+        var storeMessage : [String: String] = ["title" : "empty",
+                                               "message" : "empty"]
+        postRoot.setValue(storeMessage)
+        
+        var quoteString = ["string": "empty"]
+        var storeImage = ["image": quoteString]
+        var imageRoot = root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("posts")
+        imageRoot.updateChildValues(storeImage)
+        
+    }
+    
+    //drop other pins
+    func dropOthersPin (post: NSManagedObject, lat: CLLocationDegrees, long: CLLocationDegrees) {
+
+        let artwork = Post(user: post.valueForKey("user") as! String,
+                           title: post.valueForKey("title") as! String,
+                           message: post.valueForKey("message") as! String,
+                           coordinate: CLLocationCoordinate2D(latitude: post.valueForKey("lat") as! Double, longitude: post.valueForKey("long") as! Double),
+                           image: UIImage(data: (post.valueForKey("image") as? NSData)!)!)
+        
+        mapView.addAnnotation(artwork)
+
+        
     }
     
     // Mark: Map Update
