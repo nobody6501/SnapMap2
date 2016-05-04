@@ -18,12 +18,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     var location: CLLocation? = nil
     var imagePicker = UIImagePickerController()
     var originalphoto: UIImage? = nil
+    var firstphoto: UIImage? = nil
     var alertController: UIAlertController? = nil
     var id: NSString? = nil
     var clients = [NSManagedObject]()
     var client: NSManagedObject? = nil
     var ButtonRect: CGRect!
     var saving = false
+    var presentCamera = true
     
     @IBOutlet weak var titleBox: UITextField!
     @IBOutlet weak var commentBox: UITextField!
@@ -32,6 +34,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var postBtn: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var changeFilterOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +107,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         saving = true
         originalphoto = info[UIImagePickerControllerOriginalImage] as? UIImage
+        firstphoto = originalphoto
+        performSegueWithIdentifier("showFilterView", sender: self)
         image.image = originalphoto
         showOrHideFields(false)
         dismissViewControllerAnimated(true, completion: nil)
@@ -280,6 +285,21 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     // Mark: Navigation:
     
+    @IBAction func unwindToCameraView(segue: UIStoryboardSegue) {}
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "showFilterView"){
+            let dvc = segue.destinationViewController as! AddFilterViewController
+            dvc.orientation = firstphoto!.imageOrientation
+            dvc.beginImage = CIImage(image: firstphoto!)
+            dvc.cvc = self
+        }
+    }
+    
+    @IBAction func changeFilter(sender: AnyObject) {
+        self.performSegueWithIdentifier("showFilterView", sender: self)
+    }
+
     // Mark: Helper Functions
     
     func showOrHideFields (hide: Bool) {
@@ -289,6 +309,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         commentBox.hidden = hide
         titleBox.hidden = hide
         image.hidden = hide
+        changeFilterOutlet.hidden = hide
     }
     
 }

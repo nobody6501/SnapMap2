@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		330202A41CD8E49500C767F2 /* AddFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330202A31CD8E49500C767F2 /* AddFilterViewController.swift */; };
 		33216C021C8361C300F249B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33216C011C8361C300F249B1 /* AppDelegate.swift */; };
 		33216C041C8361C300F249B1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33216C031C8361C300F249B1 /* LoginViewController.swift */; };
 		33216C071C8361C300F249B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33216C051C8361C300F249B1 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		330202A31CD8E49500C767F2 /* AddFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFilterViewController.swift; sourceTree = "<group>"; };
 		33216BFE1C8361C300F249B1 /* SnapMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33216C011C8361C300F249B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33216C031C8361C300F249B1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				338AC1C31CA2454500170CF6 /* TabBarViewController.swift */,
 				338AC1B21CA22EB400170CF6 /* MapViewController.swift */,
 				333574D01CB5900D007F6AC2 /* CameraViewController.swift */,
+				330202A31CD8E49500C767F2 /* AddFilterViewController.swift */,
 				DCBAABE01CA3175800560A92 /* SettingsViewController.swift */,
 				337D04C51CCEF597008C7822 /* AnnotationViewController.swift */,
 				33786FFB1CD59C560009E777 /* PictureViewController.swift */,
@@ -266,6 +269,7 @@
 				33216C0A1C8361C300F249B1 /* SnapMap.xcdatamodeld in Sources */,
 				338AC1C41CA2454500170CF6 /* TabBarViewController.swift in Sources */,
 				3323B2031CB43D4F00FF3A97 /* Post.swift in Sources */,
+				330202A41CD8E49500C767F2 /* AddFilterViewController.swift in Sources */,
 				337D04C61CCEF597008C7822 /* AnnotationViewController.swift in Sources */,
 				338AC1B31CA22EB400170CF6 /* MapViewController.swift in Sources */,
 				337D04D01CD2F509008C7822 /* LaunchScreenViewController.swift in Sources */,

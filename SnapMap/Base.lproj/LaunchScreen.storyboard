@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,23 +17,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LoginBackground.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="v7x-Q5-RXr">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginBackground.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="v7x-Q5-RXr">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SnapMapTitle.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="awY-98-oXP">
                                 <rect key="frame" x="0.0" y="152" width="414" height="166"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="414" id="98Y-J9-QJa"/>
-                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.7337837815284729" green="0.081235863268375397" blue="0.18886762857437134" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="awY-98-oXP" secondAttribute="trailing" constant="-20" id="N68-ps-eAm"/>
-                            <constraint firstItem="awY-98-oXP" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="OKb-7y-X67"/>
-                            <constraint firstItem="awY-98-oXP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="hGN-kn-4Id"/>
-                            <constraint firstItem="awY-98-oXP" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="132" id="ou9-34-p0u"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="awY-98-oXP" secondAttribute="bottom" constant="418" id="t5I-fn-lHk"/>
+                            <constraint firstItem="v7x-Q5-RXr" firstAttribute="leading" secondItem="awY-98-oXP" secondAttribute="leading" id="5Nv-nR-cvn"/>
+                            <constraint firstAttribute="trailing" secondItem="v7x-Q5-RXr" secondAttribute="trailing" id="C1k-62-e9M"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="awY-98-oXP" secondAttribute="bottom" constant="418" id="Cr5-Bp-aOI"/>
+                            <constraint firstItem="v7x-Q5-RXr" firstAttribute="trailing" secondItem="awY-98-oXP" secondAttribute="trailing" id="arq-gd-ds5"/>
+                            <constraint firstItem="v7x-Q5-RXr" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="eyk-Fw-keA"/>
+                            <constraint firstItem="v7x-Q5-RXr" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="hmk-yB-3Cp"/>
+                            <constraint firstItem="v7x-Q5-RXr" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="kzf-7J-gwR"/>
+                            <constraint firstItem="awY-98-oXP" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="132" id="qNa-3Z-a6k"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
