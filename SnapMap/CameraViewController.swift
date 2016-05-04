@@ -14,6 +14,8 @@ import CoreData
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
     
+    let root = User.currentUser().root
+    var uid = User.currentUser().uid
     let locationManager = CLLocationManager()
     var location: CLLocation? = nil
     var imagePicker = UIImagePickerController()
@@ -23,6 +25,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     var clients = [NSManagedObject]()
     var client: NSManagedObject? = nil
     var base64String: NSString!
+    var longitude: CLLocationDegrees!
+    var latitude: CLLocationDegrees!
     
     @IBOutlet weak var commentBox: UITextField!
     @IBOutlet weak var shareBtn: UIButton!
@@ -130,6 +134,17 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last        
         self.locationManager.stopUpdatingLocation()
+        
+        longitude = location!.coordinate.longitude
+        latitude = location!.coordinate.latitude
+        
+        var coordinates : [String:CLLocationDegrees] = [
+            "longitude": longitude,
+            "latitude": latitude
+        ]
+        
+        let locationRoot = root!.childByAppendingPath("users").childByAppendingPath(self.uid).childByAppendingPath("locations")
+        locationRoot.setValue(coordinates)
     }
     
     // MARK: Map Annotation
