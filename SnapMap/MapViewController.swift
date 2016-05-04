@@ -36,6 +36,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var latitude: CLLocationDegrees!
     var otherUserLong:CLLocationDegrees!
     var otherUserLat:CLLocationDegrees!
+    var postTitle : String!
+    var postMessage : String!
+    var otherImage : String!
     
     
     override func viewDidLoad() {
@@ -56,7 +59,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         updateMap()
         
         setNilMessage()
-        getOtherMessagePosts()
+        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(MapViewController.getOtherMessagePosts), userInfo: nil, repeats: true)
         
     }
     
@@ -84,15 +87,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         longitude = location!.coordinate.longitude
         latitude = location!.coordinate.latitude
-        
-        var coordinates : [String:CLLocationDegrees] = [
-            "longitude": longitude,
-            "latitude": latitude
-        ]
-        
-        let locationRoot = root!.childByAppendingPath("users").childByAppendingPath(self.uid).childByAppendingPath("locations")
-        locationRoot.setValue(coordinates)
-
+        updateCoordinates(latitude, long: longitude)
         
         mapView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height * 0.7)
         
@@ -231,10 +226,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             var postRoot = User.currentUser().root.childByAppendingPath("users").childByAppendingPath(User.currentUser().uid).childByAppendingPath("posts").childByAppendingPath("messages")
             var storeMessage : [String: String] = ["title" : self.titleBox!.text!,
                 "message" : self.messageBox!.text!]
-//            if(self.messageBox != nil && self.titleBox != nil) {
-//                postRoot.setValue(storeMessage)
-//            }
+
             postRoot.updateChildValues(storeMessage)
+            
+            self.updateCoordinates(self.location!.coordinate.latitude, long: self.location!.coordinate.longitude)
 
             
             do {
@@ -286,9 +281,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func getOtherMessagePosts() {
-        var title = ""
-        var message = ""
-        var otherImage = ""
+        
         root.childByAppendingPath("users").queryOrderedByKey().observeEventType(.ChildAdded, withBlock: {
             snapshot in
             print(snapshot.key)
@@ -306,17 +299,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //get the messages if they have any
             
                 if(messages.key == "message") {
-                    message = messages.value as! String
+                    self.postMessage = messages.value as! String
                 } else {
-                    title = messages.value as! String
+                    self.postTitle = messages.value as! String
                 }
             
             })
+            if(self.postTitle != nil || self.postMessage != nil) {
+                self.dropOthersPin(self.otherUserLat, long: self.otherUserLong)
+            }
+            self.postMessage = nil
+            self.postTitle = nil
             self.root.childByAppendingPath("users").childByAppendingPath(snapshot.key).childByAppendingPath("posts").childByAppendingPath("image").observeEventType(.ChildAdded, withBlock: { image in
                 //get the images if they have any
                 
                 if(image.key == "string") {
-                    otherImage = image.value as! String
+                    self.otherImage = image.value as! String
                 }
                 
             })
@@ -324,8 +322,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         })
     }
     
-    func setNilMessage() {
+
     
+    //drop other pins
+    func dropOthersPin (lat: CLLocationDegrees, long: CLLocationDegrees) {
+        
+        let location = CLLocationCoordinate2DMake(lat, long)        // Drop a pin
+        let dropPin = MKPointAnnotation()
+        dropPin.coordinate = location
+        dropPin.title = self.postTitle
+        dropPin.subtitle=self.postMessage
+        mapView.addAnnotation(dropPin)
+//        print("DROP!")
+    }
+    
+    //update coordinates
+    func updateCoordinates(lat: CLLocationDegrees, long: CLLocationDegrees) {
+        var coordinates : [String:CLLocationDegrees] = [
+            "longitude": long,
+            "latitude": lat
+        ]
+        
+        let locationRoot = root!.childByAppendingPath("users").childByAppendingPath(self.uid).childByAppendingPath("locations")
+        locationRoot.updateChildValues(coordinates)
+    }
+    
+    //setup firebase to empty
+    func setNilMessage() {
+        
         var postRoot = root.childByAppendingPath("users").childByAppendingPath(User.currentUser().uid).childByAppendingPath("posts").childByAppendingPath("messages")
         var storeMessage : [String: String] = ["title" : "empty",
                                                "message" : "empty"]
@@ -338,19 +362,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    //drop other pins
-    func dropOthersPin (post: NSManagedObject, lat: CLLocationDegrees, long: CLLocationDegrees) {
-
-        let artwork = Post(user: post.valueForKey("user") as! String,
-                           title: post.valueForKey("title") as! String,
-                           message: post.valueForKey("message") as! String,
-                           coordinate: CLLocationCoordinate2D(latitude: post.valueForKey("lat") as! Double, longitude: post.valueForKey("long") as! Double),
-                           image: UIImage(data: (post.valueForKey("image") as? NSData)!)!)
-        
-        mapView.addAnnotation(artwork)
-
-        
-    }
     
     // Mark: Map Update
     
