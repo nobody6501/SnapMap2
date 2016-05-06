@@ -475,6 +475,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WnI-J5-KdC">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="531"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="531" id="dcv-Wy-OJN"/>
                                 </constraints>
@@ -487,7 +488,7 @@
                                 </constraints>
                             </pickerView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="q9i-gN-6RZ" firstAttribute="leading" secondItem="ewt-bB-hrv" secondAttribute="leading" id="Etc-Hb-J14"/>
                             <constraint firstAttribute="trailing" secondItem="q9i-gN-6RZ" secondAttribute="trailing" id="HOR-1B-6yv"/>

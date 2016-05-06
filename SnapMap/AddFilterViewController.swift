@@ -49,6 +49,8 @@ class AddFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         self.navigationItem.title = ""
     }
     
+    // Mark: Picker View
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -94,6 +96,8 @@ class AddFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
+    // Mark: Add Image Filter
+    
     func makePhotoFilter(nameOfFilter: String){
         let filter = CIFilter(name: nameOfFilter)
         filter?.setValue(beginImage, forKey: kCIInputImageKey)
@@ -103,14 +107,12 @@ class AddFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         self.filteredImageView.image = filteredImage
     }
     
+    // MARK: Navigation
     
     override func didMoveToParentViewController(parent: UIViewController?) {
         cvc!.originalphoto = filteredImage
         cvc!.presentCamera = false
     }
-    
-    
-    // MARK: - Navigation
     
     func addFilter () {
         performSegueWithIdentifier("showCameraView", sender: self)
