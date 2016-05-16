@@ -305,7 +305,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 }
             
             })
-            if((self.postTitle != nil || self.postMessage != nil) && (self.postMessage != "empty" || self.postTitle != "empty") ) {
+            if((self.postTitle != nil || self.postMessage != nil)) {
+                print("getitng message")
+
                 self.dropOthersPin(self.otherUserLat, long: self.otherUserLong)
             }
             self.postMessage = nil
